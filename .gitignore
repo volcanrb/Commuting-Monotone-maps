@@ -1,0 +1,8 @@
+# Lean/Lake generated state and fetched dependencies
+.lake/
+
+# Local temporary PDF tooling
+.pdf-tools/
+.tmp_pypdf/
+
+other/bf.cookies

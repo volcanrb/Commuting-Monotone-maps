@@ -1,0 +1,3812 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\I}{[0,1]}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Crit}{\operatorname{Turn}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\M}{\mathcal M_0}
+\newcommand{\T}{\mathcal T}
+\newcommand{\Lap}{\mathscr L}
+\newcommand{\Var}{\operatorname{Var}}
+
+\title{Common Fixed Points for Commuting\\
+Finite-Piece Piecewise-Monotone Interval Maps}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $P,Q:[0,1]\to[0,1]$ be commuting continuous maps, each monotone on
+finitely many interval pieces.  Monotonicity need not be strict, so constant
+branches and plateau intervals are allowed.  We prove that $P$ and $Q$ have
+a common fixed point.  The proof constructs a common monotone quotient on
+which the two maps are finite-piece piecewise linear.  The required
+piecewise-linear fixed-point proposition is proved directly by combining a
+minimal-counterexample reduction, one-sided orbit-circle rigidity, exactness,
+a common constant-slope coordinate, substitution dynamics, and an affine
+circle argument.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+A continuous map $T:\I\to\I$ is called \emph{finite-piece piecewise
+monotone} if there is a finite partition
+\[
+ 0=x_0<x_1<\cdots <x_m=1
+\]
+such that $T$ is nondecreasing or nonincreasing on every
+$[x_{i-1},x_i]$.  Constant pieces and nontrivial plateau intervals are
+allowed.  The class is closed under composition.  To verify this last
+assertion without a strict-monotonicity assumption, let \(U,V\) have finite
+monotonicity partitions.  On a monotonicity cell \(J\) of \(V\), the inverse
+image of each partition point of \(U\) is empty, a point, or a compact
+interval, because \(V|_J\) is continuous and monotone.  Add the endpoints of
+all these inverse images to the partition of \(V\).  On each cell of the
+resulting finite refinement, \(V\) has image in one monotonicity cell of \(U\)
+(or is constant at a partition point).  The composite \(U\circ V\) is
+therefore monotone on that cell.  This proves the asserted closure, including
+all plateau cases.
+
+\begin{theorem}\label{thm:main}
+Let $P,Q:\I\to\I$ be commuting continuous finite-piece
+piecewise-monotone maps.  Then
+\[
+ \Fix(P)\cap\Fix(Q)\ne\varnothing.
+\]
+\end{theorem}
+
+The corresponding statement for arbitrary continuous interval maps is
+false by examples of Boyce and Huneke \cite{Boyce,Huneke}.  The proof of
+Theorem~\ref{thm:main} has two necessary components.  First, we prove the
+piecewise-linear core proposition below.  Second, using positive entropy and
+a branch-transfer operator, we construct one nonatomic conformal measure for
+both maps.  Its distribution function collapses all plateaus and descends
+the pair to commuting finite-piece piecewise-linear maps.  A fixed point in
+the quotient gives a common invariant fiber, and minimality finishes the
+argument.
+
+\section{The piecewise-linear core}
+
+A map is \emph{finite-piece piecewise linear} if it is continuous and affine
+on every interval of some finite partition; constant affine pieces are
+allowed.
+Throughout the proof, products of maps are compositions read from right to
+left:
+\[
+ UV=U\circ V,\qquad (UV)(x)=U(V(x)).
+\]
+
+\begin{proposition}[Piecewise-linear core]\label{prop:PL-core}
+Every pair of commuting continuous finite-piece piecewise-linear selfmaps of
+$\I$ has a common fixed point.
+\end{proposition}
+
+\par\noindent\textit{Proof of Proposition~\ref{prop:PL-core}.}\quad
+Suppose, toward a contradiction, that $P,Q$ commute and have no common fixed
+point.
+
+\subsection{Piecewise-linear finiteness and safe quotients}
+
+\begin{lemma}[Piecewise-linear finiteness]\label{lem:pl-finiteness}
+The class of continuous finite-piece piecewise-linear interval maps has the
+following properties.
+\begin{enumerate}
+\item It is closed under composition, restriction to a compact interval,
+and affine changes of coordinates.
+\item For every map $T$ in the class, $\Fix(T)$ is a finite union of points
+and compact intervals.
+\item If $T$ has no flat interval, then it is finite-to-one and has finitely
+many strict monotonicity laps.
+\item On every affine branch, the derivative is constant and therefore has
+bounded variation.
+\item Suppose finitely many pairwise disjoint nondegenerate compact intervals
+are collapsed by the canonical finite piecewise-affine nondecreasing
+quotient, and a finite family of maps respects the quotient fibres.  The
+descended maps are again continuous finite-piece piecewise linear.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Composition, restriction, and affine conjugacy preserve finite piecewise
+linearity after a finite refinement of the relevant partitions.  On each
+affine branch, $T-\id$ is affine; hence its zero set is empty, a point, or
+the whole branch.  This proves (2).  If $T$ has no flat interval, every
+nondegenerate affine branch is strict, so only finitely many monotonicity
+laps occur and every fiber meets each lap in at most one point.  This proves
+(3), while (4) is immediate.
+
+For (5), let $\pi$ be the quotient map.  On every uncollapsed source gap,
+$\pi$ has an affine inverse.  After refining at the branch endpoints of the
+original map and their images under $\pi$, the descended map is therefore a
+composition of affine maps on each nondegenerate quotient interval.  On a
+collapsed source interval, respect of fibres makes $\pi T$ constant.  The
+point-quotient case gives a constant map.  Thus the descended map is
+continuous and finite-piece piecewise linear.
+\end{proof}
+
+Here is the quotient convention used throughout.  Given pairwise disjoint
+nondegenerate intervals $C_k=[a_k,b_k]$, $1\leq k\leq m$, put
+\[
+ d=1-\sum_{k=1}^m(b_k-a_k).
+\]
+If $d>0$, their \emph{canonical quotient} is the map $\pi:\I\to\I$ defined
+by
+\begin{equation}\label{eq:canonical-quotient}
+ \pi(x)=\frac{x-\sum_{k=1}^m
+              \operatorname{length}(C_k\cap[0,x])}{d}.
+\end{equation}
+It collapses precisely the intervals $C_k$ and is affine with slope $d^{-1}$
+on every complementary gap.  If $d=0$, necessarily the collapsed family is
+$\{\I\}$; the target is the one-point interval and $\pi$ is the constant
+map.  A map $F$ \emph{respects the fibres of $\pi$} when
+\begin{equation}\label{eq:respect-fibres}
+ \pi(x)=\pi(y)\quad\Longrightarrow\quad
+ \pi(F(x))=\pi(F(y)).
+\end{equation}
+Equivalently, $\pi F$ is constant on every quotient fibre.
+
+Here and below, an interval \emph{invariant under \(T\)} is forward
+invariant, \(T(J)\subseteq J\), unless equality is explicitly asserted.  Let
+$\mathscr J$ be the family of nonempty compact intervals invariant under
+both $P$ and $Q$, ordered by inclusion.  It is nonempty because it contains
+$\I$.  If $\mathscr C\subseteq\mathscr J$ is a chain, every finite subfamily
+of $\mathscr C$ has nonempty intersection: its intersection is simply its
+least member.  Compactness of $\I$ and the finite-intersection property give
+\(J_*=\bigcap_{J\in\mathscr C}J\neq\varnothing\).  This is a compact
+interval, and for $x\in J_*$ and $J\in\mathscr C$ one has
+$P(x),Q(x)\in J$; hence $P(J_*),Q(J_*)\subseteq J_*$.  Thus $J_*$ is a lower
+bound, and Zorn's lemma gives an inclusion-minimal member.  Restrict to it
+and rescale affinely to $\I$.  It is nondegenerate, since a singleton would
+be a common fixed point.  Moreover
+\begin{equation}\label{eq:onto}
+ P(\I)=\I=Q(\I).
+\end{equation}
+Indeed, $P(\I)$ is a nonempty compact interval and
+\[
+ P(P(\I))\subseteq P(\I),\qquad
+ Q(P(\I))=P(Q(\I))\subseteq P(\I).
+\]
+Minimality gives $P(\I)=\I$; interchanging $P,Q$ proves $Q(\I)=\I$.
+Henceforth there is no proper nonempty compact interval invariant under both
+maps.
+
+\begin{proposition}[Finite respected quotient package]
+\label{prop:quotient-package}
+Let $\pi:\I\to I'$ be the canonical nondecreasing quotient which collapses
+finitely many pairwise disjoint nondegenerate compact intervals and is
+affine with positive slope on every complementary gap (with the one-point
+case understood as above).  Let $\mathscr F$ be a finite commuting
+family of maps in the finite-piece piecewise-linear class, and suppose every member of
+$\mathscr F$ respects the fibres of $\pi$.  Then:
+\begin{enumerate}
+\item every $F\in\mathscr F$ descends to a unique continuous map
+$\overline F:I'\to I'$ in the same piecewise-linear class; the descended maps commute,
+and surjectivity descends;
+\item for every map $T$ respecting the fibres,
+\begin{equation}\label{eq:fix-quotient-pl}
+ \Fix(\overline T)=\pi(\Fix(T));
+\end{equation}
+\item the inverse image of a compact interval invariant under all descended
+maps is a compact interval invariant under all original maps;
+\item if $T=P^rQ^s$ with $r,s>0$ and the collapsed intervals are exactly all
+the nondegenerate connected components of $\Fix(T)$, then $P$ and $Q$
+respect the quotient, and every common fixed point of the descended pair
+lifts to a common fixed point of $P,Q$;
+\item after fixed sets have become finite, a respected quotient followed by
+restriction to a common invariant core cannot increase their cardinalities;
+it strictly decreases the cardinality of $\Fix(T)$ whenever one quotient
+fibre contains two distinct $T$-fixed points.
+\item Suppose $P,Q\in\mathscr F$ have no common fixed point and admit no
+proper nonempty compact interval which is forward invariant under both maps.
+If $\pi$ is nonconstant, then the descended pair
+$\overline P,\overline Q$ also has no common fixed point.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The existence, continuity, and piecewise-linear regularity of the descended maps are
+Lemma~\ref{lem:pl-finiteness}(5).  Uniqueness follows from the
+surjectivity of $\pi$, and commutation follows after composing with $\pi$.
+If $F$ is onto and $y=\pi(x)$, choose $z$ with $F(z)=x$; then
+$\overline F(\pi(z))=y$, so $\overline F$ is onto.
+
+One inclusion in \eqref{eq:fix-quotient-pl} is immediate.  Conversely,
+if $\overline T(\pi(x))=\pi(x)$, the fibre
+$C=\pi^{-1}(\pi(x))$ is a compact interval and $T(C)\subseteq C$.
+The interval fixed-point theorem supplies a point of $C\cap\Fix(T)$.
+This proves (2).  If $J'\subseteq I'$ is invariant under every descended
+map, then $\pi^{-1}(J')$ is a compact interval and the intertwining identity
+$\pi F=\overline F\pi$ proves (3).
+
+For (4), put $X=\Fix(T)$.  On $X$ the restrictions of the factors have the
+explicit two-sided inverses
+\[
+ (P|_X)^{-1}=P^{r-1}Q^s|_X,\qquad
+ (Q|_X)^{-1}=Q^{s-1}P^r|_X.
+\]
+For example, $P^{r-1}Q^s$ preserves $X$ because it commutes with $T$, and
+both composites of its restriction with $P|_X$ equal $T|_X=\id_X$; the
+argument for $Q$ is identical.  Thus $P$ and $Q$ are homeomorphisms of $X$
+and permute all its connected components.  In particular, each
+nondegenerate component is sent onto another nondegenerate component, so
+collapsing \emph{all} such components satisfies
+\eqref{eq:respect-fibres}.
+
+Let $y$ be fixed by both descended maps and let $C=\pi^{-1}(y)$.  If $C$ is
+a singleton, the two intertwining identities show that its point is fixed
+by both maps.  Otherwise $C$ is a nondegenerate component of $X$.
+The same identities give $P(C),Q(C)\subseteq C$, while component permutation
+gives equality.  On $C$ the restrictions are commuting interval
+homeomorphisms.  If both preserve orientation, each fixes both endpoints.
+If one reverses orientation, it has a unique fixed point in $C$;
+commutation sends that point to another fixed point of the reversing map,
+so the other map fixes it as well.
+
+Finally, \eqref{eq:fix-quotient-pl} says that a quotient only identifies
+fixed points, while restriction to a core only discards them.  If a fibre
+contains two distinct fixed points, their images coalesce, giving the strict
+inequality in (5).
+
+For (6), suppose that $y\in I'$ is fixed by both descended maps and put
+$C=\pi^{-1}(y)$.  The intertwining identities give
+$P(C)\subseteq C$ and $Q(C)\subseteq C$.  If $C$ is a singleton, its point is
+fixed by both original maps.  If $C$ is nondegenerate, then it is a proper
+compact interval because $\pi$ is nonconstant, and it is forward invariant
+under both maps.  Either alternative contradicts the hypotheses.
+\end{proof}
+
+All quotient operations below are canonical quotients of the preceding
+form.  Proposition~\ref{prop:quotient-package} will be used without further
+comment to retain the piecewise-linear category, preserve a counterexample after a
+nonconstant respected quotient of a minimal core, compare fixed-set
+cardinalities, and lift a common fixed point from a fixed-component quotient.
+
+\subsection{Normalization and the selected repelling side}
+
+Put
+\begin{equation}\label{eq:pl-W}
+ W=(PQ)^2.
+\end{equation}
+
+\begin{lemma}[Normalization and lexicographic descent]
+\label{lem:pl-normalization}
+Starting from a piecewise-linear counterexample on a minimal common
+invariant core, one can obtain another such counterexample for which
+\(X=\Fix(W)\) is finite and, on putting
+\[
+ \nu=\#X
+\]
+and
+\begin{equation}\label{eq:pl-words}
+ L=2(2\nu)!,\qquad A=P^L,\qquad B=Q^L,\qquad
+ R=AB=W^{L/2},\qquad S=R^2=W^L,
+\end{equation}
+the sets \(\Fix(R)\) and \(\Fix(S)\) are finite as well.  Normalized piecewise-linear
+counterexamples therefore exist, and among all of them one can choose a pair
+minimizing
+\begin{equation}\label{eq:pl-mintriple}
+ \bigl(\#\Fix(W),\#\Fix(R),\#\Fix(S)\bigr)
+\end{equation}
+lexicographically.
+
+For such a minimizing pair, a later nonconstant respected finite interval
+quotient, followed by restriction to a minimal common invariant core and
+fixed-component normalization, cannot lower the first fixed count.  If that
+count remains \(\nu\), its canonical exponent is still \(L\), and the
+descended words \(R,S\) are literally those in \eqref{eq:pl-words}; their
+fixed counts cannot increase.  If the second count is also unchanged, the
+third count cannot decrease.
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{lem:pl-finiteness} says that \(\Fix(W)\) has finitely many
+components.  If \(\Fix(W)=\I\), collapsing its sole nondegenerate component
+gives the one-point quotient, whose unique point is fixed by both descended
+maps; Proposition~\ref{prop:quotient-package}(4) would then lift a common
+fixed point of \(P,Q\).  Hence this case is impossible, and the quotient
+which collapses all nondegenerate components of \(\Fix(W)\) is nonconstant.
+Collapse them and return to a minimal common invariant core.  The quotient
+remains finite-piece piecewise linear, a common fixed point would lift, and
+\eqref{eq:fix-quotient-pl} says that the new \(\Fix(W)\) is finite.
+Every later respected quotient or core
+restriction can only identify or discard points of this finite set: by
+\eqref{eq:fix-quotient-pl} it cannot increase its cardinality or
+recreate a nondegenerate fixed component.
+
+We now make the three minimizations in dependency order.  Among all
+minimal-core counterexamples for which \(\Fix(W)\) is finite, choose one
+for which
+\[
+ \nu=\#\Fix(W)
+\]
+is least.  This class is nonempty by the preceding paragraph.  For every
+pair in this first minimizing class the integer
+\(L=2(2\nu)!\), and hence the words \(R=P^LQ^L\) and \(S=R^2\), have the
+same prescribed form.
+
+For a pair attaining the first minimum, \(\Fix(R)\neq\I\).  Indeed, if
+\(R\) fixed the whole interval, collapsing its sole nondegenerate fixed
+component would give the one-point quotient, and
+Proposition~\ref{prop:quotient-package}(4) would lift the quotient's common
+fixed point.  Collapse all nondegenerate components of \(\Fix(R)\), then
+restrict to a minimal common invariant core.  Exact fixed-point descent
+shows that the resulting \(W\)-fixed count is at most \(\nu\); by the choice
+of \(\nu\) it is exactly \(\nu\).  Consequently the canonical exponent is
+still \(L\), the descended \(R\) is exactly \(\overline P^L\overline Q^L\),
+and its fixed set is finite.  Thus there are first-stage minimizers with
+finite \(\Fix(R)\).  Among them choose one for which
+\[
+ \rho=\#\Fix(R)
+\]
+is least.
+
+For a pair attaining these first two minima, \(\Fix(S)\neq\I\), by the
+same fixed-component lifting argument.  Collapse the nondegenerate
+components of \(\Fix(S)\) and return to a minimal common invariant core.
+The new \(W\)-fixed count is at most \(\nu\), so it is \(\nu\); the exponent
+is therefore still \(L\).  The new \(R\)-fixed count is at most \(\rho\),
+so it is \(\rho\).  Exact descent now makes \(\Fix(S)\) finite.  Among the
+systems attaining the first two minima and having finite \(\Fix(S)\), choose
+one for which \(\#\Fix(S)\) is least.  This is precisely a lexicographic
+minimum of the triple \eqref{eq:pl-mintriple}, and proves existence of the
+normalization asserted in the statement.
+
+Finally consider any later respected quotient and minimal-core restriction.
+Exact fixed-point descent makes the new first count no larger than \(\nu\).
+If it were smaller, fixed-component normalization of the descended pair
+would produce a member of the first minimizing class with a smaller first
+count, a contradiction.  Hence that count equals \(\nu\), so the canonical
+exponent remains \(L\) and \(R,S\) descend literally.  Their fixed counts
+cannot increase.  If the \(R\)-count fell below \(\rho\), normalizing the
+descended system would contradict the second minimum.  Thus it too remains
+\(\rho\); any strict decrease of the \(S\)-count then contradicts the third
+minimum.  This is the lexicographic descent principle used below.
+\end{proof}
+
+Fix henceforth a normalized counterexample minimizing
+\eqref{eq:pl-mintriple}.  Commutation gives \(P(X),Q(X)\subseteq X\), and on
+\(X\) the factors have the explicit inverses
+\begin{equation}\label{eq:pl-X-inverses}
+ (P|_X)^{-1}=Q(PQ)|_X,\qquad
+ (Q|_X)^{-1}=P(PQ)|_X.
+\end{equation}
+Indeed, both displayed composites with the indicated factor equal
+\((PQ)^2=W\), which is the identity on \(X\).  Thus \(P,Q\) permute \(X\).
+The set \(X\) has at least two points: if it were a singleton, both
+permutations would fix its unique point.
+
+It is useful to record the complementary words
+\[
+ C_P=Q(PQ),\qquad C_Q=P(PQ).
+\]
+Since all the factors commute, they satisfy the two-sided identities
+\begin{equation}\label{eq:pl-complementary-identities}
+ C_P\circ P=P\circ C_P=W,\qquad
+ C_Q\circ Q=Q\circ C_Q=W,\qquad
+ P\circ W=W\circ P,\qquad Q\circ W=W\circ Q.
+\end{equation}
+
+Choose consecutive points \(p<c\) of \(X\).  The continuous function
+\(W-\id\) has a strict constant sign on \((p,c)\).  Reflecting the ambient
+coordinate if necessary, assume
+\begin{equation}\label{eq:pl-gap-sign}
+ W(x)>x\qquad(p<x<c).
+\end{equation}
+Conjugacy by \(x\mapsto1-x\) preserves commutation, the absence of a common
+fixed point, finite-piece linearity, all three fixed-set cardinalities, and
+the canonical words.  Hence reflection preserves the chosen normalization
+and entails no loss of generality.
+
+A \emph{directed side} is a pair $(a,\epsilon)$ with $a\in X$ and
+$\epsilon\in\{-,+\}$ for which the corresponding side of $a$ in $\I$ is
+nonempty.  Write $a_+(t)=a+t$ and $a_-(t)=a-t$.  The state
+$(a,\epsilon)$ is \emph{$W$-repelling} if there is $\delta>0$ such that
+$W(a)=a$ and, whenever $0<t<\delta$, the point
+$W(a_\epsilon(t))$ lies on that same side and
+\[
+ |W(a_\epsilon(t))-a|>t;
+\]
+here $\delta$ is chosen so that all $a_\epsilon(t)$ lie in $\I$.  By
+continuity we may shrink $\delta$ so that the entire closed one-sided
+interval maps into the same side.  Equation~\eqref{eq:pl-gap-sign} shows
+that $(p,+)$ is repelling.
+There are at most $2\nu$ repelling directed states.
+
+\begin{lemma}[Directed-state return]\label{lem:pl-states}
+The maps \(P,Q\) permute the finite set of \(W\)-repelling directed states;
+on each such state their one-sided germs are strictly affine
+homeomorphisms onto the image state.  Consequently \(A,B\) fix the selected
+state \((p,+)\), and their selected germs are orientation-preserving \(C^1\)
+local diffeomorphisms.  Their derivatives have bounded variation on a
+sufficiently small selected-side interval.  They also fix \(p\) and \(c\).
+\end{lemma}
+
+\begin{proof}
+Let $(a,\epsilon)$ be a repelling state.  Its one-sided neighborhood can be
+shrunk so that \(W\), \(P\), and the branch of \(C_P\)
+met after applying \(P\) are affine on the relevant one-sided intervals.
+The germ of \(P\) cannot be constant: otherwise the factorization
+\(C_P\circ P=W\) would make \(W\) constant on a smaller source-side
+interval, contrary to strict motion away from the base.  Thus this affine
+germ is strictly monotone and maps the source side homeomorphically onto a
+one-sided interval based at \(P(a)\).  Since
+\[
+ W(P(a))=P(W(a))=P(a),
+\]
+the new base belongs to \(X\); the image side therefore defines a directed
+state.
+
+Use directed distance from the base on both sides.  In these coordinates a
+strictly monotone map from one chosen side onto its image side is increasing,
+whether or not it preserves the ambient orientation.  If \(t\) is close
+enough to the source base, then \(W(t)\) lies farther into the same side than
+\(t\).  Hence \(P(W(t))\) lies farther into the image side than \(P(t)\).
+The commutation identity
+\[
+ W(P(t))=P(W(t))
+\]
+shows that the image state is again \(W\)-repelling.
+
+The same argument, using the complementary factor $P$ in
+\eqref{eq:pl-complementary-identities}, shows that $C_P$ also sends
+repelling states to repelling states.  On directed states the composite
+induced by \(C_P\circ P=W\) is the identity,
+because \(W\) fixes the base and preserves its chosen side.  Thus the action
+of \(P\) has a left inverse and is injective on the finite state set; it is
+therefore a permutation.  Replacing \(P,C_P\) by
+\(Q,C_Q\) proves the same assertion for \(Q\).
+
+Every permutation of at most \(2\nu\) objects has order dividing
+\((2\nu)!\).  Hence the multiple \(L=2(2\nu)!\) makes both \(P^L=A\)
+and \(Q^L=B\) fix every directed state.  Their germs at the selected state
+return the right side of \(p\) to itself and therefore have positive affine
+slope.  They are local \(C^1\) diffeomorphisms there, and the logarithm of
+each derivative is constant, hence of bounded variation.  The same exponent
+fixes every point of \(X\), since \(P,Q\) permute a set of size \(\nu\).
+In particular \(A,B\) fix \(p,c\).
+\end{proof}
+
+\subsection{Finite arrival and local eventual surjectivity}
+
+Put \(J=[p,c]\).  Since \(A,B\) fix its endpoints, continuity gives
+\begin{equation}\label{eq:pl-J-expands}
+ J\subseteq A(J),\qquad J\subseteq B(J).
+\end{equation}
+Let
+\[
+ K_{i,j}=A^iB^j(J),\qquad
+ K=\cl\bigcup_{n\geq0}K_{n,n}.
+\]
+Because $J\subseteq A(J)$ and $J\subseteq B(J)$ and the maps commute, the
+family $K_{i,j}$ is increasing in each index.  Continuity and compactness
+give
+\[
+ A(K)\subseteq\cl\bigcup_{n\geq0}K_{n+1,n}\subseteq K.
+\]
+Conversely $K_{n,n}\subseteq K_{n+1,n}=A(K_{n,n})\subseteq A(K)$ for every
+$n$, and $A(K)$ is compact, so $K\subseteq A(K)$.  The same two inclusions
+with $B$ in place of $A$ prove
+\begin{equation}\label{eq:pl-K-invariant}
+ A(K)=K=B(K).
+\end{equation}
+
+We shall also use the action on $Y=\Fix(S)$.  Commutation makes $Y$
+invariant under $P,Q$ and under the following complementary words, and on
+$Y$ there are explicit two-sided inverses
+\begin{equation}\label{eq:pl-S-inverses}
+ (P|_Y)^{-1}=P^{2L-1}Q^{2L}|_Y,\qquad
+ (Q|_Y)^{-1}=Q^{2L-1}P^{2L}|_Y.
+\end{equation}
+Indeed, each composite in the first identity, in either order, is
+$P^{2L}Q^{2L}=S$, hence the identity on $Y$; the second identity is the
+same calculation.  Thus $P$ and $Q$ permute $Y$ and preserve distinctness
+there.
+
+We record the phase-intersection argument which controls every interval
+quotient below.  If a compact interval \(C\) satisfies
+\(P^L(C)=C=Q^L(C)\), put
+\[
+ D_{i,j}=P^iQ^j(C),\qquad
+ (i,j)\in(\mathbb Z/L\mathbb Z)^2,
+\]
+and join two labels when their intervals meet.  Translation by either
+coordinate is a graph automorphism.  For example, applying \(P\) proves
+that an intersection implies an intersection after translating the first
+coordinate.  Conversely, if
+\(y\in P(D_\alpha)\cap P(D_\beta)\), then
+\[
+ P^{L-1}(y)\in P^L(D_\alpha)\cap P^L(D_\beta)
+ =D_\alpha\cap D_\beta,
+\]
+because \(P^L\) fixes every phase interval.  The argument for \(Q\) is
+identical.  The two translations act transitively on the label set, so this
+finite interval-intersection graph is vertex transitive.  Notice that no
+injectivity of \(P\) or \(Q\) on the whole interval has been used.
+
+Apply the construction to \(C=K\).  First suppose that its phase graph is
+connected.  A connected vertex-transitive interval graph is complete.  To
+see this, choose a representing interval with least right endpoint.  All of
+its neighbors contain that endpoint and hence form a clique, so this vertex
+is simplicial.  Vertex transitivity makes every vertex simplicial.  If two
+vertices were nonadjacent, a shortest path between them would have length at
+least two, and the first three vertices on that path would contradict
+simpliciality of the middle one.  Thus every two phase intervals meet.  The
+one-dimensional Helly property now gives
+\[
+ C_0=\bigcap_{0\leq i,j<L}P^iQ^j(K)\neq\varnothing.
+\]
+Translation of the labels and the elementary inclusion
+\(P(\bigcap D_{i,j})\subseteq\bigcap P(D_{i,j})\) give
+\[
+ P(C_0)\subseteq C_0,\qquad Q(C_0)\subseteq C_0.
+\]
+The intersection is a nonempty compact interval; minimality of the common
+invariant core forces \(C_0=\I\).  Since \(C_0\subseteq K\), it follows that
+\(K=\I\).
+
+It remains to exclude a disconnected phase graph.  Set
+\[
+ F=\bigcup_{0\leq i,j<L}D_{i,j}.
+\]
+Graph components correspond exactly to the connected components of this
+finite union of compact intervals.  The label translations show that
+\(P(F)=F=Q(F)\) and permute these components.  More explicitly, a continuous
+image of one component lies in a component, while the inverse label
+translation proved above makes the induced maps on the finite component set
+bijective.  Hence collapsing every component of \(F\) defines a nonconstant
+finite interval quotient respected by both \(P\) and \(Q\).
+
+Every phase interval contains
+\[
+ P^iQ^j(p)\quad\hbox{and}\quad P^iQ^j(c).
+\]
+These points are distinct and fixed by \(S\): the points \(p,c\) lie in
+\(\Fix(W)\subseteq\Fix(S)\), and \(P,Q\) act as permutations on
+\(\Fix(S)\), by \eqref{eq:pl-S-inverses}.  Thus at least one collapsed
+component contains two
+distinct \(S\)-fixed points.  Exact fixed-point descent strictly lowers the
+\(S\)-fixed count, unless the quotient or subsequent minimal-core
+restriction has already lowered the \(W\)- or \(R\)-fixed count.  In the
+first case normalization contradicts the first minimum in
+Lemma~\ref{lem:pl-normalization}; if the first count is unchanged, \(L\) is
+unchanged, and a drop of the second count contradicts the second minimum; if
+both earlier counts are unchanged, the strict drop of the third count
+contradicts the final minimum.  Proposition~\ref{prop:quotient-package}(6)
+ensures throughout that the descended maps remain a counterexample.  The
+disconnected case is therefore impossible, and the connected case has
+already shown that \(K=\I\).
+
+Consequently
+\begin{equation}\label{eq:pl-dense-diagonal}
+ R^n(J)\quad(n\geq0)
+\end{equation}
+is an increasing sequence of intervals with dense union in \(\I\).
+
+Write \(R^n(J)=[\ell_n,r_n]\).  Then
+\(\ell_n\downarrow0\) and \(r_n\uparrow1\).  We next prove that both ambient
+endpoints occur at a finite stage.  Notice that $R$ and $S$ are onto, since
+$P$ and $Q$ are onto.
+
+Suppose, for definiteness, that \(0\) never occurs.  We claim that
+\begin{equation}\label{eq:pl-singleton-endpoint}
+ S(0)=0,\qquad S^{-1}(0)=\{0\}.
+\end{equation}
+Every interior point belongs to some even diagonal interval
+\(R^{2n}(J)\).  If such a point mapped to zero under \(S=R^2\), then zero
+would belong to \(R^{2n+2}(J)\), contrary to the assumption.  Hence
+$S^{-1}(0)\subseteq\{0,1\}$.  If the other ambient endpoint has already
+occurred, it belongs to some even diagonal interval as well, so the same
+argument excludes it as a preimage of zero.  Onto-ness of $S$ then forces
+$S^{-1}(0)=\{0\}$, and in particular $S(0)=0$.
+
+It remains to justify the case in which both ambient endpoints are
+asymptotic.  Every \(x\in(0,1)\) lies in some diagonal interval.  If
+\(R(x)\) were an ambient endpoint, that endpoint would occur at the next
+stage.  Hence \(R((0,1))\subseteq(0,1)\).  Onto-ness of $R$ forces each
+ambient endpoint to have a preimage in $\{0,1\}$.  There are only two
+candidates, so $R|_{\{0,1\}}$ is a permutation.  Thus \(S=R^2\) fixes both
+endpoints and neither has any other preimage.  This proves
+\eqref{eq:pl-singleton-endpoint} in all cases.
+
+After shrinking \(\varepsilon>0\), the map \(S\) is affine on
+\([0,\varepsilon]\).  It cannot be constant there, since that would
+contradict \eqref{eq:pl-singleton-endpoint}.  Its slope cannot be negative,
+because \(S(0)=0\) and \(S\) takes values in \([0,1]\).  Hence the slope is
+positive and \(S\) is strictly increasing on \([0,\varepsilon]\).
+Compact separation gives
+\[
+ \eta=\min S([\varepsilon,1])>0.
+\]
+For all sufficiently large \(n\), both
+\(\ell_{2n}<\varepsilon\) and \(\ell_{2n+2}<\eta\).  Choose
+\(x_n\in R^{2n}(J)=[\ell_{2n},r_{2n}]\) with
+\(S(x_n)=\ell_{2n+2}\).  The definition of \(\eta\) forces
+\(x_n<\varepsilon\).  Since \(S\) is increasing on
+\([0,\varepsilon]\) and \(\ell_{2n}\leq x_n\), we have
+\(S(\ell_{2n})\leq\ell_{2n+2}\).  The reverse inequality follows from
+\(S(\ell_{2n})\in S(R^{2n}(J))=R^{2n+2}(J)\).  Hence
+\[
+ \ell_{2n+2}=S(\ell_{2n}).
+\]
+The positive sequence on the left decreases to zero.  Since \(\Fix(S)\) is
+finite, the strict sign of \(S(x)-x\) on a sufficiently small punctured
+endpoint interval is therefore negative.  Thus every sufficiently small
+positive point has iterates decreasing to zero.  More explicitly, after
+shrinking \(\rho>0\), singleton-fibre positivity and the strict sign give
+\[
+ 0<S(x)<x\qquad(0<x\leq\rho).
+\]
+Every orbit beginning in \((0,\rho]\) decreases to a fixed point in
+\([0,\rho]\), necessarily zero.  If an arbitrary basin point first enters
+\((0,\rho)\) after \(n\) iterates, continuity of \(S^n\) gives a neighborhood
+which also enters \((0,\rho)\).  Hence the basin of zero is open.
+
+Let \(U_0\) be the basin component containing zero and put
+\(C_e=\cl(U_0)\).  This is a nondegenerate endpoint interval because the
+basin contains $[0,\rho]$.  Under the standing assumption that zero never
+occurs in a diagonal interval, already $0\notin J$, so $p>0$.  The point
+$p$ is fixed by $S$ and is not in the basin of zero.  It is therefore an
+interior barrier which the basin component beginning at zero cannot pass;
+in particular $C_e$ is proper.
+
+Write $C_e=[0,u]$.  The basin is forward invariant; the connected set
+$S(U_0)$ contains zero and lies in the basin, so $S(U_0)\subseteq U_0$.
+Continuity gives $S(C_e)\subseteq C_e$.  Since $u<1$ and the basin is open,
+$u$ is not in the basin and $U_0=[0,u)$.  If $S(u)\in U_0$---including
+$S(u)=0$---then $u$ itself would converge to zero, a contradiction.
+Therefore $S(u)=u$.  The interval $S(C_e)$ contains both $0$ and $u$, and
+hence
+\begin{equation}\label{eq:pl-basin-onto}
+ S(C_e)=C_e.
+\end{equation}
+
+We also need the elementary singleton-fibre factorization.  If commuting
+onto interval maps \(U,V\) satisfy
+\[
+ (UV)^{-1}(0)=\{0\},\qquad UV(0)=0,
+\]
+then, using both factorizations \(UV,VU\),
+\[
+\begin{alignedat}{2}
+ U^{-1}(0)&=\{V(0)\},\qquad&V^{-1}(0)&=\{U(0)\},\\
+ U^{-1}(U(0))&=\{0\},&V^{-1}(V(0))&=\{0\}.
+\end{alignedat}
+\]
+For example, if $U(x)=0$, choose $y$ with $V(y)=x$; then
+$UV(y)=0$, so $y=0$ and $x=V(0)$.  Conversely $U(V(0))=UV(0)=0$.
+Also, $U(x)=U(0)$ implies
+$UV(x)=VU(x)=VU(0)=UV(0)=0$, whence $x=0$.  The other two identities are
+symmetric.
+
+For an onto interval map, a value having an ambient endpoint as its unique
+preimage must itself be an ambient endpoint.  Indeed, if the value were in
+$(0,1)$, preimages of $0$ and $1$ would both differ from the endpoint, and
+the intermediate value theorem on the interval joining those preimages
+would give a second preimage of the intermediate value.  Applied to the last
+two singleton-fibre identities, this shows that $U(0),V(0)\in\{0,1\}$.
+Moreover $U(V(0))=0$ and $V(U(0))=0$.  If $U(0)=0$, then $U$ fixes zero.
+If $U(0)=1$, then $V(0)\neq0$, so $V(0)=1$ and $U(1)=0$; thus $U$
+interchanges the ambient endpoints.  The same dichotomy holds for $V$.
+
+Apply this to the two factorizations
+\[
+ S=P\bigl(P^{2L-1}Q^{2L}\bigr)
+  =Q\bigl(P^{2L}Q^{2L-1}\bigr),
+\]
+whose factors are commuting and onto.  Equation~\eqref{eq:pl-singleton-endpoint}
+is exactly the singleton-fibre hypothesis.  It follows that each of \(P,Q\)
+either fixes zero or interchanges the ambient endpoints.  Since \(L\) is even,
+\[
+ A(0)=0=B(0).
+\]
+Commutation with $S$ sends the basin to itself, and $A(0)=B(0)=0$; hence
+$A(U_0),B(U_0)\subseteq U_0$ and therefore
+\(A(C_e),B(C_e)\subseteq C_e\).  Since
+\(S=A^2B^2\), we have
+$C_e=S(C_e)\subseteq A(C_e)\subseteq C_e$ and similarly for $B$.
+Consequently
+\[
+ A(C_e)=C_e=B(C_e).
+\]
+
+The phase images \(P^iQ^j(C_e)\), \(0\leq i,j<L\), now obey the same
+vertex-transitive intersection-graph dichotomy.  If their graph is
+connected, interval Helly gives a common invariant intersection contained in
+the proper interval \(C_e\).  Minimality would make this intersection equal
+to $\I$, an immediate contradiction.  If the graph is disconnected, its
+union cannot equal $\I$; collapse the connected components of that union to
+obtain a nonconstant quotient.  Proposition~\ref{prop:quotient-package}(6) says
+that the descended pair is still a counterexample.  Every phase interval
+contains the two distinct
+images of the endpoints of \(C_e\), which lie in \(\Fix(S)\); distinctness
+is preserved by the inverses in \eqref{eq:pl-S-inverses}.
+Thus the quotient strictly lowers \(\#\Fix(S)\), unless an earlier fixed
+count has already fallen.  If the \(W\)-count falls, normalize again and
+contradict the first minimum; if it is unchanged, the exponent \(L\) is
+unchanged, and a fall of the \(R\)-count contradicts the second minimum; if
+both are unchanged, the strict fall of the \(S\)-count contradicts the third
+minimum.  The reflected argument treats the endpoint \(1\).  Hence no
+ambient endpoint is merely asymptotic.  Choose arrival times \(n_0,n_1\)
+for zero and one and put \(N=\max\{n_0,n_1\}\).  The diagonal intervals are
+nested, so \(R^N(J)\) contains both ambient endpoints and therefore
+\begin{equation}\label{eq:pl-finite-arrival}
+ R^N(J)=\I
+\end{equation}
+for some \(N\).
+
+There remains a terminal-gap issue.  Suppose \(c=1\) and \(p>0\).
+For every \(x\in[p,1]\), equation~\eqref{eq:pl-gap-sign} gives
+\(W(x)\geq x\), with equality only at the endpoints.  Inductively every
+iterate \(W^m(x)\) remains in \([p,1]\).  Since
+\(R^N=W^{NL/2}\), this gives
+\[
+ R^N(J)\subseteq[p,1],
+\]
+contradicting \eqref{eq:pl-finite-arrival}.  Thus \(c=1\) forces \(p=0\).
+
+If \(p=0,c=1\), then consecutiveness of \(p,c\) in \(X\) gives
+\(X=\{0,1\}\).  By \eqref{eq:pl-X-inverses}, the restrictions \(P|_X\) and
+\(Q|_X\) are permutations; each therefore either fixes both endpoints or
+interchanges them.  Suppose a factor, say \(P\), interchanges the endpoints.
+Lemma~\ref{lem:pl-states} makes its selected germ a local
+diffeomorphism from the right of zero to the left of one, hence locally
+decreasing.  For small \(x>0\),
+\[
+ W(x)>x\quad\Longrightarrow\quad P(W(x))<P(x).
+\]
+Commutation gives \(W(P(x))<P(x)\), contradicting
+\eqref{eq:pl-gap-sign}.  Hence neither factor interchanges the
+endpoints; both fix zero, already a common fixed point.  In the surviving
+counterexample,
+\begin{equation}\label{eq:pl-c-internal}
+ c<1.
+\end{equation}
+
+Finally, fix $0<\delta<c-p$, put $x_0=p+\delta$, and write
+$x_n=W^n(x_0)$.  As long as $x_n\in(p,c)$,
+\eqref{eq:pl-gap-sign} gives $x_{n+1}>x_n$.  Hence either some
+$x_n\geq c$, or the sequence remains in $(p,c)$ and increases to a limit
+$d\leq c$.  In the latter case continuity gives $W(d)=d$; since there is no
+$W$-fixed point in $(p,c)$, necessarily $d=c$.
+
+Choose $z_0,z_1\in J$ with
+\[
+ R^N(z_0)=0,\qquad R^N(z_1)=1.
+\]
+Because $R$ fixes $p,c$ and $c<1$, the point $z_1$ lies in $(p,c)$; likewise
+$z_0\in(p,c)$ unless $p=0$ and $z_0=p$.  Put
+\[
+ r=\max\{z_0,z_1\}<c.
+\]
+(In the exceptional case $z_0=p$, the same strict inequality follows from
+$z_1\in(p,c)$.)  The orbit argument supplies $n$ with $x_n\geq r$.
+The image $W^n([p,p+\delta])$ is an interval containing both
+$W^n(p)=p$ and $x_n$, and hence contains $[p,r]$, in particular $z_0,z_1$.
+Applying $R^N=W^{NL/2}$ gives an interval containing zero and one; it is
+therefore all of $\I$.  Since $R$ and $W$ are powers of the same map, the
+composite is the single iterate $W^{n+NL/2}$.  If
+$\delta\geq c-p$, the original interval contains a smaller selected-side
+interval to which the preceding argument applies.  We have proved the
+fundamental local property
+\begin{equation}\label{eq:pl-LEO}
+ \boxed{\text{For every }0<\delta\leq1-p\text{ there is }k\text{ such that }
+ W^k([p,p+\delta])=\I.}
+\end{equation}
+
+In particular, suppose $F$ and $G$ commute with $W$ and agree on a
+selected-side neighborhood of $p$.  By continuity they agree on
+$[p,p+\delta]$ for some $\delta>0$.  Choose $k$ from
+\eqref{eq:pl-LEO}.  Given $y\in\I$, choose
+$x\in[p,p+\delta]$ with $W^k(x)=y$.  Then
+\[
+ F(y)=F(W^k(x))=W^k(F(x))=W^k(G(x))=G(W^k(x))=G(y).
+\]
+Thus $F=G$ on $\I$.  We call this \emph{germ determination}.
+
+\subsection{The one-sided \texorpdfstring{\(C^{1+\mathrm{BV}}\)}{C1+BV} orbit circle}
+
+For an orientation-preserving \(C^1\) local diffeomorphism, write
+\(C^{1+\mathrm{BV}}\) when \(\log Df\) has bounded variation on a sufficiently
+small closed one-sided interval.  This class is closed under composition and
+inverse, because
+\[
+ \log D(g\circ h)=(\log Dg)\circ h+\log Dh,
+ \qquad
+ \log D(g^{-1})=-(\log Dg)\circ g^{-1}.
+\]
+Composition with a monotone map does not increase variation.  Moreover, on
+every compact representative the positive continuous derivative has range in
+some interval \([c,C]\subset(0,\infty)\).  The restrictions of \(\log\) and
+\(\exp\) to the corresponding compact ranges are Lipschitz, and therefore
+\begin{equation}\label{eq:pl-log-derivative-BV}
+ \Var(\log Df)<\infty\quad\Longleftrightarrow\quad \Var(Df)<\infty.
+\end{equation}
+Thus this convention is exactly strong enough for the derivative-BV
+hypothesis in Denjoy's theorem below.
+Every selected germ occurring here is affine after the domain is
+shrunk sufficiently.  Once its positive slope is known to be nonzero, its
+logarithmic derivative is constant, so it is automatically
+\(C^{1+\mathrm{BV}}\).
+
+We use three standard one-dimensional facts.  Navas's
+bounded-variation Kopell lemma \cite[Theorem 4.1.1]{Navas} says that if
+commuting orientation-preserving diffeomorphisms $u,v$ of $[0,1)$ are
+respectively $C^{1+\mathrm{BV}}$ and $C^1$, if $u$ has no interior fixed
+point, and if $v$ has one, then $v=\id$.  The Poincar\'e translation-number
+criterion \cite[Propositions 2.2.2 and 2.2.3]{Navas} says that an
+orientation-preserving circle-homeomorphism lift $G$ has translation number
+$m/n\in\mathbb Q$, $n>0$, exactly when $G^n(t)=t+m$ for some $t$.
+Finally, Denjoy's theorem
+\cite[Theorem 3.1.1]{Navas} says that an orientation-preserving $C^1$ circle
+diffeomorphism whose derivative has bounded variation and whose rotation
+number is irrational is topologically conjugate to the corresponding rigid
+rotation.
+
+We first record the local form of Kopell's lemma that will be used below.
+
+\begin{lemma}[Local BV Kopell corollary]\label{lem:local-BV-Kopell}
+Let \(u,v\) be commuting orientation-preserving one-sided \(C^1\) local
+diffeomorphism germs fixing zero.  Suppose that \(u\) is
+\(C^{1+\mathrm{BV}}\), has no fixed point on the punctured side, and that
+\(v\) has a punctured-side fixed point.  Then \(v\) is the identity germ.
+\end{lemma}
+
+\begin{proof}
+Replace \(u\) by \(u^{-1}\), if necessary, so that \(u(x)<x\).  Choose a
+fixed point \(y>0\) of \(v\) in a common representative domain on which
+\(u,v\), their local inverses, and the commutation identity are all defined.
+Then every
+\(u^j(y)\), \(j\geq0\), is fixed by \(v\), and \(u^j(y)\downarrow0\).
+Extend \(u\) above \(y\) to a fixed-point-free
+\(C^{1+\mathrm{BV}}\) diffeomorphism of \([0,1)\), preserving the already
+given germ.  For completeness, write \(z=u(y)<y\) and \(r=Du(y)>0\).
+We construct the extension explicitly.  Put \(a=y-z>0\),
+\(s=1-r<1\), and choose
+\(0<\eta<\min\{r,1\}/2\).  Fix \(\kappa>0\), and choose
+\(Y\in(y,1)\) so close to \(y\) that the function
+\[
+ q(x)=s+\frac{x-y}{Y-y}(-\kappa-s),\qquad
+ d(x)=a+\int_y^x q(t)\,dt \quad (y\leq x\leq Y),
+\]
+is positive.  Since both endpoint values of \(q\) are at most
+\(1-\eta\), so is \(q\) throughout this interval.  Write
+\(a_Y=d(Y)>0\) and set
+\(\lambda=\kappa(1-Y)^2/a_Y\).  On \([Y,1)\), continue \(d\) by
+\[
+ d(x)=a_Y\exp\!\left[-\lambda
+   \left(\frac1{1-x}-\frac1{1-Y}\right)\right].
+\]
+The value and first derivative match at \(Y\), because the right derivative
+there is \(-\lambda a_Y/(1-Y)^2=-\kappa\).  For the variation calculation,
+put \(w=(1-x)^{-1}\).  On the tail,
+\[
+ d'=-\lambda w^2d,\qquad
+ d''=d(\lambda^2w^4-2\lambda w^3).
+\]
+Since \(d=C e^{-\lambda w}\) there, where
+\(C=a_Ye^{\lambda/(1-Y)}\), and \(dx=dw/w^2\),
+\[
+ \int_Y^1|d''(x)|\,dx
+ \leq C\int_{(1-Y)^{-1}}^\infty
+ e^{-\lambda w}(\lambda^2w^2+2\lambda w)\,dw<\infty.
+\]
+Thus \(d'\) has finite variation on the tail.  It equals the affine
+function \(q\) on \([y,Y]\), and there is no jump at \(Y\), so \(d'\) has
+bounded variation on all of \([y,1)\).  The same formula shows that the tail
+and all its derivatives tend to zero at one.  Consequently \(d\) is positive
+and \(C^1\), \(d'\leq1-\eta\), and \(d(x)\to0\) as \(x\uparrow1\).  Define
+\(u(x)=x-d(x)\) for \(x\geq y\).
+Its value and derivative at \(y\) are \(z\) and \(r\), so it glues to the
+given representative.  Moreover \(Du=1-d'\geq\eta\), \(u(x)<x\), and
+\(u(x)\to1\).  Thus the result is an orientation-preserving diffeomorphism
+of \([0,1)\) onto itself with no interior fixed point.  Since \(Du\) has
+bounded variation and is bounded away from zero, \(\log Du\) has bounded
+variation as well.  This is the required extension.
+
+Keep \(v\) on \([0,y]\).  On the successive fundamental intervals above
+\(y\), extend it by
+\[
+ v\bigm|_{u^{-k}([u(y),y])}
+   =u^{-k}\bigl(v\bigm|_{[u(y),y]}\bigr)u^k,
+ \qquad k=1,2,\ldots .
+\]
+Here \(a_k=u^{-k}(y)\) increases to one, and the \(k\)-th displayed formula
+acts on \([a_{k-1},a_k]\).  It fixes both endpoints, so the pieces fit
+continuously and define an increasing homeomorphism of \([0,1)\).  Indeed,
+the increasing sequence \((a_k)\) can have no limit below one, since such a
+limit would be an interior fixed point of \(u\); hence these fundamental
+intervals exhaust \([y,1)\).
+At the common endpoint \(a_k\), the chain rule gives
+\[
+ D(u^{-k}vu^k)(a_k)=Dv(y),\qquad
+ D(u^{-(k+1)}vu^{k+1})(a_k)=Dv(u(y)),
+\]
+because the derivatives of each inverse pair cancel at the corresponding
+orbit point.  Since
+\(v(y)=y\), differentiating \(uv=vu\) at \(y\) gives
+\[
+ Du(y)Dv(y)=Dv(u(y))Du(y),
+\]
+and \(Du(y)>0\), so these two one-sided derivatives agree.  Thus the pieces
+glue \(C^1\).  The conjugation formulas also give \(uv=vu\) on each
+fundamental interval, and continuity gives the identity at every seam.
+Only finitely many seams meet a compact subinterval of \([0,1)\), so the
+extension is a \(C^1\) diffeomorphism there and still fixes \(y\).
+The BV Kopell lemma makes it the identity, so the original \(v\) is the
+identity germ.
+\end{proof}
+
+\begin{lemma}[Orbit-circle dichotomy]\label{lem:orbit-circle}
+Let \(f,A,B\) be pairwise commuting orientation-preserving
+\(C^{1+\mathrm{BV}}\) one-sided local diffeomorphism germs fixing zero, and
+suppose
+\[
+ f(x)>x\quad(0<x\ll1),\qquad AB=f^d,\qquad d\in\mathbb Z_{>0}.
+\]
+The physical germ \(A\) selects a real lift translation number \(\alpha\),
+normalized by \(\tau_f(f)=1\).  Exactly one of the following holds.
+\begin{enumerate}
+\item If \(\alpha=m/n\in\mathbb Q\), where \(n>0\), then
+\begin{equation}\label{eq:rational-germ-powers}
+ A^n=f^m,\qquad B^n=f^{dn-m}
+\end{equation}
+as germs.
+\item If \(\alpha\notin\mathbb Q\), there are an increasing homeomorphism
+\(\chi:(0,\varepsilon)\to(-\infty,T)\) and simultaneous germ identities,
+valid on a sufficiently far-left tail,
+\begin{equation}\label{eq:irrational-germ-translations}
+ \chi f\chi^{-1}(s)=s+1,\quad
+ \chi A\chi^{-1}(s)=s+\alpha,\quad
+ \chi B\chi^{-1}(s)=s+d-\alpha.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{claim}[Direct-limit orbit line]\label{clm:direct-limit-orbit-line}
+For the germs \(f,A,B\) above there is a Hausdorff ordered line
+\(\mathscr L\), carrying a \(C^{1+\mathrm{BV}}\) atlas, in which the physical
+punctured side is a neighborhood of the negative end.  The three germs
+extend uniquely by equivariance to pairwise commuting
+\(C^{1+\mathrm{BV}}\) orientation-preserving diffeomorphisms of
+\(\mathscr L\), and all their germ relations remain valid.  The extension
+of \(f\) acts freely, \(\mathscr L/\langle f\rangle\) is a
+\(C^{1+\mathrm{BV}}\) circle, and there is a
+\(C^{1+\mathrm{BV}}\) coordinate \(H:\mathscr L\to\mathbb R\) satisfying
+\(HfH^{-1}(s)=s+1\).
+\end{claim}
+
+\begin{proof}[Proof of the claim]
+Shrink the representatives so that $f,A,B$ and their inverses are defined on
+the intervals used below.  Here is an explicit model for the direct limit.
+For a sufficiently small representative interval \(U=(0,\varepsilon)\),
+take classes \([x,j]\), \(x\in U\), \(j\in\mathbb Z\), under the
+equivalence relation generated by
+\begin{equation}\label{eq:direct-limit-relation}
+ [f(x),j]=[x,j+1]
+\end{equation}
+whenever the displayed terms are defined.  The ordered direct limit is an
+open line \(\mathscr L\).  The physical punctured side embeds by
+\(x\mapsto[x,0]\).  After shrinking \(U\), the selected local inverse
+satisfies \(0<f^{-1}(x)<x\) throughout \(U\).  Hence all its forward iterates
+are defined, and \(f^{-k}(x)\) decreases to a limit \(\ell\geq0\).
+Continuity gives \(f(\ell)=\ell\); the strict germ inequality excludes a
+positive such limit, so \(\ell=0\).  Thus the embedded physical side is a
+neighborhood of
+the negative end.  Using a sufficiently small representative of each class,
+the germ extends to the free deck map
+
+\[
+ f_{\mathscr L}[x,j]=[f(x),j]=[x,j+1].
+\]
+
+We continue to denote this extension by \(f\).  Choose \(x_0>0\) and put
+\(x_1=f(x_0)>x_0\).  Every point of \(\mathscr L\) has a representative
+\([x,j]\) with \(x\in D=[x_0,x_1]\); the only boundary identifications are
+\([x_1,j]=[x_0,j+1]\).  Thus \(\mathscr L\) is the ordered gluing of the
+copies \(D_j=D\times\{j\}\).  Reduction to \(D\) is unique except for these
+two seam representatives, and
+\[
+ H_0([x,j])=j+\frac{x-x_0}{x_1-x_0}\qquad(x\in D)
+\]
+is well defined at each seam.  Its restriction to every copy is a
+homeomorphism onto \([j,j+1]\), and the piecewise inverse has the quotient
+topology.  Hence \(H_0\) is a homeomorphism
+\(\mathscr L\cong\mathbb R\); in particular the quotient is Hausdorff and
+the asserted ordered open line is genuine.
+
+For regularity, enlarge each copy slightly across its two endpoints using
+\eqref{eq:direct-limit-relation}.  The overlap maps are restrictions of
+iterates of \(f\) and \(f^{-1}\), so they form a
+\(C^{1+\mathrm{BV}}\) atlas compatible with this topology.  The deck map
+is represented in these charts by \(f\) and its conjugates.  Its quotient
+\[
+ \mathscr O_f=\mathscr L/\langle f\rangle
+\]
+is a topological circle.  A fundamental interval is
+$D=[x_0,x_1]$, with $x_0$ identified with $x_1$ by $f$.
+
+We spell out the regularity at this seam.  Choose a positive $C^1$ function
+$\rho$ on $D$, with derivative of bounded variation, satisfying
+\[
+ \rho(x_1)Df(x_0)=\rho(x_0).
+\]
+For example, prescribe the two positive endpoint values in this ratio and
+join them by a positive affine function.  Rescale \(\rho\) so that
+\(\int_{x_0}^{x_1}\rho=1\), and
+set
+\[
+ h(x)=\int_{x_0}^x\rho(t)\,dt,\qquad x\in D.
+\]
+Extend $h$ to a coordinate $H:\mathscr L\to\mathbb R$ by
+
+\[
+ H([x,j])=h(x)+j \qquad (x\in D).
+\]
+
+The values agree at the seam because \(h(x_1)=1\) and \(h(x_0)=0\).
+To check the derivative, use the \(j\)-th physical coordinate on both sides.
+Just to the right of the seam, write the point as
+\([x,j+1]=[f(x),j]\).  The derivative there, in the coordinate \(f(x)\),
+tends to \(\rho(x_0)/Df(x_0)\); from the left it tends to \(\rho(x_1)\).
+These are equal by the endpoint condition on \(\rho\).  Hence there is no
+derivative jump.  Each side is \(C^{1+\mathrm{BV}}\), and a compact part of
+\(\mathscr L\) meets only finitely many copies, so the total variation on
+that compact part is finite.  Positivity of \(\rho\) gives the same
+statement for the local inverse.  Thus \(H\) is a
+\(C^{1+\mathrm{BV}}\) coordinate and
+\begin{equation}\label{eq:orbit-deck}
+ HfH^{-1}(s)=s+1.
+\end{equation}
+It follows in particular that $\mathscr O_f$ carries the standard
+$C^{1+\mathrm{BV}}$ circle structure.
+
+For \(G=A\) or \(G=B\), define its equivariant extension by
+\begin{equation}\label{eq:direct-limit-G}
+ G_{\mathscr L}[x,j]=[G(x),j],
+\end{equation}
+using a sufficiently small representative of the class.  This is
+independent of the representative: relation
+\eqref{eq:direct-limit-relation} and \(Gf=fG\) give
+
+\[
+ [G(f(x)),j]=[f(G(x)),j]=[G(x),j+1].
+\]
+
+The same construction with the inverse germ proves that
+\(G_{\mathscr L}\) is an orientation-preserving diffeomorphism, and the
+definition gives \(G_{\mathscr L}f=fG_{\mathscr L}\).  In overlapping
+direct-limit charts its formulas are conjugates \(f^kGf^{-k}\).  Adjacent
+formulas have equal values by commutation, and differentiating \(Gf=fG\)
+shows that their first derivatives agree at the seam.  All such formulas
+are \(C^{1+\mathrm{BV}}\).  Since a compact interval in \(\mathscr L\)
+meets only finitely many charts, its derivative variation is a finite sum
+of the piecewise variations, with no seam jump.  Thus \(G_{\mathscr L}\)
+is \(C^{1+\mathrm{BV}}\) on the line.
+Formula \eqref{eq:direct-limit-G} also preserves every germ relation:
+evaluate both words on a representative sufficiently close to zero.  In
+particular the extensions of \(A,B,f\) commute pairwise and satisfy
+\(AB=f^d\).  Equivariance and agreement on the embedded negative end make
+the extensions unique.  This proves the claim.
+\end{proof}
+
+Choose the line, extensions, and coordinate supplied by
+Claim~\ref{clm:direct-limit-orbit-line}.  For \(G\in\{A,B\}\), put
+\(\widetilde G=HG_{\mathscr L}H^{-1}\).  Commutation with \(f\) gives the
+exact deck identity
+\[
+ \widetilde G(s+1)=\widetilde G(s)+1.
+\]
+Consequently \(D\widetilde G(s+1)=D\widetilde G(s)\); restricting to
+\([0,1]\) and identifying its endpoints produces an orientation-preserving
+\(C^{1+\mathrm{BV}}\) circle diffeomorphism.  This proves the required
+regularity of the circle maps induced by \(A\) and \(B\).
+
+The actual action of $G$ on $\mathscr L$, rather than only its quotient
+circle map, selects this lift $\widetilde G$ commuting with the deck
+translation $T_1(s)=s+1$.  A different lift $T_1^k\widetilde G$ would
+represent the different germ $f^kG$.  Define
+\[
+ \alpha=\tau_f(A)=\lim_{r\to\infty}
+       \frac{\widetilde A^{\,r}(s)-s}{r}.
+\]
+This is independent of $s$, its class modulo $\mathbb Z$ is the rotation
+number of the induced circle map, and the germ identity $AB=f^d$ gives the
+exact lift identity
+\begin{equation}\label{eq:selected-lift-product}
+ \widetilde A\widetilde B=T_1^d.
+\end{equation}
+
+Suppose first that $\alpha=m/n\in\mathbb Q$, with $n>0$.  The
+Poincar\'e theorem provides $s$ such that
+$\widetilde A^n(s)=s+m$.  Translating $s$ by a sufficiently negative integer
+places the corresponding point in the physical representative of the germ;
+the equality is unchanged because the lifts commute with $T_1$.  Hence
+$H_0=A^nf^{-m}$ has a punctured-side fixed point.  It commutes with the
+fixed-point-free $C^{1+\mathrm{BV}}$ germ $f$, so
+Lemma~\ref{lem:local-BV-Kopell} gives $H_0=\id$.  Therefore
+$A^n=f^m$.  Since $B=f^dA^{-1}$, also
+$B^n=f^{dn-m}$.
+
+Now suppose that $\alpha$ is irrational.  Denjoy's theorem conjugates the
+circle map induced by $A$ to rotation by $\alpha\bmod\mathbb Z$.  Lift a
+degree-one conjugacy to an increasing homeomorphism of universal covers
+which commutes with $T_1$.  The conjugated selected lift of $A$ is a
+translation.  Its displacement is exactly $\alpha$, rather than merely its
+residue class, because translation number is invariant under degree-one lift
+conjugacy.  Equation~\eqref{eq:selected-lift-product} then sends the selected
+lift of $B$ to translation by $d-\alpha$, while
+\eqref{eq:orbit-deck} sends $f$ to translation by one.  Restricting this
+lifted coordinate to a sufficiently far-left part of the physical end gives
+an increasing homeomorphism
+$\chi:(0,\varepsilon)\to(-\infty,T)$ and the three identities in
+\eqref{eq:irrational-germ-translations}.
+\end{proof}
+
+Apply Lemma~\ref{lem:orbit-circle} in the physical selected-side coordinate
+\(x-p\) to \(f=W\) and to \(A,B\), where \(d=L/2\) and \(AB=W^d\).
+There is also an elementary one-map dilation chart
+\[
+ \jmath:[0,\varepsilon_0)\longrightarrow[p,p+\delta_0),\qquad
+ W(\jmath(t))=\jmath(et)\quad(0\leq t<\varepsilon_0/e).
+\]
+Here is the construction in full.  Choose \(x_0>p\) so close to \(p\) that
+\(W\) is an increasing local diffeomorphism on \([p,x_0]\), that
+\(x_1=W(x_0)>x_0\), and that the selected inverse branch
+\(g:[p,x_1]\to[p,x_0]\) is defined.  Choose an increasing homeomorphism
+\(\eta:[1,e]\to[x_0,x_1]\) with \(\eta(1)=x_0\) and \(\eta(e)=x_1\).
+For \(0<t<e\), choose \(n\geq0\) such that
+\[
+ e^{-n}\leq t\leq e^{\,1-n}
+\]
+and put
+\[
+ \jmath(t)=g^n\bigl(\eta(e^nt)\bigr);
+\]
+also put \(\jmath(0)=p\).  At the common endpoint of two consecutive
+parameter intervals the two formulas agree, since
+\[
+ g^{n+1}(\eta(e))=g^{n+1}(x_1)
+ =g^n(x_0)=g^n(\eta(1)).
+\]
+The intervals \(g^n([x_0,x_1])\) are consecutive and their endpoints tend
+to \(p\): the decreasing sequence \(g^n(x_0)\) has a fixed-point limit, and
+the selected germ has no fixed point other than \(p\).  Hence the displayed
+pieces fit to an increasing homeomorphism
+\(\jmath:[0,e)\to[p,x_1)\), continuous also at zero.  Finally, for
+\(0<t<1\), choosing \(n\geq1\) with
+\(e^{-n}\leq t\leq e^{1-n}\) gives
+\[
+ W(\jmath(t))=g^{n-1}(\eta(e^nt))=\jmath(et),
+\]
+and the identity at \(t=0\) follows from \(W(p)=p\).  Thus one may take
+\(\varepsilon_0=e\) and \(\delta_0=x_1-p\).
+
+Suppose first that \(\alpha=m/n\) is rational.  If \(m<0\), write
+\(h=-m>0\).  Choose \(0<\varepsilon<\varepsilon_0/e\) so small that the
+selected inverse germ of \(W\), all the identities used below, and the chart
+formula
+\[
+ W^{-h}(\jmath(t))=\jmath(e^{-h}t)
+\]
+are defined on \(0\leq t\leq\varepsilon\).  Put
+\(I_\varepsilon=\jmath([0,\varepsilon])\).  Here \(W^{-h}\) means only the
+corresponding iterate of this selected local inverse; no global inverse of
+\(W\) is being used.  Since \(W^{-h}(I_\varepsilon)\subseteq I_\varepsilon\),
+induction using \(A^n=W^{-h}\) on this chart gives, for every \(k\geq0\),
+\begin{equation}\label{eq:pl-rational-shrinking}
+ A^{nk}(I_\varepsilon)
+ =W^{-hk}(I_\varepsilon)
+ =\jmath([0,e^{-hk}\varepsilon]).
+\end{equation}
+Thus these compact intervals shrink to \(\{p\}\), and every use of the germ
+identity occurs inside its chosen domain.  Choose \(q\) from
+\eqref{eq:pl-LEO} with \(W^q(I_\varepsilon)=\I\).  Surjectivity of \(A\) and
+commutation give, for every \(k\),
+\[
+ \I=A^{nk}(\I)
+    =A^{nk}(W^q(I_\varepsilon))
+    =W^q(A^{nk}(I_\varepsilon)).
+\]
+On the other hand, continuity of the fixed map \(W^q\), together with
+\(W^q(p)=p\), gives
+\[
+ \sup_{x\in A^{nk}(I_\varepsilon)}|W^q(x)-p|\longrightarrow0.
+\]
+The last displayed set therefore cannot equal the nondegenerate interval
+\(\I\) for every \(k\), a contradiction.  If \(m=0\), germ determination
+gives \(A^n=\id\)
+globally, so \(P^{Ln}=\id\).  Then \(P\) is a finite-order interval
+homeomorphism: if it preserves orientation it is the identity, while if it
+reverses orientation its unique fixed point is preserved by \(Q\).  Either
+case gives a common fixed point.  Applying the same argument to
+\(B^n=W^{dn-m}\) shows that \(dn-m\) is neither negative nor zero.  Hence
+\(0<m<dn\), and
+\[
+ A^{\,n(dn-m)}=B^{\,nm}.
+\]
+Germ determination makes this equality global, that is,
+\(P^{Ln(dn-m)}=Q^{Lnm}\).  Both powers are positive, so
+Lemma~\ref{lem:pl-common-iterate} below again gives a common fixed
+point of \(P,Q\).  Thus the rational alternative is impossible in the
+standing counterexample.
+
+We are in the irrational alternative.  Exponentiate its translation
+coordinate and return to the physical side.  This gives the germ chart
+\[
+ \iota:[0,e^T)\longrightarrow\I,\qquad
+ \iota(0)=p,\qquad
+ \iota(t)=p+\chi^{-1}(\log t)\quad(0<t<e^T),
+\]
+and set
+\[
+ \lambda=e,\qquad a=e^\alpha,\qquad b=e^{d-\alpha},\qquad
+ \Lambda=e^d=\lambda^d.
+\]
+Then, as selected-side germ identities (that is, whenever \(t\) and the
+scaled arguments displayed below lie in \([0,e^T)\)),
+\begin{equation}\label{eq:actor-dilations}
+ W(\iota(t))=\iota(\lambda t),\qquad
+ A(\iota(t))=\iota(at),\qquad
+ B(\iota(t))=\iota(bt),
+\end{equation}
+and
+\begin{equation}\label{eq:pl-scale-product}
+ ab=\Lambda>1.
+\end{equation}
+
+No onto centralizer return can have scale below one.  If, for example,
+\(0<a<1\), choose \(\varepsilon>0\) so small that the \(A\)-germ identity is
+valid throughout \(I_\varepsilon=\iota([0,\varepsilon])\).  Because its
+image is nested inside the same chart, induction gives
+\begin{equation}\label{eq:pl-subunit-shrinking}
+ A^k(I_\varepsilon)=\iota([0,a^k\varepsilon])
+ \qquad(k\geq0).
+\end{equation}
+Choose \(q\) with \(W^q(I_\varepsilon)=\I\).  Surjectivity and commutation
+then give
+\[
+ \I=A^k(\I)=A^k(W^q(I_\varepsilon))
+    =W^q(A^k(I_\varepsilon))
+ \qquad(k\geq0).
+\]
+The intervals in \eqref{eq:pl-subunit-shrinking} shrink to \(\{p\}\), so
+continuity of the fixed map \(W^q\) gives
+\[
+ \sup_{x\in A^k(I_\varepsilon)}|W^q(x)-p|\longrightarrow0.
+\]
+Again the right side cannot equal \(\I\) for every \(k\), a contradiction.
+The identical argument excludes \(0<b<1\).
+Here \(a=1\) would make \(\alpha=0\), and \(b=1\) would make \(\alpha=d\);
+both contradict irrationality.  Thus
+\begin{equation}\label{eq:pl-scales-positive}
+ a,b>1.
+\end{equation}
+
+We shall use the Fugate--McLean fixed-set theorem
+\cite[Corollary 1.5, p.~613]{FugateMcLean}, whose exact conclusion is that
+the fixed-point set of a periodic homeomorphism of a tree-like continuum is
+a nonvoid continuum.
+
+\begin{lemma}[Common positive iterate]
+\label{lem:pl-common-iterate}
+Let \(F,G\colon\I\to\I\) be commuting continuous maps.  If
+\[
+ F^m=G^n
+\]
+for some positive integers \(m,n\), then \(F,G\) have a common fixed point.
+\end{lemma}
+
+\begin{proof}
+Put \(T=F^m=G^n\) and
+\[
+ J_\infty=\bigcap_{r\geq0}T^r(\I).
+\]
+The sets in this intersection are nested nonempty compact intervals.  Also
+\begin{equation}\label{eq:pl-eventual-range-onto}
+ T(J_\infty)=J_\infty.
+\end{equation}
+Indeed, one inclusion is immediate.  For \(y\in J_\infty\), the nonempty
+compact sets
+\[
+ T^{-1}(y)\cap T^r(\I),\qquad r\geq0,
+\]
+are nested: nonemptiness follows from \(y\in T^{r+1}(\I)\).  Their
+intersection contains a preimage of \(y\) in \(J_\infty\), proving the other
+inclusion.  Commutation gives
+\[
+ F(J_\infty)\subseteq J_\infty,\qquad
+ G(J_\infty)\subseteq J_\infty.
+\]
+If \(J_\infty\) is a singleton, it is already common fixed.  Assume it is
+nondegenerate.
+
+Form the natural extension
+\[
+ X_T=\{(x_0,x_1,\ldots)\in J_\infty^{\mathbb N_0}:
+       T(x_{i+1})=x_i\text{ for every }i\geq0\}.
+\]
+By \eqref{eq:pl-eventual-range-onto}, this is a nonempty compact
+connected metric space.  For completeness, in the product
+\(J_\infty^{\mathbb N_0}\) let
+\[
+ X_T^{(N)}=\{x:T(x_{i+1})=x_i\text{ for }0\leq i<N\}.
+\]
+Once \(x_N\) and the unconstrained coordinates after \(N\) are chosen, the
+coordinates before \(N\) are determined.  Thus \(X_T^{(N)}\) is homeomorphic
+to a product of compact intervals, and in particular is nonempty, compact,
+and connected.  These sets are nested, and
+\(X_T=\bigcap_NX_T^{(N)}\); the nested-intersection theorem therefore proves
+the assertion.  Give \(X_T\) the metric
+\[
+ d_X(x,y)=\sum_{i=0}^{\infty}2^{-i-1}|x_i-y_i|.
+\]
+The coordinate projection \(\pi_N\colon X_T\to J_\infty\) is onto: prescribe
+the \(N\)-th coordinate, determine the earlier ones by forward iteration,
+and choose the later ones recursively using
+\eqref{eq:pl-eventual-range-onto}.  If
+\(\pi_N(x)=\pi_N(y)\), the bonding equations make \(x_i=y_i\) for
+\(0\leq i\leq N\), and hence
+\[
+ d_X(x,y)\leq\sum_{i>N}2^{-i-1}=2^{-N-1}.
+\]
+Thus, for every \(\varepsilon>0\), some \(\pi_N\) is an
+\(\varepsilon\)-map onto an interval, meaning that every point fibre has
+diameter less than \(\varepsilon\).  This is precisely the defining
+approximation property for an arc-like continuum.  Since an arc is a finite
+tree, every arc-like continuum is tree-like.
+
+The shift
+\[
+ \Sigma(x_0,x_1,\ldots)=(T(x_0),x_0,x_1,\ldots)
+\]
+is a homeomorphism, with inverse deleting the zeroth coordinate.
+Coordinatewise application defines commuting maps \(\widehat F,\widehat G\)
+of \(X_T\), and
+\[
+ \widehat F^m=\Sigma=\widehat G^n.
+\]
+A continuous selfmap whose positive power is a homeomorphism is itself a
+homeomorphism: injectivity follows from injectivity of the power, surjectivity
+from surjectivity of the power, and a continuous bijection of a compact space
+onto a Hausdorff space is a homeomorphism.  Thus \(\widehat F,\widehat G\)
+are commuting homeomorphisms.
+
+Write
+\[
+ m=d_0m_0,\qquad n=d_0n_0,\qquad \gcd(m_0,n_0)=1,
+\]
+and choose integers \(r_0,s_0\) with
+\[
+ r_0n_0+s_0m_0=1.
+\]
+Negative powers are now legitimate.  Set
+\[
+ U=\widehat F^{r_0}\widehat G^{s_0},\qquad
+ V=\widehat F^{m_0}\widehat G^{-n_0}.
+\]
+Then \(V^{d_0}=\id\), and the B\'ezout identity gives
+\begin{equation}\label{eq:pl-bezout-split}
+ \widehat F=U^{n_0}V^{s_0},\qquad
+ \widehat G=U^{m_0}V^{-r_0}.
+\end{equation}
+
+The quoted Fugate--McLean theorem makes
+\[
+ \mathcal C=\Fix(V)
+\]
+a nonempty compact connected subset of \(X_T\).  Since \(U\) commutes with
+\(V\), it maps \(\mathcal C\) into itself.  We prove directly that
+\(U|_{\mathcal C}\) has a fixed point.  Given \(\varepsilon>0\), choose
+\(N\) with \(2^{-N-1}<\varepsilon\).  The set
+\(\pi_N(\mathcal C)=[\alpha,\beta]\) is an interval.  If
+\(\alpha=\beta\), every \(z\in\mathcal C\) satisfies
+\(d_X(U(z),z)<\varepsilon\).  Otherwise choose
+\(z_\alpha,z_\beta\in\mathcal C\) over the two endpoints.  The continuous
+function
+\[
+ z\longmapsto\pi_N(U(z))-\pi_N(z)
+\]
+is nonnegative at \(z_\alpha\) and nonpositive at \(z_\beta\).  Its image of
+the connected set \(\mathcal C\) therefore contains zero.  In either case
+there is \(z_\varepsilon\in\mathcal C\) with
+\[
+ d_X(U(z_\varepsilon),z_\varepsilon)<\varepsilon.
+\]
+Compactness, followed by \(\varepsilon\downarrow0\), supplies
+\(z\in\mathcal C\) with \(U(z)=z\).  Since also \(V(z)=z\),
+\eqref{eq:pl-bezout-split} gives
+\(\widehat F(z)=z=\widehat G(z)\).  The zeroth coordinate is a common fixed
+point of \(F,G\).
+\end{proof}
+
+If \(a^m=b^n\) for positive integers \(m,n\), the dilation coordinate makes
+\(A^m\) and \(B^n\) equal as germs.  Germ determination makes them equal
+globally:
+\[
+ P^{Lm}=Q^{Ln}.
+\]
+ Lemma~\ref{lem:pl-common-iterate} then gives a common fixed point of
+ \(P,Q\).
+Consequently the sole remaining case is
+\begin{equation}\label{eq:pl-independent-scales}
+ a,b>1,\qquad \frac{\log a}{\log b}\notin\mathbb Q.
+\end{equation}
+
+\subsection{The canonical ray and its tail core}
+
+For \(t\geq0\), choose \(n\) large enough that \(t/\lambda^n\) lies in the
+domain of \(\iota\), and define
+\begin{equation}\label{eq:pl-ray}
+ \Phi(t)=W^n\left(\iota\left(\frac{t}{\lambda^n}\right)\right).
+\end{equation}
+Whenever \(n\) is large enough that both germ arguments are admissible,
+\[
+ W^{n+1}\left(\iota\left(\frac{t}{\lambda^{n+1}}\right)\right)
+ =W^n\left(\iota\left(\frac{t}{\lambda^n}\right)\right).
+\]
+Indeed, this is one application of the \(W\)-identity in
+\eqref{eq:actor-dilations}, followed by \(W^n\).  Induction makes
+\eqref{eq:pl-ray} independent of every sufficiently large choice of \(n\).
+One \(n\) works on each compact
+parameter interval, so \(\Phi\) is continuous; near zero it equals
+\(\iota\).  Property~\eqref{eq:pl-LEO} makes \(\Phi\) onto.  Commutation
+and the germ identities give
+\begin{equation}\label{eq:pl-ray-equivariance}
+ \Phi(at)=A(\Phi(t)),\qquad
+ \Phi(bt)=B(\Phi(t)),\qquad
+ \Phi(\Lambda t)=R(\Phi(t)).
+\end{equation}
+
+For \(T>0\), put
+\[
+ \mathcal C_T=\cl\bigl(\Phi([T,\infty))\bigr),\qquad
+ \Omega=\bigcap_{T>0}\mathcal C_T.
+\]
+The set \(\Phi([T,\infty))\) is nonempty and connected, so its closure in
+the compact interval \(\I\) is a nonempty compact interval.  Thus each
+\(\mathcal C_T\) is a compact interval.  The family decreases with \(T\), so
+\(\Omega\) is itself a nonempty compact interval.  Equivariance gives
+\(A(\mathcal C_T)=\mathcal C_{aT}\).  Here is the closure bookkeeping.
+If \(x=\lim_k\Phi(t_k)\in\mathcal C_T\), with \(t_k\geq T\), continuity and
+equivariance give
+\(A(x)=\lim_k\Phi(at_k)\in\mathcal C_{aT}\).  Conversely, if
+\(y=\lim_k\Phi(s_k)\in\mathcal C_{aT}\), take \(s_k\geq aT\) and put
+\(t_k=s_k/a\).  A subsequence of \(\Phi(t_k)\) converges, by compactness of
+\(\I\), to some \(x\in\mathcal C_T\), and then
+\(A(x)=\lim_k\Phi(s_k)=y\).  This proves the asserted equality.  Hence
+\(A(\Omega)\subseteq\Omega\).  Conversely, if \(y\in\Omega\), then the
+nested compact sets
+\[
+ \mathcal C_T\cap A^{-1}(y)\qquad(T>0)
+\]
+are nonempty because \(y\in\mathcal C_{aT}=A(\mathcal C_T)\).  Their
+intersection contains \(x\in\Omega\) with \(A(x)=y\).  Thus
+\(A(\Omega)=\Omega\), and the identical argument for \(B\) gives
+\begin{equation}\label{eq:pl-Omega-invariant}
+ A(\Omega)=\Omega=B(\Omega).
+\end{equation}
+
+Suppose first that \(\Omega=\{q\}\).  If \(x\) is fixed by \(R\), choose
+\(t\) with \(\Phi(t)=x\).  If \(t>0\), then
+\[
+ x=R^n(x)=\Phi(\Lambda^nt)\longrightarrow q;
+\]
+the lift \(t=0\) gives \(x=p\).  Hence
+\[
+ \Fix(R)\subseteq\{p,q\}.
+\]
+The adjacent point \(c\) is distinct from \(p\) and is fixed by \(A,B\),
+hence by \(R=AB\).  Since \(\Phi(0)=p\), every lift of \(c\) is positive;
+the preceding argument therefore gives \(c=q\).
+The sign of \(R-\id\) is positive on \((p,q)\) and negative on
+\((q,1]\): it is positive near \(p\), and there is no further fixed point
+on either interval.
+
+Commutation gives \(P(p),Q(p)\in\Fix(R)\), so each is either \(p\) or \(q\).
+If \(P(p)=q\), Lemma~\ref{lem:pl-states} says that its selected germ is
+nonzero and maps the right side of \(p\) to one of the two sides at \(q\).
+On the source, \(R\) moves points away from \(p\).
+Commutation would therefore make the target side repelling.  But on the left
+of \(q\), \(R(x)>x\) moves points toward \(q\), while on the right,
+\(R(x)<x\) does the same.  This order contradiction proves \(P(p)=p\).
+Similarly \(Q(p)=p\), contrary to the assumption of no common fixed point.
+
+Suppose instead that \(\Omega\) is nondegenerate and proper.  Its phase
+images
+\[
+ P^iQ^j(\Omega),\qquad0\leq i,j<L,
+\]
+are nondegenerate: if one were a singleton, applying
+\(P^{L-i}Q^{L-j}\) would make
+\(P^LQ^L(\Omega)=R(\Omega)=\Omega\) a singleton.  They have a
+vertex-transitive intersection graph by
+\eqref{eq:pl-Omega-invariant} and the phase-intersection argument
+above.  We now use exactly the phase-graph construction following
+Lemma~\ref{lem:pl-normalization}, the quotient package in
+Proposition~\ref{prop:quotient-package}, and the fixed-set identity
+\eqref{eq:fix-quotient-pl}; all quotient classes below are the connected
+components prescribed by that construction.  If the
+graph is connected, interval Helly gives a proper common invariant
+intersection.  If it is disconnected, collapse the connected components of
+the union.  For every phase interval \(D_{i,j}=P^iQ^j(\Omega)\), commutation
+and \(R(\Omega)=\Omega\) give
+\[
+ R(D_{i,j})=P^iQ^j(R(\Omega))=D_{i,j}.
+\]
+It follows that \(R\) maps each connected component of their union onto
+itself.  Every continuous onto selfmap \(f\) of a
+nondegenerate interval has at least two fixed points of \(f^2\).  Indeed, if
+\(f\) has at least two fixed points there is nothing to prove.  Otherwise
+let \(z\) be its unique fixed point.  It is interior: if, for example, it
+were the left endpoint, then \(f(x)<x\) at every other point, whereas a
+preimage of the right endpoint, supplied by surjectivity, would satisfy
+\(f(x)>x\); the right-endpoint case is symmetric.  Moreover,
+\(f(x)>x\) to its left while \(f(x)<x\) to its right.  If the interval is
+\([a_0,b_0]\), surjectivity gives \(v<z<u\) with
+\(f(v)=b_0\) and \(f(u)=a_0\).  Choose \(x_0\in[v,z)\) with \(f(x_0)=u\).
+Then
+\[
+ f^2(x_0)-x_0=a_0-x_0\leq0,\qquad
+ f^2(a_0)-a_0\geq0.
+\]
+Equality, or the intermediate value theorem, gives an \(f^2\)-fixed point
+to the left of \(z\), in addition to \(z\).  Here \(f=R|_C\) on a component
+\(C\), so \(f^2=S|_C\) by \eqref{eq:pl-words}.  Thus every collapsed
+component contains at least two points of \(\Fix(S)\).  Formula
+\eqref{eq:fix-quotient-pl} identifies their images with the fixed points of
+the descended \(S\); consequently the quotient strictly lowers the third
+count in \eqref{eq:pl-mintriple}, unless restriction and renormalization have
+already lowered an earlier count.  Lemma~\ref{lem:pl-normalization} keeps the
+word \(S\) unchanged whenever the first count is unchanged, while
+Proposition~\ref{prop:quotient-package}(6) preserves the counterexample.
+Either alternative contradicts lexicographic minimality.
+
+We conclude that
+\begin{equation}\label{eq:pl-Omega-full}
+ \Omega=\I.
+\end{equation}
+Equivalently, every late ray tail has dense image.
+
+\subsection{Dense tails imply exactness}
+
+Recall that an interval map \(T\) is \emph{topologically exact} if every
+nonempty relatively open set \(U\subseteq\I\) satisfies
+\(T^n(U)=\I\) for some \(n\geq0\).
+
+We first produce a positive boundary lift of the base value \(p\).
+If \(p>0\), fix \(T>0\).  Density of \(\Phi([T,\infty))\), and the fact that
+\(0<p<c\leq1\), give parameters \(t_-,t_+>T\) for which
+\(\Phi(t_-)<p<\Phi(t_+)\).  On the compact segment with endpoints
+\(t_-\) and \(t_+\), a boundary point \(t_*>T\) of the relatively open set
+\(\{t:\Phi(t)>p\}\) satisfies
+\begin{equation}\label{eq:pl-boundary-lift}
+ \Phi(t_*)=p
+\end{equation}
+and, by its definition as a boundary of that open set, is approached by
+values on the selected right side.
+
+Suppose \(p=0\).  If \(\Phi^{-1}(0)=\{0\}\), then
+\(R^{-1}(0)=\{0\}\): for \(R(x)=0\), choose \(x=\Phi(t)\); then
+\(\Phi(\Lambda t)=0\), forcing \(t=0\).  For each parameter \(\zeta\) in
+the chart domain, put
+\[
+ I_\zeta=\iota([0,\zeta]).
+\]
+Choose \(\eta>0\) so that \(\iota\) is defined on
+\([0,\Lambda\eta]\) and
+\[
+ R(\iota(t))=\iota(\Lambda t)\qquad(0\leq t\leq\eta).
+\]
+Since \(R^{-1}(0)=\{0\}\), compactness gives
+\[
+ \delta:=\min_{x\in[\iota(\eta),1]}R(x)>0.
+\]
+Choose \(\varepsilon>0\) so small that
+\(\varepsilon<\Lambda\eta\) and \(\iota(\varepsilon)<\delta\).
+On \([0,\iota(\eta)]\) the displayed dilation identifies the full preimage
+of \(I_\zeta\), while the compact-complement bound excludes every other
+preimage.  Consequently, for \(0<\zeta\leq\varepsilon\),
+\begin{equation}\label{eq:pl-local-inverse}
+  R^{-1}(I_\zeta)=I_{\zeta/\Lambda}.
+\end{equation}
+If \(\Phi(t)\in I_\varepsilon\), then
+\[
+ \Phi(t)=R^N\bigl(\Phi(t/\Lambda^N)\bigr).
+\]
+Iterating \eqref{eq:pl-local-inverse} gives
+\[
+ \Phi(t/\Lambda^N)\in I_{\varepsilon/\Lambda^N}.
+\]
+For large \(N\), the ray equals the initial chart at \(t/\Lambda^N\), so
+strict monotonicity of \(\iota\) yields \(t\leq\varepsilon\).  Conversely,
+\(\Phi=\iota\) on a sufficiently small initial interval.  After reducing
+\(\varepsilon\), therefore,
+\[
+ \Phi^{-1}(I_\varepsilon)=[0,\varepsilon],
+\]
+contradicting density of every late tail.  Thus the zero fibre has a positive
+point \(t_0\).  It cannot contain an entire tail, because every late tail is
+dense in the nondegenerate interval \(\I\).  Choose \(s>t_0\) with
+\(\Phi(s)>0\).  A boundary in \([t_0,s]\) between the closed zero fibre and
+its open complement gives \(t_*>0\) with \(\Phi(t_*)=0\), approached by
+positive, and hence selected-side, values.
+
+Equivariance and the positive selected germs show that every
+\begin{equation}\label{eq:pl-actor-boundaries}
+ a^rb^s t_*,\qquad r,s\in\mathbb Z_{\geq0},
+\end{equation}
+has the same boundary property.
+
+We now prove exactness of \(R\).  Let \(U\) be nonempty and relatively open,
+and fix any \(T>0\).  Tail density supplies \(t_0>T\) with
+\(\Phi(t_0)\in U\).  Since \(\Phi^{-1}(U)\) is relatively open, it contains a
+nondegenerate compact parameter interval
+\[
+ J_0=[u,v],\qquad T<u<v,\qquad\Phi(J_0)\subseteq U.
+\]
+By \eqref{eq:pl-independent-scales}, the multiplicative group
+\[
+ \{a^rb^s:r,s\in\mathbb Z\}
+\]
+is dense in \((0,\infty)\): after taking logarithms it becomes the additive
+subgroup generated by \(\log a\) and \(\log b\), which is dense because their
+ratio is irrational.  Choose integers \(r,s\) such that
+\[
+ z=t_*a^rb^s\in(u,v).
+\]
+For \(k\geq\max\{0,-r,-s\}\), the point
+\[
+ \Lambda^kz=t_*a^{r+k}b^{s+k}
+\]
+is a selected-side boundary lift in the interior of \(\Lambda^kJ_0\).
+Consequently
+\[
+ R^k(\Phi(J_0))=\Phi(\Lambda^kJ_0)
+\]
+contains a nondegenerate selected-side interval based at \(p\).  A further
+power of \(R=W^d\) maps that interval onto \(\I\): round the exponent in
+\eqref{eq:pl-LEO} upward to a multiple of \(d\), using surjectivity of
+\(W\).  Hence \(R\) is topologically exact.
+
+We prove exactness of \(A\) separately.  Given a nonempty relatively open
+\(U\) and any threshold \(T>t_*\), apply the preceding open-preimage argument
+to obtain a compact interval as late as desired:
+\[
+ J=[u,v],\qquad T<u<v,\qquad\Phi(J)\subseteq U.
+\]
+Let \(j\) be least with \(z=\Lambda^jt_*>u\).  Then
+\[
+ u<z\leq\Lambda u<\Lambda v.
+\]
+The set of \(\rho\in(1,\Lambda)\) for which
+\[
+ \rho u<z<\rho v
+\]
+contains a nonempty compact interval \(K_0\) in its interior.  For every
+\(\rho\in K_0\), the interval \(\rho J\) contains the boundary lift \(z\)
+in its interior.  Thus \(\Phi(\rho J)\) contains a nondegenerate selected
+interval based at \(p\).  To make the uniformity explicit, define
+\[
+ m(\rho)=\max\{\Phi(t):t\in[\rho u,\rho v]\}.
+\]
+The change of variables \(t=\rho((1-s)u+sv)\) puts this maximum over the
+fixed compact set \(s\in[0,1]\).  Uniform continuity of \(\Phi\) on the
+compact union of these intervals therefore makes \(m\) continuous on
+\(K_0\).  The boundary property at \(z\), together with
+\(z\in(\rho u,\rho v)\), gives \(m(\rho)>p\) for every \(\rho\in K_0\).
+Consequently
+\(\eta_0=\min_{\rho\in K_0}(m(\rho)-p)>0\).  Since
+\(\Phi([\rho u,\rho v])\) is an interval containing both \(p\) and
+\(m(\rho)\), we have
+\begin{equation}\label{eq:pl-uniform-selected}
+ [p,p+\eta_0]\subseteq\Phi(\rho J)
+ \qquad(\rho\in K_0).
+\end{equation}
+Choose \(q\) with \(R^q([p,p+\eta_0])=\I\).  Since \(R\) is onto, the same
+holds for every exponent at least \(q\).
+
+Write uniquely
+\[
+ a^n=\Lambda^{k_n}\rho_n,\qquad1\leq\rho_n<\Lambda.
+\]
+The residues \(\rho_n\) are dense in the multiplicative circle obtained by
+identifying the endpoints of \([1,\Lambda]\), because
+\[
+ \frac{\log a}{\log\Lambda}
+ =\frac{\log a}{\log a+\log b}
+\]
+is irrational.  Equivalently, the fractional parts of
+\(n\log a/\log\Lambda\) are dense modulo one; every tail of this sequence is
+dense.  Also
+\(k_n=\lfloor n\log a/\log\Lambda\rfloor\to\infty\).  We may therefore
+choose a single \(n\) with \(\rho_n\in K_0\) and \(k_n\geq q\).
+Then
+\[
+\begin{split}
+ A^n(\Phi(J))
+ &=\Phi(a^nJ)
+ =R^{k_n}(\Phi(\rho_nJ))\\
+ &\supseteq R^{k_n}([p,p+\eta_0])=\I.
+\end{split}
+\]
+Since \(\Phi(J)\subseteq U\), this proves exactness of \(A\).  Replacing
+\(a\) by \(b\) proves exactness of \(B\).  Finally \(A=P^L\) and \(B=Q^L\),
+so \(P,Q\) are exact as well.  In particular, none of
+\(P,Q,A,B,R\) has a flat interval.
+
+\subsection{A common Parry coordinate and the polygonal completion}
+
+By Lemma~\ref{lem:pl-finiteness}, the flat-free finite-piece piecewise-linear maps
+\(P,Q,R\) have finitely many strict monotonicity laps and are finite-to-one.
+We use the following combination of Parry's conjugacy theorem
+\cite{Parry} and Shultz's published scaled-measure results
+\cite[Propositions 3.6 and 4.3 and Corollaries 4.4 and 4.6]{Shultz}.  A
+piecewise-monotone interval map is
+\emph{essentially injective} when there are no two disjoint nondegenerate
+intervals with the same image.
+
+\medskip
+\noindent\textbf{Parry--Shultz scaled-measure theorem.}
+\emph{Let $T$ be a topologically transitive piecewise-monotone map with
+finitely many laps on a compact interval.  Then it admits a nonatomic
+full-support Borel
+probability measure $\mu$ and a number
+$s=\exp(h_{\rm top}(T))\geq1$ such that
+\[
+ \mu(T(E))=s\mu(E)
+\]
+for every Borel set $E$ on which $T$ is injective.  Its distribution function
+conjugates $T$ to a finite-piece piecewise-linear map whose nonzero slopes
+have absolute value $s$.  If $T$ is not essentially injective, the scaled
+probability is unique.  Moreover, \(s>1\) if and only if \(T\) is not
+essentially injective.}
+\medskip
+
+This theorem applies to $R$.  Exactness implies transitivity.  An exact
+interval map cannot be monotone: an onto flat-free monotone map is a
+homeomorphism, and
+no iterate of a sufficiently small open interval under a homeomorphism is
+the whole interval.  Hence $R$ has a genuine turn.  At a genuine turn the
+two adjacent strict laps have subintervals with the same nondegenerate image,
+so $R$ is not essentially injective in Shultz's sense.  Let $\mu$ be the
+unique scaled probability and let $s>1$ be its scale.
+
+For a flat-free finite-piece piecewise-monotone map \(T\), whose finitely many
+monotonicity laps are therefore strict, and a bounded Borel function
+\(\varphi\), define the preimage transfer operator by
+\[
+ (\mathcal L_T\varphi)(y)=\sum_{Tx=y}\varphi(x).
+\]
+If \(T\) has \(M\) laps, assign every common lap endpoint to one adjacent lap,
+obtaining pairwise disjoint Borel lap sets \(I_1,\ldots,I_M\).  Each
+restriction \(T|_{I_j}\) is an injective Borel map between standard Borel
+spaces.  The Lusin--Souslin theorem makes \(T(I_j)\) Borel and makes the
+inverse branch \(b_j:T(I_j)\to I_j\) Borel.  Therefore
+\[
+ \mathcal L_T\varphi
+ =\sum_{j=1}^M
+   \mathbf1_{T(I_j)}\,(\varphi\circ b_j)
+\]
+is Borel, and
+\(\|\mathcal L_T\varphi\|_\infty\leq M\|\varphi\|_\infty\).  For a finite
+Borel measure \(\nu\), define a set function on Borel sets by
+\begin{equation}\label{eq:pl-transfer-adjoint-definition}
+ (\mathcal L_T^*\nu)(E)
+ =\int_{\I}\sum_{Tx=y}\mathbf 1_E(x)\,d\nu(y).
+\end{equation}
+Monotone convergence proves countable additivity, and the preceding fibre
+bound proves finiteness.  Thus this is a finite Borel measure; equivalently,
+for every bounded Borel \(\varphi\),
+\[
+ \int_{\I}\varphi\,d(\mathcal L_T^*\nu)
+ =\int_{\I}\mathcal L_T\varphi\,d\nu.
+\]
+The raw preimage sum need not preserve continuity at critical values, which
+is why the adjoint has been defined directly on Borel measures.  Regrouping
+finite fibres, now on bounded Borel functions, gives
+\begin{equation}\label{eq:pl-transfer-composition}
+ \mathcal L_{U\circ T}=\mathcal L_U\mathcal L_T.
+\end{equation}
+
+\begin{lemma}[Transfer to a centralizer]\label{lem:pl-transfer}
+If \(T\) is an onto, flat-free, piecewise-monotone map with finitely many laps
+and commuting with \(R\), then there is a constant \(c_T>0\) such that
+\[
+ \mathcal L_T^*\mu=c_T\mu.
+\]
+\end{lemma}
+
+\begin{proof}
+First partition \(\I\) into finitely many pairwise disjoint Borel lap sets
+\(I_1,\ldots,I_N\), assigning every lap endpoint to one adjacent set, so
+that \(R\) is injective on each \(I_j\).  Since \(\mu\) is nonatomic, the
+finite endpoint assignment is immaterial.  For every Borel set \(E\), each
+image \(R(E\cap I_j)\) is Borel by the same Lusin--Souslin argument, and
+\[
+ \mathcal L_R\mathbf1_E
+ =\sum_{j=1}^N\mathbf1_{R(E\cap I_j)}.
+\]
+The scaled-set identity therefore gives
+\[
+\begin{split}
+ (\mathcal L_R^*\mu)(E)
+ &=\int\mathcal L_R\mathbf1_E\,d\mu\\
+ &=\sum_{j=1}^N\mu(R(E\cap I_j))
+ =s\sum_{j=1}^N\mu(E\cap I_j)
+ =s\mu(E).
+\end{split}
+\]
+Conversely, this eigenmeasure identity implies the scaled-set identity on
+every injectivity set.  Thus scaling is equivalent to
+\begin{equation}\label{eq:pl-R-eigenmeasure}
+ \mathcal L_R^*\mu=s\mu.
+\end{equation}
+
+Put \(\nu_T=\mathcal L_T^*\mu\).  If \(T\) has \(M\) laps, then
+\(\mathcal L_T\mathbf1\leq M\), so \(\nu_T\) is finite.  Onto-ness gives
+\(\mathcal L_T\mathbf1\geq1\), so it is nonzero.  It is nonatomic because
+\[
+ \nu_T(\{x\})=\mu(\{T(x)\})=0.
+\]
+It has full support: every nonempty open interval contains a smaller interval
+\(J\) on which \(T\) is strictly monotone, and
+\[
+ \nu_T(J)=\mu(T(J))>0.
+\]
+
+Commutation and \eqref{eq:pl-transfer-composition} yield
+\[
+ \mathcal L_R^*\nu_T
+ =\mathcal L_T^*\mathcal L_R^*\mu
+ =s\nu_T.
+\]
+After division by its positive total mass, \(\nu_T\) is another nonatomic
+full-support scaled probability for \(R\) with factor \(s\).  Uniqueness
+gives \(\nu_T=c_T\mu\).
+\end{proof}
+
+Apply Lemma~\ref{lem:pl-transfer} to \(T=P,Q\), and write
+\[
+ \mathcal L_P^*\mu=C\mu,\qquad
+ \mathcal L_Q^*\mu=D\mu
+\]
+with \(C,D>0\).  Define the distribution coordinate
+\begin{equation}\label{eq:pl-distribution}
+ \theta(x)=\mu([0,x]).
+\end{equation}
+Full support and atomlessness make \(\theta\) an increasing homeomorphism of
+\(\I\).
+
+If \(J=[x,y]\) lies in a strict monotonicity lap of \(P\), the transfer
+identity gives
+\[
+ \mu(P(J))=C\mu(J),
+\]
+and hence
+\[
+ |\theta(P(y))-\theta(P(x))|
+ =C|\theta(y)-\theta(x)|.
+\]
+It follows that \(\theta P\theta^{-1}\) is affine with slope \(+C\) or
+\(-C\) on each of finitely many laps.  Thus it is a finite-piece PL map.
+The same argument makes \(\theta Q\theta^{-1}\) finite-piece PL.
+
+These two conjugated maps commute.
+
+Put
+\[
+ p_\theta=\theta(p).
+\]
+From now on we use the same letters \(P,Q,A,B,R\) for the maps conjugated by
+\(\theta\).  Exactness and commutation are preserved by conjugacy.  Thus
+\(P,Q,A,B,R\) are exact, flat-free, finite-piece piecewise-linear maps, with
+\[
+ A=P^L,\qquad B=Q^L,\qquad R=AB.
+\]
+Set
+\begin{equation}\label{term:eq:transformed-scales}
+ \widehat a=C^L,\qquad
+ \widehat b=D^L,\qquad
+ \widehat s=\widehat a\widehat b.
+\end{equation}
+Every nonzero slope of \(A,B,R\) has absolute value
+\(\widehat a,\widehat b,\widehat s\), respectively.  Since the original
+selected germs of \(A,B\) preserve the selected side, their conjugated germs
+at \(p_\theta\) have positive slopes \(\widehat a,\widehat b\); consequently
+the selected germ of \(R\) has positive slope \(\widehat s\).
+
+\subsubsection{Multiplicative independence survives the Parry coordinate}
+
+The original selected germs of \(A,B\) move every sufficiently close point
+strictly away from \(p\).  Since \(\theta\) preserves order, their conjugated
+affine germs move every sufficiently close point strictly away from
+\(p_\theta\).  Their positive slopes therefore satisfy
+\(\widehat a,\widehat b>1\), and hence \(C,D>1\).
+
+If \(\widehat a^{\,m}=\widehat b^{\,n}\) for some \(m,n>0\), the selected
+affine germs of \(A^m\) and \(B^n\) have the same base point and the same
+positive slope, so they agree on a nondegenerate selected-side interval.
+Both maps commute with the exact map \(R\).  If \(J\) is a nonempty open
+subinterval on which they agree, choose \(N\) with \(R^N(J)=\I\).  For
+\(y=R^N(x)\), \(x\in J\), commutation gives
+\[
+ A^m(y)=R^N(A^m(x))=R^N(B^n(x))=B^n(y).
+\]
+Thus exactness transports the local equality to the whole interval, and
+\(A^m=B^n\), equivalently
+\(P^{Lm}=Q^{Ln}\).  Lemma~\ref{lem:pl-common-iterate} then gives a
+common fixed point of \(P,Q\), contrary to the standing counterexample
+assumption.  Therefore
+\begin{equation}\label{term:eq:new-independent}
+ \widehat a,\widehat b>1,\qquad
+ \frac{\log\widehat a}{\log\widehat b}\notin\mathbb Q.
+\end{equation}
+
+\subsection{The unit-speed ray and a common Markov partition}
+
+\subsubsection{Rebuilding the ray}
+
+Using the positive right germ of the constant-slope map \(R\), define, for
+\(t\geq0\),
+\begin{equation}\label{term:eq:Psi}
+ \Psi(t)=R^n\left(p_\theta+\frac{t}{\widehat s^{\,n}}\right)
+\end{equation}
+for any sufficiently large \(n\).  The definition stabilizes because
+\[
+\begin{split}
+ R^{n+1}\left(p_\theta+\frac{t}{\widehat s^{\,n+1}}\right)
+ &=R^n\left(
+     R\left(p_\theta+\frac{t}{\widehat s^{\,n+1}}\right)\right)\\
+ &=R^n\left(p_\theta+\frac{t}{\widehat s^{\,n}}\right),
+\end{split}
+\]
+where \(R(p_\theta+x)=p_\theta+\widehat s x\) on the selected germ.
+Induction proves independence of all sufficiently large \(n\), and one such
+\(n\) works on every compact parameter interval.  Thus \(\Psi\) is continuous
+and locally finite-piece PL.  Exactness of \(R\) excludes a constant interval
+for every \(R^n\), since all later images of such an interval would remain
+singletons.  On each affine piece the absolute slope of \(R^n\) is therefore
+\(\widehat s^{\,n}\), so the corresponding affine piece of \(\Psi\) has
+absolute slope
+\(\widehat s^{\,n}/\widehat s^{\,n}=1\).
+
+The ray is onto.  Indeed, choose a small selected-side interval contained in
+the germ of \(R\).  Exactness sends its relative interior onto the whole
+interval under some iterate, and \eqref{term:eq:Psi} places that image in the
+range of \(\Psi\).  Near zero,
+\begin{equation}\label{term:eq:Psi-initial}
+ \Psi(t)=p_\theta+t.
+\end{equation}
+Commutation and the selected germs give
+\begin{equation}\label{term:eq:Psi-equivariance}
+\begin{split}
+ \Psi(\widehat a t)&=A(\Psi(t)),\\
+ \Psi(\widehat b t)&=B(\Psi(t)),\\
+ \Psi(\widehat s t)&=R(\Psi(t)).
+\end{split}
+\end{equation}
+
+\subsubsection{Lap-vertex values}
+
+For an onto flat-free finite-piece PL map $T$, let
+\[
+ E(T)=\{0,1\}\cup\operatorname{Turn}(T),\qquad
+ \mathcal V(T)=T(E(T)),
+\]
+where $\operatorname{Turn}(T)$ is the finite set of genuine changes of
+monotonicity.
+
+\begin{lemma}[Vertex values under composition]
+\label{lem:vertex-composition}
+For onto flat-free finite-piece PL maps $U,T$,
+\begin{equation}\label{term:eq:vertex-composition}
+ \mathcal V(U\circ T)=\mathcal V(U)\cup U(\mathcal V(T)).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $x$ be a turn of the inner map $T$.  The two adjacent branches of $T$
+approach $T(x)$ from the same side.  On that side $U$ has a nonzero affine
+germ, even when $T(x)$ is itself a turn coordinate of $U$.  Thus the inner
+turn cannot cancel in $U\circ T$.  Domain endpoints remain domain endpoints,
+so
+$U(\mathcal V(T))\subseteq\mathcal V(U\circ T)$.
+
+\begin{claim}[Transverse preimage]\label{clm:pl-transverse-preimage}
+For every \(y\in(0,1)\), there is \(x\in T^{-1}(y)\) at which \(T\) is
+locally one-to-one.
+\end{claim}
+
+\begin{proof}
+Choose \(x_0,x_1\) with \(T(x_0)=0\) and \(T(x_1)=1\).  On the segment
+joining them, \(T-y\) has opposite signs at the two ends.  Because \(T\) has
+finitely many nonconstant affine pieces, \(T^{-1}(y)\) is finite.  Therefore,
+as one traverses this segment, at least one zero \(x\) of \(T-y\) is a
+sign-changing zero.  The two one-sided affine slopes at such a zero have the
+same nonzero sign.  Hence \(T\) is strictly monotone, and thus one-to-one, on
+a neighborhood of \(x\).  This proves the claim.
+\end{proof}
+
+Let \(y\) be an interior turn coordinate of \(U\).  At the preimage supplied
+by Claim~\ref{clm:pl-transverse-preimage}, composition with the locally
+one-to-one map \(T\) preserves the outer turn of \(U\).  Thus \(U(y)\) is a
+vertex value of \(U\circ T\).  If \(y\in\{0,1\}\), every interior point of
+\(T^{-1}(y)\) is a global extremum; flat-freeness makes it a genuine turn.
+Hence a preimage of \(y\) is either a domain endpoint or a turn of \(T\),
+and the first paragraph shows again that \(U(y)\) is a vertex value of the
+composite.  This accounts for \(U(E(U))\) and proves
+\(\mathcal V(U)\subseteq\mathcal V(U\circ T)\).
+
+Conversely, if $x\notin E(T)$, then $T$ is locally strictly monotone and
+one-to-one at $x$; a turn of $U\circ T$ at $x$ can therefore occur only when
+$T(x)$ is a turn of $U$.  If $x\in E(T)$, its composite value lies in
+$U(\mathcal V(T))$.  These alternatives prove the reverse inclusion and
+hence \eqref{term:eq:vertex-composition}.
+\end{proof}
+
+Define
+\begin{equation}\label{term:eq:TA-TB}
+ \mathcal T_A(m)=\bigcup_{0\leq i<m}A^i(\mathcal V(A)),\qquad
+ \mathcal T_B(n)=\bigcup_{0\leq j<n}B^j(\mathcal V(B)).
+\end{equation}
+Iterating Lemma~\ref{lem:vertex-composition} and comparing $A^mB^n$ with
+$B^nA^m$ gives, for all $m,n\geq1$,
+\begin{equation}\label{term:eq:rectangle-identity}
+ \mathcal T_A(m)\cup A^m(\mathcal T_B(n))
+ =
+ \mathcal T_B(n)\cup B^n(\mathcal T_A(m)).
+\end{equation}
+
+\subsubsection{Finiteness of the postvertex sets}
+
+\begin{lemma}[Finite postvertex sets]
+\label{lem:finite-postvertex}
+The sets
+\[
+ \mathcal T_A=\bigcup_{i\geq0}A^i(\mathcal V(A)),\qquad
+ \mathcal T_B=\bigcup_{j\geq0}B^j(\mathcal V(B))
+\]
+are finite.
+\end{lemma}
+
+\begin{proof}
+Put
+$\mathcal T=\bigcup_{m\geq1}\mathcal T_A(m)$ and
+$\mathcal U=\mathcal V(B)$.  Taking $n=1$ in
+\eqref{term:eq:rectangle-identity} gives
+\[
+ \mathcal T_A(m)\cup A^m(\mathcal U)
+ =\mathcal U\cup B(\mathcal T_A(m)),
+\]
+and hence
+\begin{equation}\label{term:eq:postvertex-differences}
+\begin{aligned}
+ \mathcal T_A(m)\setminus B(\mathcal T_A(m))&\subseteq\mathcal U,\\
+ B(\mathcal T_A(m))\setminus\mathcal T_A(m)&\subseteq A^m(\mathcal U).
+\end{aligned}
+\end{equation}
+\begin{claim}[Finite exceptional set]\label{clm:pl-postvertex-exceptional}
+There is a finite set \(Z\) of \(A\)-periodic points such that
+\begin{equation}\label{term:eq:B-T}
+ B(\mathcal T)\subseteq\mathcal T\cup Z.
+\end{equation}
+\end{claim}
+
+\begin{proof}
+Let \(y\in B(\mathcal T)\setminus\mathcal T\), and choose \(m_0\) so that a
+\(B\)-preimage of \(y\) belongs to \(\mathcal T_A(m_0)\).  For every
+\(m\geq m_0\), the second inclusion in
+\eqref{term:eq:postvertex-differences} gives \(y\in A^m(\mathcal U)\).
+Because \(\mathcal U\) is finite, there are \(u\in\mathcal U\) and
+\(m_0\leq i<j\) with
+\[
+ A^i(u)=y=A^j(u).
+\]
+It follows that \(A^{j-i}(y)=y\).  For a fixed \(u\), every periodic point
+on its forward orbit belongs to its unique eventual cycle, when that cycle
+exists.  The union \(Z\) of these cycles over the finite set \(\mathcal U\)
+is finite, consists of \(A\)-periodic points, and contains every such \(y\).
+This proves the claim.
+\end{proof}
+
+Suppose, toward a contradiction, that \(\mathcal T\) is infinite.
+
+\begin{claim}[Action on infinite tail classes]
+\label{clm:pl-tail-class-action}
+The points of \(\mathcal T\) with infinite forward \(A\)-orbit form a
+nonempty union of finitely many tail-equivalence classes, and \(B\) induces
+a selfmap of this finite class set.
+\end{claim}
+
+\begin{proof}
+Declare \(x\sim y\) when their forward \(A\)-orbits meet.  Since
+\(\mathcal T\) is generated by the finite seed \(\mathcal V(A)\), every
+infinite orbit in \(\mathcal T\) is tail-equivalent to the orbit of one of
+these seeds.  Hence there are only finitely many classes, and at least one
+exists because \(\mathcal T\) is infinite.
+
+If \(w\) has infinite \(A\)-orbit, then \(B(w)\) also has infinite
+\(A\)-orbit.  Otherwise
+\[
+ B(A^i(w))=A^i(B(w))
+\]
+would send the infinitely many distinct points \(A^i(w)\) into a finite set,
+contrary to finite-to-one-ness of \(B\).  Claim
+\ref{clm:pl-postvertex-exceptional} then puts \(B(w)\) in \(\mathcal T\),
+because every point of \(Z\) has a finite \(A\)-orbit.  Finally, if
+\(A^i(x)=A^j(y)\), commutation gives
+\(A^i(B(x))=A^j(B(y))\).  Thus the induced class map is well defined.
+\end{proof}
+
+\begin{claim}[Global tail relation]\label{clm:pl-tail-relation-global}
+There are \(r\geq1\) and \(p_0,q_0\geq0\) such that
+\begin{equation}\label{term:eq:global-tail-relation}
+ A^{p_0}B^r=A^{q_0}
+\end{equation}
+on \(\I\).
+\end{claim}
+
+\begin{proof}
+A selfmap of a nonempty finite set has a periodic element.  Choose a tail
+class of period \(r\geq1\) for the class map in Claim
+\ref{clm:pl-tail-class-action}, and choose \(w\) in that class.  The points
+\(B^r(w)\) and \(w\) are tail-equivalent, so there are \(p_0,q_0\geq0\)
+such that
+\begin{equation}\label{term:eq:tail-relation}
+ A^{p_0}B^r(w)=A^{q_0}(w).
+\end{equation}
+Commutation propagates this equality to every point \(A^i(w)\).  These
+points are distinct, and the two finite-piece PL maps
+\(A^{p_0}B^r\) and \(A^{q_0}\) have a finite common affine partition.
+One open cell therefore contains at least two agreement points, so the two
+affine restrictions agree throughout a nondegenerate open interval \(J_1\).
+
+Both maps commute with the exact map \(R\).  Choose \(N\) with
+\(R^N(J_1)=\I\).  If \(y=R^N(x)\), \(x\in J_1\), then
+\[
+ A^{p_0}B^r(y)=R^N A^{p_0}B^r(x)
+              =R^N A^{q_0}(x)=A^{q_0}(y).
+\]
+This proves the global identity.
+\end{proof}
+
+\begin{claim}[Slope contradiction]\label{clm:pl-tail-slope-contradiction}
+The identity in Claim~\ref{clm:pl-tail-relation-global} contradicts
+\eqref{term:eq:new-independent}.
+\end{claim}
+
+\begin{proof}
+At a point outside the finite breakpoint sets, equality of the two maps
+implies equality of their absolute slopes:
+\[
+ \widehat a^{p_0}\widehat b^r=\widehat a^{q_0}.
+\]
+If \(p_0=q_0\), this says \(\widehat b^r=1\), contrary to
+\(\widehat b>1\).  If \(p_0<q_0\), it says
+\(\widehat b^r=\widehat a^{q_0-p_0}\), contrary to multiplicative
+independence.  If \(p_0>q_0\), it says
+\(\widehat a^{p_0-q_0}\widehat b^r=1\), although both factors exceed one.
+All cases are impossible.
+\end{proof}
+
+The contradiction proves that \(\mathcal T=\mathcal T_A\) is finite.  The
+same argument with \(A,B\) interchanged proves that \(\mathcal T_B\) is
+finite.
+\end{proof}
+
+\subsubsection{A common finite Markov set}
+
+\begin{lemma}[Common finite Markov set]
+\label{lem:common-Markov-set}
+There is a finite set $\mathcal K\subseteq\I$ containing $0,1,p_\theta$
+such that
+\[
+ A(\mathcal K)\subseteq\mathcal K,\qquad
+ B(\mathcal K)\subseteq\mathcal K,
+\]
+and both $A$ and $B$ are affine and monotone between consecutive points of
+$\mathcal K$.
+\end{lemma}
+
+\begin{proof}
+Once $\mathcal T_A(m)$ has stabilized to $\mathcal T_A$,
+\eqref{term:eq:postvertex-differences} applies for every larger $m$.  For
+$u\in\mathcal V(B)$ whose forward $A$-orbit is eventually periodic, let
+$C_A(u)$ denote its eventual cycle, and set
+\[
+ Z_A=\bigcup_{\substack{u\in\mathcal V(B)\\
+                 u\text{ has eventually periodic }A\text{-orbit}}}C_A(u).
+\]
+The argument proving \eqref{term:eq:B-T} shows that
+$B(\mathcal T_A)\setminus\mathcal T_A\subseteq Z_A$.  Thus $Z_A$ is finite
+and consists of $A$-periodic points.  If \(Z_A=\varnothing\), put \(r_A=1\);
+otherwise choose \(r_A\) divisible by the periods of all its points.  Then
+\(Z_A\subseteq\Fix(A^{r_A})\).  The latter fixed set is finite: on every
+affine cell the slope of \(A^{r_A}\) has absolute value
+\(\widehat a^{r_A}>1\), so \(A^{r_A}-\id\) has nonzero slope and at most one
+zero.  There are only finitely many cells.
+
+The set \(\mathcal T_A\) is forward invariant under \(A\), and
+\[
+ B(\mathcal T_A)\subseteq\mathcal T_A\cup Z_A
+ \subseteq\mathcal T_A\cup\Fix(A^{r_A}).
+\]
+Moreover, commutation gives
+\[
+\begin{split}
+ A(\Fix(A^{r_A}))&\subseteq\Fix(A^{r_A}),\\
+ B(\Fix(A^{r_A}))&\subseteq\Fix(A^{r_A}).
+\end{split}
+\]
+Therefore
+\[
+ F_A=\mathcal T_A\cup\Fix(A^{r_A})
+\]
+is finite and forward invariant under both maps.  Construct \(F_B\)
+symmetrically, using the eventual \(B\)-cycles met by the forward \(B\)-orbits
+of \(\mathcal V(A)\).  We have proved
+\begin{equation}\label{term:eq:F-invariance}
+ A(F_A)\cup B(F_A)\subseteq F_A,\qquad
+ A(F_B)\cup B(F_B)\subseteq F_B.
+\end{equation}
+
+\begin{claim}[Turn transport]\label{clm:pl-turn-transport}
+\begin{equation}\label{term:eq:turn-transport}
+ B(E(A))\subseteq E(A)\cup F_B,\qquad
+ A(E(B))\subseteq E(B)\cup F_A.
+\end{equation}
+Moreover,
+\begin{equation}\label{term:eq:R-turn-transport}
+ A(E(R))\subseteq E(R)\cup F_A,\qquad
+ B(E(R))\subseteq E(R)\cup F_B.
+\end{equation}
+\end{claim}
+
+\begin{proof}
+Suppose \(x\) is an interior turn of \(A\) but not of \(B\).  Flat-freeness
+and the absence of a turn make \(B\) locally strictly monotone and
+one-to-one at \(x\).  In \(BA\), the inner turn of \(A\) cannot cancel:
+both branches approach \(A(x)\) from the same side, on which the germ of
+\(B\) has nonzero slope.  Since \(AB=BA\), the map \(AB\) also turns at
+\(x\).  Local one-to-one-ness of \(B\) then forces \(B(x)\) to be a turn of
+\(A\).  If \(x\) is a turn of both maps, then
+\(B(x)\in\mathcal V(B)\subseteq F_B\).  The same inclusion holds when \(x\)
+is a domain endpoint, since every domain endpoint lies in \(E(B)\).
+This proves the first inclusion in \eqref{term:eq:turn-transport}; the second
+is symmetric.  Repeating the same argument for \(AR=RA\) and \(BR=RB\)
+gives \eqref{term:eq:R-turn-transport}.
+\end{proof}
+
+Set
+\begin{equation}\label{term:eq:Markov-K}
+ \mathcal K=
+ F_A\cup F_B\cup E(A)\cup E(B)\cup E(R)\cup\{p_\theta\}.
+\end{equation}
+\begin{claim}[Markov-set invariance]\label{clm:pl-Markov-invariance}
+\[
+ A(\mathcal K)\subseteq\mathcal K,\qquad
+ B(\mathcal K)\subseteq\mathcal K.
+\]
+\end{claim}
+
+\begin{proof}
+Equation~\eqref{term:eq:F-invariance} handles \(F_A\) and \(F_B\).  For the
+three vertex sets, the required images under \(A\) are
+\[
+\begin{aligned}
+ A(E(A))&=\mathcal V(A)\subseteq\mathcal T_A\subseteq F_A,\\
+ A(E(B))&\subseteq E(B)\cup F_A,\\
+ A(E(R))&\subseteq E(R)\cup F_A,
+\end{aligned}
+\]
+where the last two lines are
+\eqref{term:eq:turn-transport} and
+\eqref{term:eq:R-turn-transport}.  Similarly, their images under \(B\) are
+\[
+\begin{aligned}
+ B(E(A))&\subseteq E(A)\cup F_B,\\
+ B(E(B))&=\mathcal V(B)\subseteq\mathcal T_B\subseteq F_B,\\
+ B(E(R))&\subseteq E(R)\cup F_B.
+\end{aligned}
+\]
+Finally, \(p_\theta\) is fixed by both maps.  Every summand in
+\eqref{term:eq:Markov-K} is therefore carried back into \(\mathcal K\).
+\end{proof}
+
+Thus \(\mathcal K\) is finite and forward invariant under \(A,B\).  It contains
+all turns of both maps.  Moreover, constant nonzero absolute slope excludes
+an unrecorded same-direction kink: on two adjacent pieces with the same
+monotonicity the signed slopes coincide, and continuity then makes the two
+affine formulas identical.  Hence each map is affine and monotone on every
+component of $\I\setminus\mathcal K$, and the endpoint images lie in
+$\mathcal K$.
+Since \(R=AB\), we also have \(R(\mathcal K)\subseteq\mathcal K\).
+This is the required common Markov vertex set.
+\end{proof}
+
+\subsection{Common substitutions and Cobham periodicity}
+
+\subsubsection{Directed edge substitutions}
+
+Because \(p<c<1\), we have \(p_\theta<1\).  Let \(k_+\) be the least member
+of \(\mathcal K\) greater than \(p_\theta\), and put
+\[
+ e_+=(p_\theta,k_+),\qquad \ell=k_+-p_\theta.
+\]
+Because \(\mathcal K\) contains every turn of \(A,B,R\), and these maps have
+constant absolute slope, their positive selected affine germs extend as
+long as the argument remains in \(e_+\).  For \(0\leq t\leq\ell\), choose
+\(N\) so large that \(t/\widehat s^{\,N}\) lies in the initial germ.
+Every intermediate point
+\(p_\theta+t/\widehat s^{\,j}\), \(0\leq j\leq N\), lies in the closure of
+\(e_+\); iterating the positive branch of \(R\) in
+\eqref{term:eq:Psi} therefore gives
+\[
+ \Psi(t)=p_\theta+t\qquad(0\leq t\leq\ell).
+\]
+Thus \(\Psi|_{[0,\ell]}\) parametrizes the directed edge \(e_+\) at unit
+speed.  Applying \eqref{term:eq:Psi-equivariance} \(n\) times gives the
+corresponding iterate identities.  We now record all the symbolic information
+that will be used below in one proposition.
+
+\begin{proposition}[Common directed-edge coding]
+\label{term:prop:common-edge-coding}
+There are a finite alphabet \(\mathcal A\) of directed
+\(\mathcal K\)-edges, a seed \(e_+\in\mathcal A\), two nonerasing
+substitutions \(\sigma_A,\sigma_B\) on \(\mathcal A\), and a one-sided word
+\(x\in\mathcal A^{\mathbb N}\) with the following properties.
+\begin{enumerate}
+\item The word \(x\) is the literal unit-speed directed-edge itinerary of
+\(\Psi\), beginning with \(e_+\).  Every letter of \(\mathcal A\) occurs
+in \(x\).
+\item Both substitutions are prolongable and generating on \(e_+\), and
+\begin{equation}\label{term:eq:common-fixed-word}
+ \sigma_A(x)=x=\sigma_B(x).
+\end{equation}
+For every \(n\in\mathbb N\), their iterated seed images are the corresponding
+prefixes:
+\begin{equation}\label{term:eq:substitution-prefixes}
+\begin{split}
+ \sigma_A^n(e_+)
+ &=\text{the itinerary of }\Psi\text{ on }[0,\widehat a^{\,n}\ell],\\
+ \sigma_B^n(e_+)
+ &=\text{the itinerary of }\Psi\text{ on }[0,\widehat b^{\,n}\ell].
+\end{split}
+\end{equation}
+In particular, the lengths of both prefix families tend to infinity.
+\item For either
+\[
+ (T,s,\sigma_T)=(A,\widehat a,\sigma_A)
+ \quad\hbox{or}\quad
+ (T,s,\sigma_T)=(B,\widehat b,\sigma_B),
+\]
+the word \(\sigma_T(e)\), for every \(e\in\mathcal A\), is the complete
+literal directed path traced by \(T\) on \(e\), without cancellation.  More
+generally, for every \(n\in\mathbb N\), if
+\[
+ \sigma_T^n(e)=f_1\cdots f_r,\qquad
+ d_j=\sum_{i=1}^j |f_i|,\quad d_0=0,
+\]
+and \(\iota_e:[0,|e|]\to e\) is the unit-speed parametrization in the
+displayed orientation, then for every \(1\leq j\leq r\) and
+\(d_{j-1}\leq u\leq d_j\),
+\begin{equation}\label{term:eq:ordered-edge-realization}
+ T^n\!\left(\iota_e(u/s^n)\right)
+   =\iota_{f_j}(u-d_{j-1}).
+\end{equation}
+\item The exact metric laws are
+\begin{equation}\label{term:eq:metric-substitution}
+ \sum_{f\text{ in }\sigma_A(e)}|f|=\widehat a|e|,
+ \qquad
+ \sum_{f\text{ in }\sigma_B(e)}|f|=\widehat b|e|.
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+First work on the full alphabet consisting of both orientations of every
+\(\mathcal K\)-edge.  For a directed edge \(e\), the map \(A|_e\) is affine
+and strict, its endpoints lie in \(\mathcal K\), and its absolute slope is
+\(\widehat a\).  Cutting its oriented image at all intervening Markov
+vertices gives a nonempty complete literal path; call this word
+\(\Sigma_A(e)\).  Define \(\Sigma_B\) in the same way.  Oppositely directed
+successive letters, if they arise in a literal description, are retained.
+
+The construction is pointwise, not just endpoint-compatible.  For either
+\((T,s,\Sigma_T)=(A,\widehat a,\Sigma_A)\) or
+\((T,s,\Sigma_T)=(B,\widehat b,\Sigma_B)\), if
+\(\Sigma_T(e)=f_1\cdots f_r\), then the path
+\[
+ u\longmapsto T\bigl(\iota_e(u/s)\bigr),
+ \qquad 0\leq u\leq s|e|,
+\]
+has speed one, hits the successive Markov vertices at the cumulative times
+\(|f_1|,|f_1|+|f_2|,\ldots\), and equals the displayed unit-speed
+parametrization of \(f_j\) between the \((j-1)\)-st and \(j\)-th times.
+This proves \eqref{term:eq:ordered-edge-realization} for \(n=1\), as well as
+\eqref{term:eq:metric-substitution} on the full alphabet.
+For \(n=0\), the ordered realization is simply the identity parametrization
+of \(e\).
+
+Inductively, replace every letter \(f_j\) in the depth-\(n\) realization by
+its one-step literal image.  That block has duration \(s|f_j|\).  Hence its
+right endpoint is
+\[
+ s\bigl(|f_1|+\cdots+|f_j|\bigr)=s d_j,
+\]
+which is the left endpoint of the following block after the global
+rescaling.  Inside the block, writing the local parameter as
+\(u=s d_{j-1}+v\), the identity
+\[
+ T^{n+1}\!\left(\iota_e(u/s^{n+1})\right)
+ =T\!\left(T^n\!\left(
+   \iota_e((d_{j-1}+v/s)/s^n)\right)\right)
+\]
+reduces the assertion to the induction hypothesis and the one-step formula.
+Thus \eqref{term:eq:ordered-edge-realization} holds for every \(n\).
+
+On the seed edge, the positive selected germs of both \(A\) and \(B\), not
+merely the inequalities \(\widehat a,\widehat b>1\), show that
+\(\Sigma_A(e_+)\) and \(\Sigma_B(e_+)\) begin with \(e_+\).  Their metric
+lengths are respectively \(\widehat a\ell\) and \(\widehat b\ell\), so the
+remaining tails are nonempty.  Moreover
+\[
+ \Psi(\widehat a^{\,n}t)=A^n(\Psi(t)),\qquad
+ \Psi(\widehat b^{\,n}t)=B^n(\Psi(t))
+ \quad(0\leq t\leq\ell).
+\]
+The ordered realization therefore identifies the two iterated seed words
+with the prefixes in \eqref{term:eq:substitution-prefixes}.
+
+We justify explicitly that the ray has a literal \(\mathcal K\)-edge
+itinerary.  On a compact parameter interval, choose one sufficiently large
+\(N\) in \eqref{term:eq:Psi}, so that \(\Psi\) there is the affine initial
+segment followed by \(R^N\).  A breakpoint of this composite occurs when
+some intermediate iterate meets \(E(R)\).  Since
+\(E(R)\subseteq\mathcal K\) and \(R(\mathcal K)\subseteq\mathcal K\), its
+final \(\Psi\)-value belongs to \(\mathcal K\).  Refine also at the finitely
+many times at which an affine piece crosses a vertex of \(\mathcal K\).
+Apart from a possibly truncated final piece at the chosen compact endpoint,
+the resulting consecutive pieces are precisely complete directed
+\(\mathcal K\)-edges.  These subdivisions are compatible as the compact
+parameter interval grows.  The finite alphabet has a positive minimum edge
+length, so completed edges cannot accumulate in bounded parameter time;
+hence they form a well-defined one-sided word \(x\), beginning with \(e_+\).
+
+The substitution blocks align pointwise.  If a ray letter \(e\) occupies
+the parameter interval \([r,r+|e|]\), its complete \(A\)-image occupies
+\([\widehat a r,\widehat a(r+|e|)]\) and parametrizes
+\(u\mapsto A(\Psi(u/\widehat a))\).  Adjacent blocks meet at the image under
+\(A\) of their common endpoint, so their literal concatenation has no gap; a
+possible immediate reversal is retained rather than cancelled.  By
+\(\Psi(\widehat a t)=A(\Psi(t))\), the
+concatenated path is exactly \(\Psi\).  Literal-itinerary uniqueness gives
+\(\Sigma_A(x)=x\), and the same argument gives \(\Sigma_B(x)=x\).
+
+Let \(\mathcal A\) be the set of directed letters occurring in \(x\).  If
+\(e\) occurs in \(x\), every letter of \(\Sigma_A(e)\) occurs in
+\(\Sigma_A(x)=x\), and similarly for \(B\).  Thus \(\mathcal A\) is
+invariant under both substitutions, and restriction gives
+\(\sigma_A,\sigma_B\) while preserving the pointwise and metric identities.
+The seed belongs to \(\mathcal A\); the positive-germ observation makes both
+restrictions prolongable on it.  Finally the metric lengths of the seed
+prefixes are \(\widehat a^{\,n}\ell\) and
+\(\widehat b^{\,n}\ell\).  Since the finite alphabet has a positive minimum
+and finite maximum edge length, their ordinary word lengths tend to
+infinity.  Every letter occurring in \(x\) consequently occurs in some
+iterated seed prefix, so \(e_+\) is generating for both substitutions.
+This proves all assertions.
+\end{proof}
+
+\subsubsection{Perron growth}
+
+Use the standard incidence convention
+$(M_A)_{e,f}=|\sigma_A(f)|_e$, and similarly for $B$: columns are source
+letters and rows count output letters.  Assign to each directed geometric
+edge its positive Euclidean length, and let $\boldsymbol\ell$ be the
+resulting strictly positive column vector.  Since the image path of an edge
+has Euclidean length equal to the absolute slope times the length of that
+edge,
+\begin{equation}\label{term:eq:length-eigenvectors}
+ M_A^{\mathsf T}\boldsymbol\ell=\widehat a\boldsymbol\ell,\qquad
+ M_B^{\mathsf T}\boldsymbol\ell=\widehat b\boldsymbol\ell.
+\end{equation}
+
+Recall that a \emph{Perron number} is a real algebraic integer
+\(\lambda>1\) all of whose algebraic conjugates other than \(\lambda\) have
+modulus strictly less than \(\lambda\).
+
+\begin{lemma}[A weak Perron eigenvalue has a Perron power]
+\label{term:lem:perron-power}
+Let \(M\) be a finite nonnegative integral matrix.  If
+\[
+ Mv=\lambda v
+\]
+for a strictly positive vector \(v\) and a real number \(\lambda>1\), then
+\(\rho(M)=\lambda\), and there is a positive integer \(u\) such that
+\(\lambda^u\) is a Perron number.  Moreover \(M^u\) has spectral radius
+\(\lambda^u\).
+\end{lemma}
+
+\begin{proof}
+The Collatz--Wielandt inequalities applied to the strictly positive vector
+\(v\) give \(\rho(M)=\lambda\).  Since \(M\) is integral, \(\lambda\) is an
+algebraic integer; its minimal polynomial divides the characteristic
+polynomial of \(M\), so every algebraic conjugate of \(\lambda\) is an
+eigenvalue of \(M\) and has modulus at most \(\lambda\).
+
+Put \(M\) in Frobenius block form.  If an eigenvalue \(z\) of \(M\) has
+\(|z|=\lambda\), then it belongs to an irreducible diagonal block whose
+spectral radius is \(\lambda\).  The periodic form of the Perron--Frobenius
+theorem gives \(z=\lambda\zeta\), where \(\zeta\) is a root of unity.  Choose
+\(u\) divisible by the orders of all the finitely many such \(\zeta\).
+
+Let \(w\) be a conjugate of \(\lambda^u\).  An embedding of
+\(\mathbb Q(\lambda^u)\) producing \(w\) extends to an embedding of
+\(\mathbb Q(\lambda)\), so \(w=z^u\) for a conjugate \(z\) of \(\lambda\).
+If \(|z|<\lambda\), then \(|w|<\lambda^u\).  If \(|z|=\lambda\), the
+choice of \(u\) gives \(w=z^u=\lambda^u\).  Thus every distinct conjugate of
+\(\lambda^u\) has modulus strictly less than \(\lambda^u\), which is exactly
+the Perron property.  Finally
+\(\rho(M^u)=\rho(M)^u=\lambda^u\).
+\end{proof}
+
+Apply Lemma~\ref{term:lem:perron-power} to
+$M_A^{\mathsf T},M_B^{\mathsf T}$.  Transposition does not change the
+spectrum.  There are positive integers $u,v$ such that
+$\widehat a^{\,u},\widehat b^{\,v}$ are Perron numbers and are the spectral
+radii of $M_A^u,M_B^v$, respectively.  The incidence matrix of a substitution
+power is the corresponding matrix power.
+Moreover
+\[
+ \sigma_A^u(x)=x=\sigma_B^v(x),
+\]
+the occurring alphabet is unchanged, and the substitutions remain
+nonerasing and prolongable on \(e_+\).  Their iterated prefixes form
+subsequences of the prefixes in \eqref{term:eq:substitution-prefixes}.  The
+positive minimum and maximum edge lengths show that
+\(\lvert\sigma_A^n(e_+)\rvert\) is comparable to \(\widehat a^{\,n}\), and
+similarly for \(B\), so both prefix lengths tend to infinity.  The same is
+therefore true along the subsequences of exponents divisible by \(u\) and
+\(v\).  Since those subsequence images are prefixes of \(x\) of unbounded
+length, every retained letter occurs in an iterated seed image of each
+powered substitution.  Thus the powered presentations are generating at
+the actual head seed.  Finally \(\widehat a^{\,u}\) and
+\(\widehat b^{\,v}\) remain multiplicatively independent, since a relation
+between positive powers of them would be a relation between positive powers
+of \(\widehat a,\widehat b\).
+
+\subsubsection{Durand's theorem and periodicity}
+
+We use Durand's substitution form of Cobham's theorem
+\cite[Definition 2 and Theorem 1]{Durand}.
+
+\medskip
+\noindent\textbf{Durand--Cobham theorem.}
+\emph{Let \(\alpha,\beta>1\) be multiplicatively independent Perron
+numbers.  Suppose a one-sided sequence over a finite alphabet is both
+\(\alpha\)-substitutive and \(\beta\)-substitutive: more precisely, it is a
+letter-to-letter coding of a fixed point of a substitution prolongable on a
+generating letter whose occurring-letter incidence matrix has dominant
+eigenvalue \(\alpha\), and it has an analogous presentation with dominant
+eigenvalue \(\beta\).  Then the sequence is ultimately periodic.}
+\medskip
+
+Set \(\tau_A=\sigma_A^u\) and \(\tau_B=\sigma_B^v\).  We verify the
+Definition~2 boundary explicitly.  Both substitutions are nonerasing and
+prolongable on the actual first letter \(e_+\).  Their canonical generated
+fixed points are \(x\), because \(\tau_A^n(e_+)=\sigma_A^{un}(e_+)\) and
+\(\tau_B^n(e_+)=\sigma_B^{vn}(e_+)\) are cofinal families of prefixes of
+\(x\), and their lengths tend to infinity.  Every letter in the retained
+alphabet occurs in \(x\), and the preceding paragraph shows that \(e_+\) is
+generating for both powered substitutions.  The incidence matrices are
+\(M_A^u,M_B^v\); their dominant eigenvalues are respectively
+\(\widehat a^u,\widehat b^v\), which are Perron numbers by
+Lemma~\ref{term:lem:perron-power}.  Finally the output coding in both
+presentations is the identity letter coding.  These are exactly the two
+substitutive presentations required in Durand's Definition~2.  Their
+dominant eigenvalues are multiplicatively independent, so Durand's
+Theorem~1 makes the directed-edge word \(x\) ultimately periodic.
+
+\begin{proposition}[Least-period periodic return path]
+\label{term:prop:periodic-return-path}
+There are a continuous surjection \(\psi:\mathbb R\to\I\) and a number
+\(P_0>0\) such that:
+\begin{enumerate}
+\item \(\psi\) is finite-piece affine with slopes \(+1\) or \(-1\) on every
+compact parameter interval;
+\item its full period group is \(P_0\mathbb Z\);
+\item \(\widehat a,\widehat b\) are natural numbers greater than one; and
+\item for every \(t\in\mathbb R\),
+\begin{equation}\label{term:eq:psi-returns}
+ \psi(\widehat a t)=A(\psi(t)),\qquad
+ \psi(\widehat b t)=B(\psi(t)).
+\end{equation}
+\end{enumerate}
+Thus \(\psi\) descends to an onto unit-speed polygonal circle path
+\begin{equation}\label{term:eq:psi-circle}
+ \psi\colon\mathbb R/P_0\mathbb Z\longrightarrow\I.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Choose integers \(N\geq0\) and \(q\geq1\) such that
+\(x_{j+q}=x_j\) for every \(j\geq N\).  Put
+\[
+ \tau_n=\sum_{0\leq j<n}|x_j|,
+ \qquad
+ P=\tau_{N+q}-\tau_N
+   =\sum_{N\leq j<N+q}|x_j|>0.
+\]
+Periodicity of the letters gives
+\(\tau_{n+q}=\tau_n+P\) for every \(n\geq N\).  The positive minimum length
+of a directed \(\mathcal K\)-edge gives \(\tau_n\to\infty\).  Hence every
+\(t\geq\tau_N\) lies in some \([\tau_n,\tau_{n+1}]\) with \(n\geq N\).
+On such an interval, the literal itinerary formula says that
+\(\Psi(t)\) is the point at offset \(t-\tau_n\) on the directed edge
+\(x_n\).  The same description at \(n+q\) therefore gives
+\begin{equation}\label{term:eq:eventual-metric-period}
+ \Psi(t+P)=\Psi(t)\qquad(t\geq\tau_N).
+\end{equation}
+This includes vertex times, because each directed-edge parametrization
+includes both endpoints.
+
+\smallskip
+\noindent\emph{Periodic extension and local unit speed.}
+For \(t\in\mathbb R\), choose any integer \(m\geq0\) large enough that
+\(t+mP\geq\tau_N\), and define
+\begin{equation}\label{term:eq:periodic-tail-extension}
+ \psi(t)=\Psi(t+mP).
+\end{equation}
+If \(m'\geq m\) is another admissible choice, repeated use of
+\eqref{term:eq:eventual-metric-period}, starting at the already late
+parameter \(t+mP\), gives the same value.  Thus the definition is
+independent of \(m\).  Choosing one \(m\) which works on a neighborhood of a
+given \(t\) identifies \(\psi\) there with a translate of \(\Psi\); hence
+\(\psi\) is continuous.  The same argument with one \(m\) working on a
+given compact interval transfers a finite unit-speed subdivision from
+\(\Psi\) to \(\psi\).  Taking the same sufficiently large shift in
+\eqref{term:eq:periodic-tail-extension} at \(t\) and \(t+P\) proves
+\(\psi(t+P)=\psi(t)\) for every real \(t\).  Finally \(\psi=\Psi\) on the
+late tail.  A unit-slope affine subinterval of that tail shows that
+\(\psi\) is nonconstant.
+
+\smallskip
+\noindent\emph{The periodic tail is onto.}
+Let
+\[
+ J=\Psi([\tau_N,\infty))=\psi(\mathbb R).
+\]
+The period just proved shows that \(J=\Psi([\tau_N,\tau_N+P])\), so \(J\)
+is a compact interval.  It has nonempty relative interior because the late
+ray has a nondegenerate unit-slope affine piece.  Since
+\(\widehat s=\widehat a\widehat b>1\), for \(t\geq\tau_N\) we have
+\(\widehat s t\geq\tau_N\), and the product return gives
+\[
+ R(\Psi(t))=\Psi(\widehat s t)\in J.
+\]
+Thus \(R(J)\subseteq J\).  If \(J\ne\I\), choose a nonempty relatively open
+interval \(U\) with \(U\subseteq\operatorname{int}_{\I}J\).  Exactness of
+\(R\) gives an \(n\) for which \(R^n(U)=\I\), while forward invariance gives
+\(R^n(U)\subseteq J\), a contradiction.  Hence \(J=\I\), proving that
+\(\psi\) is onto.
+
+\smallskip
+\noindent\emph{Least period and full period group.}
+Set
+\[
+ \operatorname{Per}(\psi)
+ =\{r\in\mathbb R:\psi(t+r)=\psi(t)\text{ for every }t\in\mathbb R\}.
+\]
+This is an additive subgroup containing \(P\).  It is closed: if periods
+\(r_i\) converge to \(r\), continuity gives
+\(\psi(t+r)=\lim_i\psi(t+r_i)=\psi(t)\) for every \(t\).
+It is not dense, for otherwise continuity would make every real number a
+period and \(\psi\) would be constant.  We spell out the elementary subgroup
+classification used here.  If every neighborhood of zero contained a
+nonzero period, we could choose periods \(h_n\) with
+\(0<|h_n|<1/n\).  For any \(x\in\mathbb R\), choose an integer \(k_n\)
+nearest to \(x/h_n\).  Then
+\[
+ |x-k_nh_n|\leq |h_n|/2\longrightarrow0,
+\]
+so the period group would be dense, a contradiction.  Hence there is an
+\(\varepsilon>0\) such that zero is its only member in
+\((-\varepsilon,\varepsilon)\).
+
+The set of positive periods is nonempty because it contains \(P\).  Let
+\[
+ P_0=\inf\bigl(\operatorname{Per}(\psi)\cap(0,\infty)\bigr).
+\]
+The preceding separation gives \(P_0\geq\varepsilon>0\).  By the defining
+property of the infimum, there are positive periods \(r_n\) with
+\(P_0\leq r_n<P_0+1/n\).  Thus \(r_n\to P_0\), and closedness makes \(P_0\)
+a period.  It is consequently the least positive period.  For any period
+\(r\), put \(k=\lfloor r/P_0\rfloor\).  The remainder
+\(r-kP_0\) is again a period and lies in \([0,P_0)\), so leastness forces it
+to be zero.  Conversely every integral multiple of \(P_0\) is a period.
+Therefore
+\[
+ \operatorname{Per}(\psi)=P_0\mathbb Z.
+\]
+
+\smallskip
+\noindent\emph{Integral scales.}
+Because \(\psi\) agrees with \(\Psi\) sufficiently far out, the ray returns
+give cutoffs \(T_A,T_B\) such that
+\[
+ \psi(\widehat a t)=A(\psi(t))\quad(t\geq T_A),
+ \qquad
+ \psi(\widehat b t)=B(\psi(t))\quad(t\geq T_B).
+\]
+For \(t\geq T_A\), periodicity gives
+\[
+\begin{split}
+ \psi\bigl(\widehat a t+\widehat aP_0\bigr)
+ &=\psi\bigl(\widehat a(t+P_0)\bigr)\\
+ &=A(\psi(t+P_0))
+ =A(\psi(t))
+ =\psi(\widehat a t).
+\end{split}
+\]
+Thus translation by \(\widehat aP_0\) fixes \(\psi\) at every sufficiently
+large argument.  Given arbitrary \(y\), choose an integer \(m\geq0\) with
+\(y+mP_0\) in that late range.  Translating both arguments by \(mP_0\)
+shows \(\psi(y+\widehat aP_0)=\psi(y)\).  Hence
+\(\widehat aP_0\in\operatorname{Per}(\psi)=P_0\mathbb Z\).  Since \(P_0>0\),
+there is an integer \(k_A>1\) with \(\widehat a=k_A\).  The identical
+argument gives an integer \(k_B>1\) with \(\widehat b=k_B\).  Therefore
+\begin{equation}\label{term:eq:integer-slopes}
+ \widehat a,\widehat b\in\mathbb N.
+\end{equation}
+
+\smallskip
+\noindent\emph{Global return identities.}
+Let \(t\in\mathbb R\), and choose \(m\geq0\) with \(t+mP_0\geq T_A\).
+Since \(\widehat a\) is an integer,
+\[
+\begin{split}
+ \psi(\widehat a t)
+ &=\psi\bigl(\widehat a t+\widehat a mP_0\bigr)\\
+ &=\psi\bigl(\widehat a(t+mP_0)\bigr)
+ =A(\psi(t+mP_0))
+ =A(\psi(t)).
+\end{split}
+\]
+The same calculation for \(B\) proves \eqref{term:eq:psi-returns} on all of
+\(\mathbb R\), completing the proof.
+\end{proof}
+
+\subsection{Original-phase affine lifts and the common fixed point}
+
+\subsubsection{Cross-period globalization}
+
+\begin{lemma}[Cross-period globalization]\label{term:lem:cross-period}
+Let \(u,v\colon\mathbb R\to\I\) be continuous periodic surjections.  Suppose
+that on every compact parameter interval each path has a finite affine
+subdivision and every affine slope is \(+1\) or \(-1\).  If, for some
+\(r>1\) and some interval map \(T\),
+\[
+ u(rt)=T(u(t)),\qquad v(rt)=T(v(t)).
+\]
+Then \(u\) and \(v\), up to a translation and possibly a reflection of the
+parameter, are the same path.  In particular, they have the same full period
+group and the same least positive period.
+\end{lemma}
+
+\begin{proof}
+Choose positive periods \(P_u,P_v\).  Each path has only finitely many
+vertices in a fundamental interval, and periodicity therefore makes the set
+of all their vertex images finite.  Choose \(y\in(0,1)\) outside the vertex
+images of both paths.
+Surjectivity supplies preimages \(t_u,t_v\).  They lie in interiors of
+unit-slope affine cells, so, after shrinking to a common nonempty interval,
+there are
+$\varepsilon\in\{1,-1\}$ and $\delta\in\mathbb R$ such that
+\begin{equation}\label{term:eq:local-path-relation}
+ v(t)=u(\varepsilon t+\delta)
+\end{equation}
+on a nonempty open interval $J$.
+
+Iterating the two dilation identities shows that, on $J_n=r^nJ$,
+\begin{equation}\label{term:eq:expanded-path-relation}
+ v(t)=u(\varepsilon t+r^n\delta).
+\end{equation}
+Indeed, write $t=r^ns$ with $s\in J$ and apply $T^n$ to
+\eqref{term:eq:local-path-relation}.  The lengths of the intervals $J_n$
+tend to infinity.
+
+Let $m_n$ be the midpoint of $J_n$.  Reduce
+\[
+ \theta_n=m_n\pmod {P_v},\qquad
+ \eta_n=\varepsilon m_n+r^n\delta\pmod {P_u}
+\]
+to fixed compact fundamental intervals.  Pass to a subsequence on which
+$\theta_n\to\theta$ and $\eta_n\to\eta$.  For any fixed
+$h\in\mathbb R$, the point $m_n+h$ belongs to $J_n$ for all sufficiently
+large $n$.  Periodicity and \eqref{term:eq:expanded-path-relation} give
+\[
+ v(\theta_n+h)=u(\eta_n+\varepsilon h).
+\]
+Taking the limit yields
+\[
+ v(\theta+h)=u(\eta+\varepsilon h)
+ \qquad(h\in\mathbb R).
+\]
+Thus, with $\delta_0=\eta-\varepsilon\theta$,
+\[
+ v(t)=u(\varepsilon t+\delta_0)\qquad(t\in\mathbb R).
+\]
+A number is a period of one side exactly when its signed counterpart is a
+period of the other.  Period groups are closed under negation, so the two
+full period groups coincide.  In particular their least positive periods
+coincide.
+\end{proof}
+
+\subsubsection{Affine circle lifts of the original maps}
+
+\begin{lemma}[Rescaling an original map]\label{term:lem:rescaled-original-path}
+Let \(\varphi:\mathbb R\to\I\) be an onto periodic path which is
+finite-piece affine with slopes \(+1\) or \(-1\) on every compact interval.
+Let \(L\) be a positive integer, let \(P\) be a finite-piece PL map of
+constant absolute slope \(C>1\), and suppose
+\[
+ A=P^L,\qquad a=C^L,\qquad
+ \varphi(at)=A(\varphi(t))\quad(t\in\mathbb R).
+\]
+Then
+\[
+ v(t)=P(\varphi(t/C))
+\]
+is a continuous onto periodic path, finite-piece affine with slopes
+\(+1\) or \(-1\) on every compact interval.  For every
+\(P_0\in\mathbb R\) that is a period of \(\varphi\), the number \(CP_0\) is
+a period of \(v\), and
+\[
+ v(at)=A(v(t))\qquad(t\in\mathbb R).
+\]
+\end{lemma}
+
+\begin{proof}
+The return identity and onto-ness of \(\varphi\) first imply that \(A\) is
+onto.  Indeed, if \(\varphi(t)=y\), then
+\[
+ A\bigl(\varphi(t/a)\bigr)=\varphi(t)=y.
+\]
+Since \(L\geq1\) and \(A=P^L=P\circ P^{L-1}\), onto-ness of \(A\) implies
+onto-ness of \(P\).  Given \(y\), choose \(z\) with \(P(z)=y\), then choose
+\(s\) with \(\varphi(s)=z\); now \(v(Cs)=y\).  Thus \(v\) is onto.
+Continuity is immediate.
+
+Fix a compact parameter interval \(K\).  Subdivide it so that
+\(t\mapsto\varphi(t/C)\) is affine with slope \(+1/C\) or \(-1/C\) on each
+cell.  Refine once more at the preimages of the finitely many vertices of
+\(P\).  On an affine cell the first map is strict, so each vertex of \(P\)
+has at most one preimage; the refinement is still finite.  On every refined
+cell the signed slope of \(P\) is \(+C\) or \(-C\), and consequently the
+signed slope of the composite \(v\) is \(+1\) or \(-1\).
+
+Let \(P_0\) be any period of \(\varphi\).  Then
+\[
+ v(t+CP_0)
+ =P\bigl(\varphi(t/C+P_0)\bigr)
+ =P\bigl(\varphi(t/C)\bigr)
+ =v(t).
+\]
+Finally, \(P\) commutes with its iterate \(A=P^L\), and therefore
+\[
+\begin{split}
+ v(at)
+ &=P\bigl(\varphi(at/C)\bigr)
+  =P\bigl(\varphi(a(t/C))\bigr)\\
+ &=P\bigl(A(\varphi(t/C))\bigr)
+  =A\bigl(P(\varphi(t/C))\bigr)
+  =A(v(t)).
+\end{split}
+\]
+\end{proof}
+
+Recall that \(P,Q\) have constant absolute slopes \(C,D>1\), with
+\begin{equation}\label{term:eq:root-slopes}
+ C^L=\widehat a,\qquad D^L=\widehat b.
+\end{equation}
+Define
+\[
+ \psi_P(t)=P(\psi(t/C)),\qquad
+ \psi_Q(t)=Q(\psi(t/D)).
+\]
+Lemma~\ref{term:lem:rescaled-original-path}, applied once to \(P,A,C\) and
+once to \(Q,B,D\), shows that these are onto periodic locally unit-speed
+polygonal paths, that \(CP_0,DP_0\) are respective periods, and that they
+have the required pairwise self-similarities: \(\psi_P\) has the same
+\(A\)-self-similarity as \(\psi\), and \(\psi_Q\) has the same
+\(B\)-self-similarity as \(\psi\).
+
+Apply Lemma~\ref{term:lem:cross-period} to \(\psi_P,\psi\), with
+\(r=\widehat a\) and \(T=A\).  There are
+\(\varepsilon_P\in\{1,-1\}\) and \(\delta_P\in\mathbb R\) such that
+\[
+ \psi_P(t)=\psi(\varepsilon_Pt+\delta_P)\qquad(t\in\mathbb R),
+\]
+and the two paths have the same full period group \(P_0\mathbb Z\).
+Since \(CP_0\) is a period of \(\psi_P\), it is therefore an integral
+multiple of \(P_0\).  Cancellation of \(P_0>0\) shows that \(C\) is a
+positive integer; since \(C>1\), it is at least two.  Substituting \(t=Cx\)
+in the global path relation gives an affine circle lift
+\begin{equation}\label{term:eq:P-lift}
+ P(\psi(x))=\psi(\mathcal P(x)),\qquad
+ \mathcal P(x)=kx+\alpha\pmod{P_0},
+\end{equation}
+where \(k=\varepsilon_PC\in\mathbb Z\), \(|k|\geq2\), and we choose the
+real representative \(\alpha=\delta_P\) of the translation class.  The same
+argument with \(\psi_Q,\psi\) gives
+\begin{equation}\label{term:eq:Q-lift}
+ Q(\psi(x))=\psi(\mathcal Q(x)),\qquad
+ \mathcal Q(x)=\ell x+\beta\pmod{P_0},
+\end{equation}
+where \(\ell\in\mathbb Z\), \(|\ell|\geq2\), and
+\(\beta\in\mathbb R\) is a fixed real representative of the corresponding
+translation class.
+
+Physical commutation makes these affine lifts commute exactly.  With the
+displayed real representatives fixed, the real affine representatives of
+\(\mathcal P\mathcal Q\) and \(\mathcal Q\mathcal P\) have common linear
+coefficient \(k\ell\), and differ by the constant
+\[
+ \Delta=(k\beta+\alpha)-(\ell\alpha+\beta).
+\]
+Equations \eqref{term:eq:P-lift}--\eqref{term:eq:Q-lift} and \(PQ=QP\)
+show that their images under \(\psi\) agree.  Since \(k\ell\ne0\), either
+affine composition is onto on the parameter circle.  Given a real \(t\),
+choose a parameter whose image under the first composition is congruent to
+\(t\) modulo \(P_0\).  Equality of the two physical images and
+\(P_0\)-periodicity give \(\psi(t)=\psi(t-\Delta)\).  Replacing \(t\) by
+\(t+\Delta\) yields
+\[
+ \psi(t+\Delta)=\psi(t)\qquad\text{for every }t.
+\]
+The full period group gives \(\Delta\in P_0\mathbb Z\), which is precisely
+\(\mathcal P\mathcal Q=\mathcal Q\mathcal P\) on the parameter circle.
+
+\subsubsection{The unique reflection}
+
+\begin{lemma}[Globalization and uniqueness of the reflection]
+\label{term:lem:global-reflection}
+Let \(P_0>0\), and let \(\psi:\mathbb R\to\I\) be a continuous surjection
+which is finite-piece affine with slopes \(+1\) or \(-1\) on every compact
+parameter interval and whose full period group is \(P_0\mathbb Z\).  Suppose
+that, for an interval map \(T\) and a number \(q>1\),
+\[
+ \psi(qt)=T(\psi(t))\qquad(t\in\mathbb R).
+\]
+Then there is a unique reflection of the parameter circle
+\[
+ \rho(t)=-t+\gamma\pmod{P_0}
+\]
+such that \(\psi\circ\rho=\psi\).
+\end{lemma}
+
+\begin{proof}
+Choose \(t_0\) with \(\psi(t_0)=1\), using onto-ness.  Take a finite affine
+subdivision of \([t_0-1,t_0+1]\) and refine it to contain \(t_0\).  On the
+cell immediately to the left of \(t_0\), the slope must be
+\(+1\): slope \(-1\) would force values greater than \(1\).  On a
+cell immediately to the right, the slope must
+be \(-1\) for the same reason.  Hence there is \(d>0\) such that
+\[
+ \psi(t_0-r)=1-r=\psi(t_0+r)
+ \qquad(0\leq r\leq d).
+\]
+With
+\[
+ J_0=[t_0,t_0+d],\qquad \gamma_0=2t_0,
+\]
+we therefore have
+\begin{equation}\label{term:eq:local-reflection}
+ \psi(t)=\psi(-t+\gamma_0)\qquad(t\in J_0).
+\end{equation}
+
+Iterating the displayed self-similarity gives, for every
+\(n\geq0\),
+\[
+ \psi(q^nt)=T^n(\psi(t)).
+\]
+Apply this to both sides of \eqref{term:eq:local-reflection}.  On
+\[
+ J_n=q^nJ_0,\qquad
+ \gamma_n=q^n\gamma_0,
+\]
+it gives
+\begin{equation}\label{term:eq:expanded-reflection}
+ \psi(u)=\psi(-u+\gamma_n)\qquad(u\in J_n).
+\end{equation}
+Choose \(n\) so large that the length of \(J_n\) exceeds \(P_0\).  Given any
+\(t\in\mathbb R\), choose \(m\in\mathbb Z\) with \(t+mP_0\in J_n\).
+Periodicity and \eqref{term:eq:expanded-reflection} yield
+\[
+\begin{split}
+ \psi(t)
+ &=\psi(t+mP_0)
+ =\psi(-(t+mP_0)+\gamma_n)\\
+ &=\psi(-t+\gamma_n).
+\end{split}
+\]
+Thus \(\rho(t)=-t+\gamma_n\) is a global reflection on
+\(\mathbb R/P_0\mathbb Z\).
+
+For uniqueness, suppose \(\rho_\gamma,\rho_\delta\) are two global reflection
+symmetries.  Their composition is translation by \(\delta-\gamma\), so
+\(\delta-\gamma\) is a period of \(\psi\).  The assumed full period group of
+this path is \(P_0\mathbb Z\), so \(\delta-\gamma\in P_0\mathbb Z\), and the two
+reflections are identical on the parameter circle.
+\end{proof}
+
+Choose a real representative \(\gamma\) of the translation class of the
+unique reflection, and let
+\begin{equation}\label{term:eq:reflection}
+ \rho(t)=-t+\gamma\pmod{P_0},\qquad \psi\circ\rho=\psi
+\end{equation}
+be the unique reflection supplied by
+Lemma~\ref{term:lem:global-reflection}, applied with
+\(q=\widehat a\) and \(T=A\).
+
+We now prove that the lift \(\mathcal P\) preserves the \(\rho\)-orbits.
+First,
+\[
+\begin{split}
+ \psi(\mathcal P\rho(t))
+ &=P(\psi(\rho(t)))\\
+ &=P(\psi(t))
+ =\psi(\mathcal P(t)).
+\end{split}
+\]
+Working on the parameter circle, write
+\(\mathcal P(t)=kt+\alpha\) and \(\rho(t)=-t+\gamma\) modulo \(P_0\).
+If \(y=\mathcal P(t)\) as a circle class, then, without choosing an inverse
+branch,
+\[
+ \mathcal P\rho(t)=-y+k\gamma+2\alpha\pmod{P_0}.
+\]
+Thus
+\[
+ \rho_P(y)=-y+k\gamma+2\alpha\pmod{P_0}
+\]
+is another global reflection symmetry of \(\psi\): explicitly,
+\(\mathcal P\rho(t)=\rho_P(\mathcal P(t))\), and every \(y\) equals
+\(\mathcal P(t)\) for some \(t\), so \(\psi(\rho_P(y))=\psi(y)\).
+Uniqueness gives \(\rho_P=\rho\), and therefore
+\[
+ \mathcal P\rho=\rho\mathcal P.
+\]
+The same argument gives \(\mathcal Q\rho=\rho\mathcal Q\).
+
+\subsubsection{A common fixed reflection orbit}
+
+Normalize the parameter circle in \eqref{term:eq:psi-circle} by the affine coordinate
+\(t\mapsto P_0t+\gamma/2\) from \(\mathbb R/\mathbb Z\) to
+\(\mathbb R/P_0\mathbb Z\).  In this coordinate \(\rho(t)=-t\).  Conjugate
+\(\mathcal P,\mathcal Q\) by the same coordinate change and continue to use
+the symbols \(\psi,\mathcal P,\mathcal Q\) for the normalized objects.  The
+physical lift identities \eqref{term:eq:P-lift}--\eqref{term:eq:Q-lift}, the
+relations \(\mathcal P\rho=\rho\mathcal P\) and
+\(\mathcal Q\rho=\rho\mathcal Q\), and exact commutation of the two lifts are
+all preserved by conjugacy; their degrees remain \(k,\ell\).  Thus
+\(\psi(-t)=\psi(t)\).  Choose representatives
+\(\alpha,\beta\in[0,1)\) for the new translation classes and write
+\[
+ \mathcal P(t)=kt+\alpha,\qquad
+ \mathcal Q(t)=\ell t+\beta\pmod1.
+\]
+The identity \(\mathcal P\rho=\rho\mathcal P\), evaluated at any \(t\),
+gives
+\[
+ -kt+\alpha=-kt-\alpha\pmod1,
+\]
+so \(2\alpha=0\pmod1\).  The corresponding calculation for \(\mathcal Q\)
+gives \(2\beta=0\pmod1\).  Hence
+\begin{equation}\label{term:eq:half-translations}
+ \alpha,\beta\in\{0,\tfrac12\},
+\end{equation}
+while exact commutation of the two affine lifts gives
+\begin{equation}\label{term:eq:affine-commutation}
+ (k-1)\beta=(\ell-1)\alpha\pmod1.
+\end{equation}
+The following exhaustive parity check produces an orbit
+\(\{t,-t\}\) preserved by both affine maps.
+\begin{enumerate}
+ \item[(i)] If \((\alpha,\beta)=(0,0)\), take \(t=0\).
+ \item[(ii)] If \((\alpha,\beta)=(\tfrac12,\tfrac12)\), then
+ \eqref{term:eq:affine-commutation} says that \(k,\ell\) have the same
+ parity.  Take \(t=\tfrac12\) if both are even and \(t=\tfrac14\) if both
+ are odd.
+ \item[(iii)] If \((\alpha,\beta)=(0,\tfrac12)\), then
+ \eqref{term:eq:affine-commutation} says that \(k\) is odd.  Take
+ \(t=\tfrac12\) if \(\ell\) is even and \(t=\tfrac14\) if \(\ell\) is odd.
+ \item[(iv)] If \((\alpha,\beta)=(\tfrac12,0)\), then
+ \eqref{term:eq:affine-commutation} says that \(\ell\) is odd.  Take
+ \(t=\tfrac12\) if \(k\) is even and \(t=\tfrac14\) if \(k\) is odd.
+\end{enumerate}
+This calculation uses only parity and therefore includes negative degrees.
+For the resulting \(t\), equations \eqref{term:eq:P-lift} and
+\eqref{term:eq:Q-lift}, together with \(\psi(-t)=\psi(t)\), give
+\[
+ P(\psi(t))=\psi(t)=Q(\psi(t)).
+\]
+This contradicts the standing assumption that \(P,Q\) have no common fixed
+point and completes the proof of Proposition~\ref{prop:PL-core}.
+\hfill\(\square\)\par
+
+
+\clearpage
+\section{Reduction to the piecewise-linear core}
+
+The following two published results supply the entropy and constant-slope
+inputs for the reduction.  All arguments needed to make the semiconjugacy
+simultaneous for $P$ and $Q$ are included below.
+
+The entropy input is Theorem~1 of Bogatyi--Frolkina
+\cite[Theorem~1]{BogatyiFrolkina}.
+\begin{theorem}[Bogatyi--Frolkina]
+\label{pm:thm:BF}
+If two commuting continuous selfmaps $F,G$ of a compact interval have no
+common fixed point, then
+\[
+ h_2(F\circ G)=h_2(G\circ F)\geq2,
+\]
+where Bogatyi and Frolkina use logarithms to base two in the definition of
+entropy.  In the natural-logarithm convention this says
+\(h_{\rm top}(F\circ G)\geq2\log2>0\).
+\end{theorem}
+
+The constant-slope input combines Theorem~A and Lemmas~1.1, 3.1, and 4.2
+of Alsed\`a--Misiurewicz
+\cite[Theorem~A and Lemmas~1.1, 3.1, 4.2]{AlsedaMisiurewicz}.
+\begin{theorem}[Alsed\`a--Misiurewicz]
+\label{pm:thm:constant-slope}
+Let $H$ be a continuous finite-piece piecewise-monotone interval map with
+$h_{\rm top}(H)>0$, and put
+\[
+ \lambda=\exp(h_{\rm top}(H))>1.
+\]
+Then there are a continuous nondecreasing surjection
+$\psi:\I\to\I$ and a continuous finite-piece piecewise-linear map
+$h:\I\to\I$, whose nonzero slopes have absolute value $\lambda$, such that
+\[
+ \psi H=h\psi.
+\]
+For all $x<y$ contained in one monotonicity piece of $H$, the
+constant-slope equation gives
+\begin{equation}\label{pm:eq:semiconjugacy-scaling}
+ |\psi(H(y))-\psi(H(x))|
+ =\lambda\,|\psi(y)-\psi(x)|.
+\end{equation}
+In addition, $\psi$ may be chosen $H$-compatible in the sense of
+Alsed\`a--Misiurewicz.
+\end{theorem}
+
+For clarity about the cited input, Lemma~3.1 of the cited paper first
+semiconjugates a positive-entropy map with possibly constant laps to a
+piecewise strictly monotone map of the same entropy, through an
+$H$-compatible increasing map.  Theorem~A supplies the compatible
+constant-slope semiconjugacy with slope
+\(\exp(h_{\rm top}(H))\).  Lemma~1.1 preserves the orientation of each
+noncollapsed lap.  The paper's equation~(2), used in Lemma~4.2, supplies
+\eqref{pm:eq:semiconjugacy-scaling}; this scaling identity comes from the
+constant-slope factor.  Separately, compatibility ensures that a lap
+collapsed by the first semiconjugacy has collapsed image as well.  Thus
+constant monotonicity pieces are included without attributing branch
+scaling to compatibility.
+
+\subsection{Minimal invariant core}
+
+Suppose, toward a contradiction, that $P,Q$ commute and have no common fixed
+point.  Let $\mathscr J$ be the family of nonempty compact intervals $J$
+satisfying
+\[
+ P(J)\subseteq J,\qquad Q(J)\subseteq J,
+\]
+ordered by inclusion.  Every chain has a nonempty compact intersection, and
+that intersection again belongs to $\mathscr J$: for a chain, every finite
+intersection is its least member, so compactness gives a nonempty total
+intersection; and if $x$ lies in every member, then so do $P(x)$ and $Q(x)$.
+Thus every chain has a lower bound.  By Zorn's lemma there is an
+inclusion-minimal member.  It is nondegenerate, because an invariant
+singleton is a common fixed point.  Restrict to this interval and rescale it
+affinely to $\I$.  We continue to write $P,Q$ for the restricted maps.
+
+Minimality implies
+\begin{equation}\label{pm:eq:onto}
+ P(\I)=\I=Q(\I).
+\end{equation}
+Indeed, $P(\I)$ is a nonempty compact interval.  Moreover,
+\[
+ P(P(\I))\subseteq P(\I),\qquad
+ Q(P(\I))=P(Q(\I))\subseteq P(\I),
+\]
+so $P(\I)$ is invariant under both maps.  Minimality forces $P(\I)=\I$,
+and the proof for $Q$ is identical.
+
+Put
+\[
+ H=P\circ Q=Q\circ P.
+\]
+The map $H$ is again continuous and finite-piece piecewise monotone.  By
+Theorem~\ref{pm:thm:BF},
+\begin{equation}\label{pm:eq:positive-entropy}
+ h_{\rm top}(H)>0.
+\end{equation}
+Set
+\[
+ \lambda=\exp(h_{\rm top}(H))>1.
+\]
+
+\subsection{The branch-transfer operator with plateau intervals}
+
+Let $J$ be a compact interval and let $u:J\to\I$ be continuous and
+monotone.  Define the set of plateau values
+\[
+ \Pi(u)=\{z\in\I:u^{-1}(z)\text{ is nondegenerate}\}.
+\]
+
+\begin{lemma}[Image measures on a monotone branch]
+\label{pm:lem:monotone-image-measure}
+The set $\Pi(u)$ is countable.  If $\sigma$ is a finite signed nonatomic
+Borel measure on $\I$, then:
+\begin{enumerate}
+\item $u(E)$ is Borel for every Borel set $E\subseteq J$;
+\item the rule
+\[
+ \beta_{u,\sigma}(E)=\sigma(u(E))
+\]
+defines a finite signed nonatomic Borel measure on $J$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The interiors of the nondegenerate fibers of $u$ are pairwise disjoint
+nonempty open intervals.  Assigning to each such interior a rational point
+shows that $\Pi(u)$ is countable.
+
+Put
+\[
+ J_0=J\setminus u^{-1}(\Pi(u)).
+\]
+The restriction $u_0=u|_{J_0}$ is an injective Borel map between standard
+Borel spaces.  By the Lusin--Souslin theorem, $u_0(E\cap J_0)$ is Borel
+whenever $E$ is Borel, and $u_0^{-1}$ is Borel on its image.  Moreover
+\[
+ u(E)=u_0(E\cap J_0)\cup\bigl(u(E)\cap\Pi(u)\bigr).
+\]
+The second set is countable, so $u(E)$ is Borel.
+
+The nonatomic measure $\sigma$ vanishes on the countable set $\Pi(u)$.
+Therefore
+\[
+ \sigma(u(E))=\sigma(u_0(E\cap J_0)).
+\]
+The right-hand side is the pullback, through the Borel bijection $u_0$, of
+the restriction of $\sigma$ to $u_0(J_0)$, extended by zero across
+$J\setminus J_0$.  It is consequently a finite signed countably additive
+Borel measure.  Finally, the image of a singleton is a singleton, so this
+measure is nonatomic.
+\end{proof}
+
+Let $T:\I\to\I$ be a continuous finite-piece piecewise-monotone map.
+Choose closed intervals on which $T$ is monotone and whose union is $\I$.
+Assign each common internal endpoint to exactly one of its adjacent
+intervals.  The resulting pairwise disjoint Borel sets form a finite
+partition $\Lap(T)$; we call them the \emph{assigned cells}.  Each assigned
+cell differs from its underlying closed monotonicity interval by at most its
+endpoints.
+
+Let $\M(\I)$ denote the real vector space of finite signed nonatomic Borel
+measures on $\I$.  Define
+\begin{equation}\label{pm:eq:transfer-definition}
+ (\T_T\sigma)(E)
+ =\sum_{L\in\Lap(T)}\sigma\bigl(T(E\cap L)\bigr)
+\end{equation}
+for every Borel set $E\subseteq\I$.  Lemma~\ref{pm:lem:monotone-image-measure}
+shows that each summand is a finite signed measure supported on its assigned
+cell.
+
+Refining a monotonicity partition does not alter
+\eqref{pm:eq:transfer-definition}.  Indeed, if a monotone interval is divided
+at one point, the images of its two parts overlap in at most one value; a
+nonatomic measure ignores that overlap.  Hence $\T_T$ depends only on $T$.
+It is real-linear on $\M(\I)$, preserves nonnegative
+measures, and preserves nonatomicity.  If a Borel set $E$ is contained in
+one assigned cell $L$, then only that cell contributes and
+\[
+ (\T_T\sigma)(E)=\sigma(T(E)).
+\]
+In particular, if $K$ is an interval contained in the underlying closed
+monotonicity interval, endpoint assignments change both sides only by
+nonatomic point masses, so
+\begin{equation}\label{pm:eq:single-lap-scaling}
+ (\T_T\sigma)(K)=\sigma(T(K)).
+\end{equation}
+
+\begin{lemma}[Composition law]\label{pm:lem:composition}
+For continuous finite-piece piecewise-monotone maps $U,T$,
+\begin{equation}\label{pm:eq:composition-law}
+ \T_{U\circ T}=\T_T\circ\T_U,
+ \qquad
+ (\T_T\circ\T_U)(\sigma)=\T_T(\T_U\sigma).
+\end{equation}
+Consequently, if $U$ and $T$ commute, then $\T_U$ and $\T_T$ commute.
+\end{lemma}
+
+\begin{proof}
+Use assigned cells for both maps.  For $L\in\Lap(T)$ and $M\in\Lap(U)$, the
+nonempty sets
+\[
+ K_{L,M}=L\cap T^{-1}(M)
+\]
+form a finite pairwise disjoint Borel partition of $\I$.  Because $T$ is
+monotone on the closure of $L$, each such set is an interval with some
+endpoints assigned or deleted, and $U\circ T$ is monotone on its closure.
+Thus, after deleting empty sets, these are the assigned cells of a valid
+refinement for the composite.
+
+For a Borel set $E$, using the definition and then this refinement gives
+\begin{align*}
+ ((\T_T\circ\T_U)\sigma)(E)
+ &=\sum_{L\in\Lap(T)}(\T_U\sigma)(T(E\cap L))\\
+ &=\sum_{L\in\Lap(T)}\sum_{M\in\Lap(U)}
+   \sigma\bigl(U(T(E\cap L)\cap M)\bigr)\\
+ &=\sum_{L,M}
+   \sigma\bigl(U(T(E\cap L\cap T^{-1}(M)))\bigr).
+\end{align*}
+This is exactly $\T_{U\circ T}\sigma(E)$ for the refined monotonicity
+partition; the middle equality uses the exact set identity
+\[
+ T(E\cap L)\cap M=T(E\cap L\cap T^{-1}(M)).
+\]
+If $U\circ T=T\circ U$, applying the formula in both orders gives
+$\T_T\circ\T_U=\T_U\circ\T_T$.
+\end{proof}
+
+We now obtain the expanding eigenmeasure for $H$ from
+Theorem~\ref{pm:thm:constant-slope}.  Let $\psi$ be the semiconjugacy there.
+Because $\psi$ is continuous, nondecreasing, and onto,
+$\psi(0)=0$ and $\psi(1)=1$.  The Lebesgue--Stieltjes premeasure
+\[
+ \mu((a,b])=\psi(b)-\psi(a),\qquad \mu(\{0\})=0,
+\]
+extends uniquely to a Borel probability measure on $\I$.  Continuity of
+$\psi$ makes this measure nonatomic, and it satisfies
+\begin{equation}\label{pm:eq:mu-from-psi}
+ \mu([x,y])=\psi(y)-\psi(x)\qquad(0\le x\le y\le1).
+\end{equation}
+For every interval $K=[x,y]$ contained in one monotonicity piece of $H$,
+\eqref{pm:eq:semiconjugacy-scaling} gives
+\[
+ \mu(H(K))=\lambda\mu(K).
+\]
+On a fixed closed monotonicity piece, Lemma~\ref{pm:lem:monotone-image-measure}
+shows that $E\mapsto\mu(H(E))$ is a finite Borel measure.  It and
+$E\mapsto\lambda\mu(E)$ agree on all closed subintervals by the preceding
+display.  Those intervals form a generating $\pi$-system, so uniqueness of
+finite Borel extension makes the two measures equal on the whole piece.
+Using assigned cells, whose endpoint choices are invisible to the
+nonatomic measures, and summing over the pieces yields
+\begin{equation}\label{pm:eq:H-eigenmeasure}
+ \T_H\mu=\lambda\mu.
+\end{equation}
+
+\subsection{Finite-dimensionality of the expanding eigenspace}
+
+Define
+\[
+ \mathscr E_\lambda(H)
+ =\{\sigma\in\M(\I):\T_H\sigma=\lambda\sigma\}.
+\]
+This is a real vector space of signed measures.
+
+\begin{lemma}[Finite-dimensional expanding eigenspace]
+\label{pm:lem:finite-dimensional}
+The vector space $\mathscr E_\lambda(H)$ is finite-dimensional.
+\end{lemma}
+
+\begin{proof}
+Choose $N\geq1$ with
+\[
+ \lambda^N>2.
+\]
+By Lemma~\ref{pm:lem:composition},
+\[
+ \T_{H^N}=\T_H^N.
+\]
+Let
+\[
+ 0=c_0<c_1<\cdots<c_r=1
+\]
+contain all endpoints of a finite monotonicity partition for $H^N$.
+
+For $\sigma\in\mathscr E_\lambda(H)$ put
+\[
+ S_\sigma(x)=\sigma([0,x])
+\]
+and define the linear map
+\[
+ \Xi:\mathscr E_\lambda(H)\longrightarrow\mathbb R^{r+1},
+ \qquad
+ \Xi(\sigma)=\bigl(S_\sigma(c_0),\ldots,S_\sigma(c_r)\bigr).
+\]
+We show that $\Xi$ is injective.
+
+Suppose $\Xi(\sigma)=0$, and put
+\[
+ M=\sup_{x\in\I}|S_\sigma(x)|<\infty.
+\]
+Take $x\in[c_{i-1},c_i]$.  Since $H^N$ is monotone on this interval,
+\eqref{pm:eq:single-lap-scaling} and
+$\T_{H^N}\sigma=\lambda^N\sigma$ give
+\[
+ \lambda^N\sigma([c_{i-1},x])
+ =\sigma\bigl(H^N([c_{i-1},x])\bigr).
+\]
+The left-hand interval begins at a point where $S_\sigma$ vanishes, so
+\[
+ \sigma([c_{i-1},x])=S_\sigma(x).
+\]
+The image on the right is an interval, possibly a singleton.  Since
+$\sigma$ is nonatomic, the measure of any interval is the difference of two
+values of $S_\sigma$; hence its absolute value is at most $2M$.  Therefore
+\[
+ |S_\sigma(x)|\leq \frac{2}{\lambda^N}M.
+\]
+Taking the supremum over $x$ yields
+\[
+ M\leq\frac{2}{\lambda^N}M.
+\]
+Since $2/\lambda^N<1$, we get $M=0$.  Thus $S_\sigma\equiv0$ and
+$\sigma=0$.  Hence $\Xi$ is injective, proving
+\[
+ \dim\mathscr E_\lambda(H)\leq r+1<\infty.
+\]
+\end{proof}
+
+For the rest of the reduction, equip $\mathscr E_\lambda(H)$ with the
+coordinate norm
+\begin{equation}\label{pm:eq:Xi-norm}
+ \|\sigma\|_\Xi
+ =\max_{0\leq i\leq r}|S_\sigma(c_i)|.
+\end{equation}
+Injectivity of $\Xi$ makes this a norm.  It gives the usual topology on the
+finite-dimensional space $\mathscr E_\lambda(H)$; in particular every
+linear functional and every linear endomorphism of this space is
+continuous.
+
+\subsection{A simultaneous conformal measure}
+
+Write
+\[
+ A=\T_P,\qquad B=\T_Q.
+\]
+Since $P,Q,H$ commute pairwise, Lemma~\ref{pm:lem:composition} shows that
+$A$ and $B$ commute with $\T_H$ and hence preserve
+$\mathscr E_\lambda(H)$.  With operator composition written explicitly,
+\begin{equation}\label{pm:eq:AB-lambda}
+ B\circ A=A\circ B=\T_H=\lambda\,\id
+ \quad\text{on }\mathscr E_\lambda(H).
+\end{equation}
+Indeed, $\T_H=\T_{P\circ Q}=\T_Q\circ\T_P=B\circ A$ by
+\eqref{pm:eq:composition-law}; commutation gives the other order.
+
+Let
+\[
+ \mathfrak P
+ =\{\nu\in\mathscr E_\lambda(H):
+       \nu\geq0,\ \nu(\I)=1\}.
+\]
+This set is nonempty because it contains $\mu$ from
+\eqref{pm:eq:H-eigenmeasure}.  It is convex.
+
+\begin{lemma}\label{pm:lem:compact-slice}
+The set $\mathfrak P$ is compact in the finite-dimensional vector space
+$\mathscr E_\lambda(H)$.
+\end{lemma}
+
+\begin{proof}
+Use the injective coordinate map $\Xi$ from the proof of
+Lemma~\ref{pm:lem:finite-dimensional}.  For every $\nu\in\mathfrak P$,
+\[
+ 0\leq S_\nu(c_i)\leq1,
+\]
+so $\|\nu\|_\Xi\leq1$ and $\mathfrak P$ is bounded.  For each Borel set
+$E$, evaluation $\nu\mapsto\nu(E)$ is a linear functional on the
+finite-dimensional normed space and is therefore continuous.  The positive
+cone is the closed intersection
+\[
+ \bigcap_{E\ {\rm Borel}}\{\nu:\nu(E)\geq0\},
+\]
+and the mass-one hyperplane is closed for the same reason.  Thus
+$\mathfrak P$ is closed and bounded in a finite-dimensional space, and
+hence compact.
+\end{proof}
+
+For $\nu\in\mathfrak P$, the measure $A\nu$ is nonnegative and belongs to
+$\mathscr E_\lambda(H)$.  It is nonzero.  More explicitly, because $P$ is
+onto and the images of its finitely many monotonicity pieces cover $\I$,
+\begin{equation}\label{pm:eq:mass-lower-bound}
+ (A\nu)(\I)
+ =\sum_{L\in\Lap(P)}\nu(P(L))
+ \geq \nu\left(\bigcup_{L\in\Lap(P)}P(L)\right)
+ =1.
+\end{equation}
+Define
+\[
+ \Phi:\mathfrak P\longrightarrow\mathfrak P,
+ \qquad
+ \Phi(\nu)=\frac{A\nu}{(A\nu)(\I)}.
+\]
+The operator $A$ is a continuous linear endomorphism of
+$\mathscr E_\lambda(H)$, the mass functional is continuous, and
+\eqref{pm:eq:mass-lower-bound} keeps the denominator at least $1$.
+Therefore $\Phi$ is a continuous selfmap of the nonempty compact convex set
+$\mathfrak P$.  Brouwer's fixed-point theorem supplies
+$\nu\in\mathfrak P$ with $\Phi(\nu)=\nu$.  Hence, for
+\[
+ C=(A\nu)(\I)>0,
+\]
+we have
+\begin{equation}\label{pm:eq:P-eigenmeasure}
+ \T_P\nu=C\nu.
+\end{equation}
+Using $B\circ A=\lambda\id$ on $\mathscr E_\lambda(H)$, we obtain
+\[
+ C\,B\nu=(B\circ A)\nu=\lambda\nu.
+\]
+Thus, with $D=\lambda/C>0$,
+\begin{equation}\label{pm:eq:Q-eigenmeasure}
+ \T_Q\nu=D\nu.
+\end{equation}
+We have proved the following central statement.
+
+\begin{proposition}[Simultaneous conformal measure]
+\label{pm:prop:simultaneous-measure}
+There is a nonatomic Borel probability measure $\nu$ and constants
+$C,D>0$ such that
+\[
+ \T_P\nu=C\nu,\qquad
+ \T_Q\nu=D\nu,\qquad
+ CD=\lambda>1.
+\]
+\end{proposition}
+
+\subsection{The common monotone quotient}
+
+Define the distribution function
+\begin{equation}\label{pm:eq:theta}
+ \theta(x)=\nu([0,x]).
+\end{equation}
+Because $\nu$ is nonatomic, $\theta$ is continuous.  It is nondecreasing,
+and since $\nu$ is a probability measure,
+\[
+ \theta(0)=0,\qquad \theta(1)=1.
+\]
+Thus $\theta:\I\to\I$ is onto.
+
+\begin{lemma}[Respect of fibers]\label{pm:lem:fibers}
+The maps $P$ and $Q$ respect the fibers of $\theta$.  Consequently there
+are unique continuous maps $\overline P,\overline Q:\I\to\I$ satisfying
+\begin{equation}\label{pm:eq:factor-identities}
+ \theta P=\overline P\theta,
+ \qquad
+ \theta Q=\overline Q\theta.
+\end{equation}
+The descended maps commute and are onto.
+\end{lemma}
+
+\begin{proof}
+Suppose $x<y$ and $\theta(x)=\theta(y)$.  Then
+\[
+ \nu([x,y])=0.
+\]
+Partition $[x,y]$ at the finitely many monotonicity-partition endpoints of
+$P$, obtaining closed intervals $J_1,\ldots,J_s$, each contained in the
+underlying closed interval of one assigned cell.  Their only overlaps are
+endpoints, which have zero measure.  Since $\nu$ is nonnegative and each
+$J_i\subseteq[x,y]$, every $J_i$ has measure zero.  By
+\eqref{pm:eq:single-lap-scaling} and
+\eqref{pm:eq:P-eigenmeasure},
+\[
+ \nu(P(J_i))=C\nu(J_i)=0.
+\]
+The continuous image $P([x,y])$ is the finite union of the intervals
+$P(J_i)$, so it has $\nu$-measure zero.  In particular, the interval with
+endpoints $P(x)$ and $P(y)$ has measure zero, and therefore
+\[
+ \theta(P(x))=\theta(P(y)).
+\]
+Thus $P$ respects the fibers of $\theta$.  The proof for $Q$ is identical,
+using \eqref{pm:eq:Q-eigenmeasure}.
+
+Since a continuous surjection from a compact space to a Hausdorff space is
+a quotient map, the well-defined formulas
+\[
+ \overline P(\theta(x))=\theta(P(x)),\qquad
+ \overline Q(\theta(x))=\theta(Q(x))
+\]
+give the unique continuous factor maps in
+\eqref{pm:eq:factor-identities}.  Their commutation follows from
+\[
+ \overline P\overline Q\theta=\theta PQ
+ =\theta QP=\overline Q\overline P\theta
+\]
+and onto-ness of $\theta$.  Finally, given $t\in\I$, choose $x$ with
+$\theta(x)=t$ and then $z$ with $P(z)=x$.  The factor identity gives
+$t=\overline P(\theta(z))$, so $\overline P$ is onto; the proof for
+$\overline Q$ is identical.
+\end{proof}
+
+\begin{lemma}[Piecewise-linear quotient]\label{pm:lem:PL-quotient}
+The map $\overline P$ is a continuous finite-piece piecewise-linear map
+whose nonzero slopes have absolute value $C$.  Likewise, $\overline Q$ is
+finite-piece piecewise linear with nonzero slopes of absolute value $D$.
+Every plateau interval of either original map is collapsed by $\theta$.
+\end{lemma}
+
+\begin{proof}
+Let $L=[a,b]$ be a closed monotonicity piece of $P$.  Its image under the
+nondecreasing map $\theta$ is the interval
+\[
+ \theta(L)=[\theta(a),\theta(b)],
+\]
+possibly degenerate.  Suppose it is nondegenerate, and take
+$s<t$ in $\theta(L)$.  Choose $x<y$ in $L$ with
+\[
+ \theta(x)=s,\qquad \theta(y)=t.
+\]
+By \eqref{pm:eq:single-lap-scaling} and \eqref{pm:eq:P-eigenmeasure},
+\[
+ \nu(P([x,y]))=C\nu([x,y])=C(t-s).
+\]
+If $P$ is nondecreasing on $L$, then $P([x,y])=[P(x),P(y)]$ and
+\[
+ \overline P(t)-\overline P(s)
+ =\theta(P(y))-\theta(P(x))
+ =C(t-s).
+\]
+If $P$ is nonincreasing, the same computation gives
+\[
+ \overline P(t)-\overline P(s)=-C(t-s).
+\]
+Thus $\overline P$ is affine with slope $+C$ or $-C$ on every
+nondegenerate interval $\theta(L)$.  The images of the finitely many
+consecutive monotonicity pieces form a finite interval partition of $\I$,
+after degenerate members are removed.  Hence $\overline P$ is finite-piece
+piecewise linear.
+
+Let $J$ now be an arbitrary plateau interval of $P$, without assuming that
+it lies in one chosen monotonicity piece.  Subdivide $J$ at all
+monotonicity-partition endpoints.  Each resulting closed subinterval $K$
+lies in one underlying assigned cell, and
+\[
+ C\nu(K)=\nu(P(K))=0.
+\]
+The subdivision is finite and its overlaps are nonatomic endpoints, so
+$\nu(J)=0$ and $\theta$ is constant on $J$.  Thus every plateau interval is
+collapsed.  The proof for $\overline Q$, including the affine-slope and
+plateau arguments, is the same.
+\end{proof}
+
+\subsection{Conclusion}
+
+By Lemmas~\ref{pm:lem:fibers} and \ref{pm:lem:PL-quotient}, the maps
+$\overline P,\overline Q$ are commuting continuous finite-piece
+piecewise-linear selfmaps of $\I$.  Proposition~\ref{prop:PL-core} gives a point
+$q\in\I$ such that
+\[
+ \overline P(q)=q=\overline Q(q).
+\]
+The fiber
+\[
+ K=\theta^{-1}(q)
+\]
+is a nonempty compact interval.  The factor identities imply
+\[
+ P(K)\subseteq K,
+ \qquad
+ Q(K)\subseteq K.
+\]
+By the minimality of the common invariant core chosen above, we must have
+$K=\I$.  Then $\theta$ is constant, contradicting the fact that
+$\theta:\I\to\I$ is onto.  This contradiction proves
+Theorem~\ref{thm:main}.\hfill\(\square\)\par
+
+\begin{thebibliography}{99}
+
+\bibitem{Boyce}
+W.~M. Boyce,
+\emph{Commuting functions with no common fixed point},
+Trans. Amer. Math. Soc. \textbf{137} (1969), 77--92,
+doi: \href{https://doi.org/10.1090/S0002-9947-1969-0236331-5}
+{10.1090/S0002-9947-1969-0236331-5}.
+
+\bibitem{Huneke}
+J.~P. Huneke,
+\emph{On common fixed points of commuting continuous functions on an
+interval},
+Trans. Amer. Math. Soc. \textbf{139} (1969), 371--381,
+doi: \href{https://doi.org/10.1090/S0002-9947-1969-0237724-2}
+{10.1090/S0002-9947-1969-0237724-2}.
+
+\bibitem{Navas}
+A.~Navas,
+\emph{Groups of Circle Diffeomorphisms},
+Chicago Lectures in Mathematics,
+University of Chicago Press, Chicago, 2011;
+Propositions 2.2.2 and 2.2.3 and Theorems 3.1.1 and 4.1.1,
+\url{https://arxiv.org/abs/math/0607481}.
+
+\bibitem{Shultz}
+F.~Shultz,
+\emph{Dimension groups for interval maps II: the transitive case},
+Ergodic Theory Dynam. Systems \textbf{27} (2007), 1287--1321;
+Propositions 3.6 and 4.3 and Corollaries 4.4 and 4.6,
+\url{https://arxiv.org/abs/math/0405467}.
+
+\bibitem{Parry}
+W.~Parry,
+\emph{Symbolic dynamics and transformations of the unit interval},
+Trans. Amer. Math. Soc. \textbf{122} (1966), 368--378,
+doi: \href{https://doi.org/10.1090/S0002-9947-1966-0197683-5}
+{10.1090/S0002-9947-1966-0197683-5}.
+
+\bibitem{Durand}
+F.~Durand,
+\emph{Cobham's theorem for substitutions},
+J. Eur. Math. Soc. \textbf{13} (2011), 1799--1814,
+doi: \href{https://doi.org/10.4171/JEMS/294}{10.4171/JEMS/294},
+\url{https://ems.press/journals/jems/articles/4506}.
+
+\bibitem{FugateMcLean}
+J.~B. Fugate and T.~B. McLean,
+\emph{Compact groups of homeomorphisms on tree-like continua},
+Trans. Amer. Math. Soc. \textbf{267} (1981), 609--620,
+doi: \href{https://doi.org/10.1090/S0002-9947-1981-0626493-5}
+{10.1090/S0002-9947-1981-0626493-5}.
+
+\bibitem{AlsedaMisiurewicz}
+Ll.~Alsed\`a and M.~Misiurewicz,
+\emph{Semiconjugacy to a map of a constant slope},
+Discrete Contin. Dyn. Syst. Ser. B \textbf{20} (2015), no.~10,
+3403--3413,
+doi: \href{https://doi.org/10.3934/dcdsb.2015.20.3403}
+{10.3934/dcdsb.2015.20.3403}.
+
+\bibitem{BogatyiFrolkina}
+S.~A. Bogatyi and O.~D. Frolkina,
+\emph{A common fixed point of commuting mappings of a tree},
+Vestnik Moskov. Univ. Ser.~1 Mat. Mekh. 2002, no.~6, 3--10;
+English translation in Moscow Univ. Math. Bull. \textbf{57} (2002),
+no.~6, 1--8 (2003),
+\url{https://www.mathnet.ru/vmumm1423}.
+
+\end{thebibliography}
+
+\end{document}

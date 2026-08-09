@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+	<head>
+	<meta name='viewport' content='width=device-width,maximum-scale=1,initial-scale=1,user-scalable=0'/>
+	<meta content='maximum-scale=1,initial-scale=1,user-scalable=0' name='viewport'>
+	<meta http-equiv='Content-Type' content='text/html; charset=Windows-1251' />
+	<META NAME='keywords' CONTENT='С. А. Богатый, О. Д. Фролкина, , Общая неподвижная точка коммутирующих отображений дерева' />
+	
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/CommonHTML", "output/HTML-CSS","output/SVG", "output/PreviewHTML"],
+      tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+          },
+
+
+      "HTML-CSS": {
+      	imageFont: null,
+        webFont: "STIX-Web",
+        availableFonts: ["TeX"],    // Or: ["STIX"], to allow local // ["TeX"]
+        preferredFont: ["TeX"]    // Or: "STIX", to allow local     // ["TeX"]
+      },
+
+      //"SVG": {
+      //  font: "STIX-Web"
+      //},
+
+      TeX: { 
+      	equationNumbers: { autoNumber: "AMS" },
+      	extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+
+      	Macros:	{
+      		le: ['\\leqslant'],
+      		ge: ['\\geqslant'],
+      		textup: ['\\text'],
+      		Box: ['\\unicode{x25A1}'],
+      		}
+      }
+
+    });
+
+    MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
+       MathJax.InputJax.TeX.prefilterHooks.Add(function (data) {
+         data.math=data.math.replace(/\mathbb\{1\}/g,'unicode{x1D7D9}');
+         data.math=data.math.replace(/\mathbb\{2\}/g,'unicode{x1D7DA}');
+       });
+    });
+
+
+  </script>
+  
+  <script type="text/javascript" src="/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_HTML"></script>
+  
+	
+
+	<meta property="fb:admins" content="100001948773698" />
+
+	<title>С.&nbsp;А.&nbsp;Богатый, О.&nbsp;Д.&nbsp;Фролкина, &#x201C;Общая неподвижная точка коммутирующих отображений дерева&#x201D;, Вестн. Моск. ун-та. Сер.&nbsp;1. Матем., мех.,   2002, номер&nbsp;6,страницы&nbsp;3&ndash;10</title>
+	<link rel="canonical" href="https://www.mathnet.ru//php/archive.phtml?wshow=paper&jrnid=vmumm&paperid=1423&option_lang=rus" />
+	<link href='/css/mathnet.css?v=1.2' rel='stylesheet' type='text/css'>
+	<link href='/css/webcard.css' rel='stylesheet' type='text/css'>
+
+ 	</head>
+
+	<body class='mainInfo' >
+
+	<table border=0 bgcolor=#f2f2f2 width=100% cellspacing=3 cellpadding=0>
+	<tr>
+
+	<td width=50px><a href=/index.phtml?&option_lang=rus><img border=0 src=/gifs/math-net-ru-top.png></a>
+	</td>
+
+	<td align=right>
+        
+
+	<table class=Card border=0 width=100%>
+	<tr width=100%>
+	<td align=right width=100%>
+	<a class=topmenu href=/php/archive.phtml?wshow=paper&jrnid=vmumm&paperid=1423&option_lang=rus>RUS</a>&nbsp;
+	<a class=topmenu href=/php/archive.phtml?wshow=paper&jrnid=vmumm&paperid=1423&option_lang=eng>ENG</a></nobr>
+	</td>
+	</tr>
+
+	<tr>
+	<td align=right width=100%>
+		<a class=topmenu href=https://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=vmumm&paperid=1423&option_lang=rus&wshow=paper>Полная версия</a>
+
+	</td>
+	</tr>
+	</table>
+                        
+	</td>
+	</tr>
+	</table>
+
+
+	<table class=Card bgcolor=#f2f2f2 border=0 width=100%>
+	<tr>
+		<td width=100% align=left>
+                        <font size=-1>
+                        <a class=SLink href=/ej.phtml?option_lang=rus>ЖУРНАЛЫ</a>
+                        <a class=SLink href=/php/journal.phtml?jrnid=vmumm&option_lang=rus>// Вестник Московского университета. Серия&nbsp;1: Математика. Механика</a>
+                        <a class=SLink href=/php/archive.phtml?&jrnid=vmumm&option_lang=rus>// Архив</a>
+                        </font>
+                        </td>
+                        	</tr>
+	</table>
+	<script language="JavaScript" src="/js/func_string.js?v=8.7"></script>
+<script language="JavaScript" src="/js/phpjs.js?v=1"></script>
+<link rel="STYLESHEET" type="text/css" href="/css/calendar.css">
+<script language=JavaScript>
+var EDIT_DISABLED_BOOL;
+var CALENDAR_LANG;
+</script>
+ 
+
+	
+<script language=JavaScript src=/js/func_dates.js?v=1></script>  <script language=JavaScript src="/js/libmenu.js?v=3"></script>
+	<script language=JavaScript src="/js/md5.js"></script>
+	<script language=JavaScript src="/js/prototype.js?v=1"></script>
+        <script language=JavaScript src="/js/func_controls.js?v=3"></script>
+		<hr color=#AC4E4A size=1>
+		<table width=100% cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		<td>
+		<div class=mob>
+		<i>Вестн. Моск. ун-та. Сер.&nbsp;1. Матем., мех., 	<a class=SLink href=/php/contents.phtml?wshow=contents&jrnid=vmumm&year=2002&option_lang=rus#2002>
+		2002</a>,	<a class=SLink href=/php/contents.phtml?wshow=issue&jrnid=vmumm&year=2002&volume=&issue=6&series=0&option_lang=rus> номер&nbsp;6,</a>	<nobr>страницы&nbsp;<nobr>3&ndash;10</nobr></nobr>
+				</i>
+		<span class=red><nobr>(Mi vmumm1423)</nobr></span>
+		</div>
+		</td>
+		</tr>
+		</table>
+		 <hr color=#AC4E4A size=1>
+		<div class=mob>	
+			<span class=red><b>Математика</b></span>
+			<br>
+				<br>
+				<span class=red><font size=+1>Общая неподвижная точка коммутирующих отображений дерева</font></span>
+			<br><br>
+			<a class=SLink href=/php/person.phtml?option_lang=rus&personid=8937>С.&nbsp;А.&nbsp;Богатый</a><sup><i></i></sup>, 	<a class=SLink href=/php/person.phtml?option_lang=rus&personid=18464>О.&nbsp;Д.&nbsp;Фролкина</a><sup><i></i></sup>	<br>	<br><br>
+			<b>Аннотация:</b>
+			Доказано, что если два коммутирующих отображения отрезка не имеют общей неподвижной точки, то энтропия их композиции не менее <nobr>$2$</nobr>. Построен пример змеевидного континуума, два коммутирующих гомеоморфизма которого не имеют общей неподвижной точки. Для деревьев решена усиленная задача Грэя&ndash;Смита: для семейства коммутирующих открытых отображений дерева в себя и коммутирующего с ними непрерывного отображения существует общая неподвижная точка. Описаны непрерывные функции, коммутирующие с многочленом Чебышева. <br/>Библиогр. 69.
+				<br><br>
+			<b>УДК:</b>
+			<span class=showUDC title="Неподвижные точки и совпадения">515.126.4</span>	<br><br><b>Поступила в редакцию:</b> 02.04.2001<br><br>
+			</div>
+			<ul class=ul_block_small>
+			<li>
+				<a class=SLink href=/php/getFT.phtml?jrnid=vmumm&paperid=1423&what=fullt&option_lang=rus>
+				<img title='Доступен полный текст статьи' align=absmiddle src=/gifs/wvolsa.gif border=0> <b>Полный текст:</b>
+				PDF файл (1913&nbsp;kB)
+				</a>
+				</li>
+					</ul>
+
+		<div class=mob>
+			<br><br>
+			<b>Реферативные базы данных:</b>
+			<ul class=ul_block_small>
+			<a title="MathSciNet bibliographic data: 2005739" class=SLink target=_blank href='https://mathscinet.ams.org/mathscinet-getitem?mr=2005739'><li><img hspace=4 src=/reficons/mathscinet.gif border=0> </li></a><a title="Zentralblatt MATH identifier: 1119.54328" class=SLink target=_blank href='https://zbmath.org/?q=an:1119.54328'><li><img hspace=4 src=/reficons/zmath.gif border=0> </li></a></ul></div>	<DIV align=center class=small>
+	<br>
+	<hr style="color: #666666">
+	<nobr>&copy; <A class=topmenu title="МИАН" href="http://www.mi-ras.ru" target=_blank>
+	МИАН</A>,&nbsp;2026</nobr>
+
+	</DIV>
+	
+		<script src="https://www.google-analytics.com/urchin.js" type="text/javascript">
+		</script>
+		<script type="text/javascript">
+		_uacct = "UA-3038033-1";
+		urchinTracker();
+		</script>
+		
+</body>
+
+</html>
