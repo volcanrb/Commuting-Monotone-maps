@@ -339,7 +339,7 @@ private theorem original_map_has_integral_affine_parameter_lift
     (hPslopes : HasConstantAbsoluteSlope P C)
     (hpath : IsUnitSpeedPeriodicSurjection ψ P₀)
     (hreturnA : DilationSemiconjugates ψ a A) :
-    ∃ k : ℤ, k ≠ 0 ∧ ∃ δ : ℝ,
+    ∃ k : ℤ, k ≠ 0 ∧ (k : ℝ) = C ∧ ∃ δ : ℝ,
       ∀ t : ℝ, P (ψ t) = ψ ((k : ℝ) * t + δ) := by
   have hCpos : 0 < C := zero_lt_one.trans hC
   have hP₀pos : 0 < P₀ := hpath.2.2.1
@@ -459,7 +459,7 @@ private theorem original_map_has_integral_affine_parameter_lift
     subst k
     norm_num at hkC
     linarith
-  refine ⟨k, hk, δ, ?_⟩
+  refine ⟨k, hk, hkC, δ, ?_⟩
   intro t
   have h := hglobal' (C * t)
   dsimp [v] at h
@@ -472,6 +472,53 @@ paths.  This is the precise technical input left after
 `cross_period_globalization`: it records the two nonzero integral affine
 lifts, but none of the reflection, commutation, or parity conclusions.
 -/
+private theorem normalized_real_affine_lifts_with_degrees
+    {P Q A B : IntervalMap} {L : ℕ}
+    {C D a b P₀ γ : ℝ} {ψ : ℝ → I}
+    (hL : 0 < L) (hPQ : Function.Commute P Q)
+    (hA : A = iterateMap P L) (hB : B = iterateMap Q L)
+    (hC : 1 < C) (hD : 1 < D)
+    (ha : a = C ^ L) (hb : b = D ^ L)
+    (hPslopes : HasConstantAbsoluteSlope P C)
+    (hQslopes : HasConstantAbsoluteSlope Q D)
+    (hpath : IsUnitSpeedPeriodicSurjection ψ P₀)
+    (hreturnA : DilationSemiconjugates ψ a A)
+    (hreturnB : DilationSemiconjugates ψ b B)
+    (hreflection : ∀ t : ℝ, ψ (-t + γ) = ψ t) :
+    ∃ data : NormalizedRealAffineLiftData P Q ψ P₀ γ,
+      (data.degreeP : ℝ) = C ∧ (data.degreeQ : ℝ) = D := by
+  obtain ⟨k, hk, hkC, δP, hliftP⟩ :=
+    original_map_has_integral_affine_parameter_lift
+      hL hA hC ha hPslopes hpath hreturnA
+  obtain ⟨ell, hell, hellD, δQ, hliftQ⟩ :=
+    original_map_has_integral_affine_parameter_lift
+      hL hB hD hb hQslopes hpath hreturnB
+  have hP₀pos : 0 < P₀ := hpath.2.2.1
+  let τP : ℝ := ((k : ℝ) * (γ / 2) + δP - γ / 2) / P₀
+  let τQ : ℝ := ((ell : ℝ) * (γ / 2) + δQ - γ / 2) / P₀
+  refine ⟨{
+    degreeP := k
+    degreeQ := ell
+    degreeP_ne_zero := hk
+    degreeQ_ne_zero := hell
+    translationP := τP
+    translationQ := τQ
+    lifts_P := ?_
+    lifts_Q := ?_ }, hkC, hellD⟩
+  · intro t
+    rw [hliftP]
+    congr 1
+    dsimp [τP]
+    field_simp [hP₀pos.ne']
+    ring
+  · intro t
+    rw [hliftQ]
+    congr 1
+    dsimp [τQ]
+    field_simp [hP₀pos.ne']
+    ring
+
+/-- Both interval maps admit normalized affine lifts in the real parameter. -/
 theorem normalized_real_affine_lifts_of_cross_period
     {P Q A B : IntervalMap} {L : ℕ}
     {C D a b P₀ γ : ℝ} {ψ : ℝ → I}
@@ -486,36 +533,9 @@ theorem normalized_real_affine_lifts_of_cross_period
     (hreturnB : DilationSemiconjugates ψ b B)
     (hreflection : ∀ t : ℝ, ψ (-t + γ) = ψ t) :
     Nonempty (NormalizedRealAffineLiftData P Q ψ P₀ γ) := by
-  obtain ⟨k, hk, δP, hliftP⟩ :=
-    original_map_has_integral_affine_parameter_lift
-      hL hA hC ha hPslopes hpath hreturnA
-  obtain ⟨ell, hell, δQ, hliftQ⟩ :=
-    original_map_has_integral_affine_parameter_lift
-      hL hB hD hb hQslopes hpath hreturnB
-  have hP₀pos : 0 < P₀ := hpath.2.2.1
-  let τP : ℝ := ((k : ℝ) * (γ / 2) + δP - γ / 2) / P₀
-  let τQ : ℝ := ((ell : ℝ) * (γ / 2) + δQ - γ / 2) / P₀
-  refine ⟨{
-    degreeP := k
-    degreeQ := ell
-    degreeP_ne_zero := hk
-    degreeQ_ne_zero := hell
-    translationP := τP
-    translationQ := τQ
-    lifts_P := ?_
-    lifts_Q := ?_ }⟩
-  · intro t
-    rw [hliftP]
-    congr 1
-    dsimp [τP]
-    field_simp [hP₀pos.ne']
-    ring
-  · intro t
-    rw [hliftQ]
-    congr 1
-    dsimp [τQ]
-    field_simp [hP₀pos.ne']
-    ring
+  obtain ⟨data, _, _⟩ := normalized_real_affine_lifts_with_degrees hL hPQ hA hB hC hD ha hb
+    hPslopes hQslopes hpath hreturnA hreturnB hreflection
+  exact ⟨data⟩
 
 private theorem unitCircle_liftIco_apply_of_int_periodic
     {X : Type*} {f : ℝ → X}
@@ -566,7 +586,7 @@ private theorem unitCircle_eq_zero_or_half_of_two_mul_eq_int
 
 /-- Cross-period globalization and reflection uniqueness produce affine
 circle lifts of the original (not merely normalized-iterate) maps. -/
-theorem original_phase_affine_lifts
+theorem original_phase_affine_lifts_with_degrees
     {P Q A B : IntervalMap} {L : ℕ}
     {C D a b P₀ : ℝ} {ψ : ℝ → I}
     (hL : 0 < L) (hPQ : Function.Commute P Q)
@@ -578,13 +598,13 @@ theorem original_phase_affine_lifts
     (hpath : IsUnitSpeedPeriodicSurjection ψ P₀)
     (hreturnA : DilationSemiconjugates ψ a A)
     (hreturnB : DilationSemiconjugates ψ b B) :
-    Nonempty (OriginalPhaseLiftPackage P Q) := by
+    ∃ pkg : OriginalPhaseLiftPackage P Q, (pkg.degreeP : ℝ) = C ∧ (pkg.degreeQ : ℝ) = D := by
   have ha_gt : 1 < a := by
     rw [ha]
     exact one_lt_pow₀ hC hL.ne'
   obtain ⟨γ, hreflection, _hreflectionUnique⟩ :=
     unique_reflection_of_expanding_dilation hpath ha_gt hreturnA
-  obtain ⟨Dreal⟩ := normalized_real_affine_lifts_of_cross_period
+  obtain ⟨Dreal, hkC, hellD⟩ := normalized_real_affine_lifts_with_degrees
     hL hPQ hA hB hC hD ha hb hPslopes hQslopes hpath
       hreturnA hreturnB hreflection
   have hP₀pos : 0 < P₀ := hpath.2.2.1
@@ -862,7 +882,25 @@ theorem original_phase_affine_lifts
     translationQ_half := hβhalf
     lifts_commute := hliftsCommute
     lifts_P := hcircleLiftP
-    lifts_Q := hcircleLiftQ }⟩
+    lifts_Q := hcircleLiftQ }, hkC, hellD⟩
+
+/-- The original maps lift to commuting affine circle maps. -/
+theorem original_phase_affine_lifts
+    {P Q A B : IntervalMap} {L : ℕ}
+    {C D a b P₀ : ℝ} {ψ : ℝ → I}
+    (hL : 0 < L) (hPQ : Function.Commute P Q)
+    (hA : A = iterateMap P L) (hB : B = iterateMap Q L)
+    (hC : 1 < C) (hD : 1 < D)
+    (ha : a = C ^ L) (hb : b = D ^ L)
+    (hPslopes : HasConstantAbsoluteSlope P C)
+    (hQslopes : HasConstantAbsoluteSlope Q D)
+    (hpath : IsUnitSpeedPeriodicSurjection ψ P₀)
+    (hreturnA : DilationSemiconjugates ψ a A)
+    (hreturnB : DilationSemiconjugates ψ b B) :
+    Nonempty (OriginalPhaseLiftPackage P Q) := by
+  obtain ⟨pkg, _, _⟩ := original_phase_affine_lifts_with_degrees hL hPQ hA hB hC hD ha hb
+    hPslopes hQslopes hpath hreturnA hreturnB
+  exact ⟨pkg⟩
 
 /-- The terminal parity calculation on the reflection quotient gives a
 physical common fixed point. -/

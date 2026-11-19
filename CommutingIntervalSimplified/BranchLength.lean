@@ -1104,16 +1104,15 @@ private theorem branchLengthOnPartition_vertex_eq_zero {T : IntervalMap}
     unfold branchContribution
     rw [if_neg hvleft, hclip, hcoord]
 
-/-- Vanishing at all iterate-partition vertex images leaves at most one
-partial lap at each point, giving the manuscript's uniform factor-two
-bound. -/
-theorem norm_branchLengthOperator_le_two_norm_of_vertex_zero
+/-- Completed branches have zero increment. The one partial branch starts
+at a vertex whose coordinate is zero, so its absolute increment is bounded
+by the norm of the coordinate itself. -/
+theorem norm_branchLengthOperator_le_norm_of_vertex_zero
     {T : IntervalMap} (hT : FinitePieceMonotone T)
     (R : MonotonicityPartition T) (S : NormalizedContinuousCoordinate)
     (hzero : ∀ v : R.partition.Vertex, S (T v.point) = 0) :
-    ‖branchLengthOperator hT S‖ ≤ 2 * ‖S‖ := by
-  refine (ContinuousMap.norm_le (branchLengthOperator hT S).1
-    (mul_nonneg (by positivity) (norm_nonneg S))).2 ?_
+    ‖branchLengthOperator hT S‖ ≤ ‖S‖ := by
+  refine (ContinuousMap.norm_le (branchLengthOperator hT S).1 (norm_nonneg S)).2 ?_
   intro x
   obtain ⟨a, b, hab, hx⟩ := R.partition.exists_adjacent_containing x
   let va : R.partition.Vertex := ⟨a, hab.1⟩
@@ -1134,7 +1133,49 @@ theorem norm_branchLengthOperator_le_two_norm_of_vertex_zero
     rw [hvzero', sub_zero] at hinc
     exact hinc
   rw [heq]
-  exact norm_coordinateLength_le_two_norm S _ _
+  rcases le_total (T va.point) (T x) with ha | ha
+  · simpa only [coordinateLength, max_eq_right ha, min_eq_left ha, hzero va, sub_zero] using
+      (ContinuousMap.norm_coe_le_norm S.1 (T x))
+  · simpa only [coordinateLength, max_eq_left ha, min_eq_right ha, hzero va, zero_sub, norm_neg]
+      using (ContinuousMap.norm_coe_le_norm S.1 (T x))
+
+/-- The factor-two bound used by the iterate-partition argument. -/
+theorem norm_branchLengthOperator_le_two_norm_of_vertex_zero
+    {T : IntervalMap} (hT : FinitePieceMonotone T)
+    (R : MonotonicityPartition T) (S : NormalizedContinuousCoordinate)
+    (hzero : ∀ v : R.partition.Vertex, S (T v.point) = 0) :
+    ‖branchLengthOperator hT S‖ ≤ 2 * ‖S‖ :=
+  (norm_branchLengthOperator_le_norm_of_vertex_zero hT R S hzero).trans (by linarith [norm_nonneg S])
+
+/-- Lemma 5.1 of *Common periodic points of commuting interval maps*.
+An expanding eigen-coordinate is determined by its values at the images
+of the original partition vertices, without passing to any iterate. -/
+theorem branchEigenspace_originalVertexEvaluation_injective
+    {H : IntervalMap} (hH : FinitePieceMonotone H) {ρ : ℝ} (hρ : 1 < ρ)
+    (R : MonotonicityPartition H) :
+    Function.Injective (branchEigenspaceVertexEvaluation hH ρ 1 R) := by
+  intro S W he
+  let V := S.val - W.val
+  have hV : V ∈ branchEigenspace hH ρ := (branchEigenspace hH ρ).sub_mem S.property W.property
+  have hvertices (v : R.partition.Vertex) : V (H v.point) = 0 :=
+    sub_eq_zero.mpr (congrFun he v)
+  have hb := norm_branchLengthOperator_le_norm_of_vertex_zero hH R V hvertices
+  rw [(mem_branchEigenspace hH ρ V).mp hV] at hb
+  have hscalar : ‖ρ • V‖ = ρ * ‖V‖ := by
+    change ‖ρ • (V.1 : C(I, ℝ))‖ = ρ * ‖(V.1 : C(I, ℝ))‖
+    rw [norm_smul, Real.norm_eq_abs, abs_of_pos (zero_lt_one.trans hρ)]
+  rw [hscalar] at hb
+  have hz : ‖V‖ = 0 := by nlinarith [norm_nonneg V]
+  exact Subtype.ext (sub_eq_zero.mp (norm_eq_zero.mp hz))
+
+/-- In particular the dimension is bounded by the number of vertices of
+any monotonicity partition of the original map. -/
+theorem branchEigenspace_finrank_le_partition_card
+    {H : IntervalMap} (hH : FinitePieceMonotone H) {ρ : ℝ} (hρ : 1 < ρ)
+    (R : MonotonicityPartition H) :
+    Module.finrank ℝ (branchEigenspace hH ρ) ≤ R.partition.points.card := by
+  simpa only [Module.finrank_fintype_fun_eq_card, Fintype.card_coe] using
+    LinearMap.finrank_le_finrank_of_injective (branchEigenspace_originalVertexEvaluation_injective hH hρ R)
 
 /-- An expanding branch eigen-coordinate which vanishes at every image of an
 iterate-partition vertex is identically zero. -/

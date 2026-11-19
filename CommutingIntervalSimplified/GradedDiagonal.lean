@@ -42,5 +42,42 @@ theorem graded_decoder_intertwine (v : Grade) (i : Bool) {w : Grade}
       ← projection_diagonal (step i v)]
     cases i <;> rfl
 
+/-- The whole section lies in the relative topological interior of the
+physical cell. This includes cells adjoining zero or one. -/
+theorem section_range_subset_interior {v : Grade} (J : Cell v) :
+    Set.range (sectionMap J) ⊆ interior (physicalCell J) := by
+  let N : ℝ := (4*M v : ℕ)
+  let k : ℝ := (indexEquiv v J).val
+  let U : Set I := {x | k < N*(x : ℝ) ∧ N*(x:ℝ) < k+1}
+  have hcont : Continuous (fun x : I => N*(x : ℝ)) := continuous_const.mul continuous_subtype_val
+  have hopen : IsOpen U := (isOpen_lt continuous_const hcont).inter (isOpen_lt hcont continuous_const)
+  have hsub : U ⊆ physicalCell J := by
+    rw [physicalCell_eq]
+    exact fun _ h => ⟨h.1.le,h.2.le⟩
+  rintro x ⟨u,rfl⟩
+  apply interior_maximal hsub hopen
+  have hN : N ≠ 0 := by
+    dsimp [N]
+    have := M_pos v
+    positivity
+  change k < N*(chart J (GradedShoulderDecoders.sectionCoord u) : ℝ) ∧
+    N*(chart J (GradedShoulderDecoders.sectionCoord u) : ℝ) < k+1
+  rw [chart_val]
+  change k < N*((k+_)/N) ∧ N*((k+_)/N) < k+1
+  rw [mul_div_cancel₀ _ hN]
+  change k < k + (if forward J then (1+(u:ℝ))/3 else 1-(1+(u:ℝ))/3) ∧ _
+  by_cases h : forward J <;> simp only [h, if_true, if_false] <;>
+    constructor <;> dsimp [GradedShoulderDecoders.sectionCoord] <;>
+    linarith [u.2.1, u.2.2]
+
+/-- The opposite same-grade map sends a closed cell into the section of its
+successor, hence into the successor's topological interior (Corollary 3.7). -/
+theorem opposite_maps_successor_interior {v : Grade} (J : Cell v) :
+    Set.MapsTo ((concreteDecoderBranches.squares interval_dist_le_one).map v (!color J))
+      (physicalCell J) (interior (physicalCell (next J))) := by
+  intro x hx
+  apply section_range_subset_interior
+  exact ((concreteDecoderBranches.atlas interval_dist_le_one).cells v).opposite_maps J hx
+
 end
 end CommutingIntervalSimplified.ConcreteProjection
