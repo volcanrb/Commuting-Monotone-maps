@@ -669,9 +669,8 @@ theorem cumulativeNormSup_contraction
   · rintro _ ⟨x, rfl⟩
     exact hpoint x
 
-/-- A nonatomic complex measure is determined by all left cumulative
-interval values. -/
-private theorem signedMeasure_eq_zero_of_Iic_eq_zero
+/-- A finite signed interval measure vanishes if its cumulative function vanishes. -/
+theorem signedMeasure_eq_zero_of_Iic_eq_zero
     (s : SignedMeasure I)
     (hs : ∀ a : I, s (Set.Iic a) = 0) :
     s = 0 := by
