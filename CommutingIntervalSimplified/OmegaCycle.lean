@@ -52,18 +52,18 @@ theorem exists_product_fixed_between {f g : IntervalMap}
   · change min (f x) (g x) ≤ x ∧ x ≤ max (f x) (g x)
     grind
 
-private theorem cluster_iff_mem_orbitOmega (f : IntervalMap) (x y : I) :
+theorem cluster_iff_mem_orbitOmega (f : IntervalMap) (x y : I) :
     MapClusterPt y atTop (fun n : ℕ => f^[n] x) ↔ y ∈ orbitOmega f x :=
   (mem_omegaLimit_singleton_iff_mapClusterPt _ _ _ _).symm
 
-private theorem orbitOmega_subset_of_invariant {f : IntervalMap} {K : Set I}
+theorem orbitOmega_subset_of_invariant {f : IntervalMap} {K : Set I}
     (hK : IsClosed K) (hmap : MapsTo f K K) {x : I} (hx : x ∈ K) :
     orbitOmega f x ⊆ K := by
   intro y hy
   exact hK.mem_of_mapClusterPt ((cluster_iff_mem_orbitOmega ..).mpr hy)
     (Eventually.of_forall fun n => hmap.iterate n hx)
 
-private theorem orbitOmega_forward {f : IntervalMap} (hf : Continuous f) (x : I) :
+theorem orbitOmega_forward {f : IntervalMap} (hf : Continuous f) (x : I) :
     MapsTo f (orbitOmega f x) (orbitOmega f x) := by
   intro y hy
   apply (cluster_iff_mem_orbitOmega ..).mp
@@ -72,7 +72,7 @@ private theorem orbitOmega_forward {f : IntervalMap} (hf : Continuous f) (x : I)
   apply MapClusterPt.of_comp (φ := fun n : ℕ => n + 1) (tendsto_add_atTop_nat 1)
   simpa only [comp_def, iterate_succ_apply'] using hc
 
-private theorem finite_orbitOmega_has_periodicPt {f : IntervalMap} (hf : Continuous f)
+theorem finite_orbitOmega_has_periodicPt {f : IntervalMap} (hf : Continuous f)
     {x : I} (hfin : (orbitOmega f x).Finite) :
     ∃ y ∈ orbitOmega f x, y ∈ periodicPts f := by
   obtain ⟨z, hz⟩ := nonempty_omegaLimit atTop (fun n : ℕ => f^[n]) {x} (singleton_nonempty x)
@@ -83,7 +83,7 @@ private theorem finite_orbitOmega_has_periodicPt {f : IntervalMap} (hf : Continu
   rw [← iterate_add_apply, Nat.sub_add_cancel hmn.le]
   exact heq.symm
 
-private theorem prodFixed_maps {f g : IntervalMap} (hc : Function.Commute f g) :
+theorem prodFixed_maps {f g : IntervalMap} (hc : Function.Commute f g) :
     MapsTo f (fixedPoints (f ∘ g)) (fixedPoints (f ∘ g)) ∧
     MapsTo g (fixedPoints (f ∘ g)) (fixedPoints (f ∘ g)) := by
   constructor <;> intro x (hx : f (g x) = x)
@@ -133,7 +133,7 @@ private theorem enters_exchanged_interiors {f : IntervalMap} {x : I} {L R : Clos
   exact (mapClusterPt_iff_frequently.mp ((cluster_iff_mem_orbitOmega ..).mpr hy) _
     ((isOpen_Ioo.union isOpen_Ioo).mem_nhds hyU)).exists
 
-private theorem exchanged_midpoint_outside {f : IntervalMap} {L R : ClosedSubinterval}
+theorem exchanged_midpoint_outside {f : IntervalMap} {L R : ClosedSubinterval}
     (hd : Disjoint L.carrier R.carrier) (hL : MapsTo f L.carrier R.carrier)
     (hR : MapsTo f R.carrier L.carrier) {u : I} (hu : u ∈ L.carrier ∪ R.carrier) :
     f u ∉ uIcc u (f (f u)) := by
@@ -161,21 +161,15 @@ private theorem exchanged_midpoint_outside {f : IntervalMap} {L R : ClosedSubint
     · exact (not_lt_of_ge hbetween.2)
         ((max_le hu.2 hw.2).trans_lt (h.trans_le hv.1))
 
-/-- The common-cycle theorem under the manuscript's exchanged-interval
-hypothesis for infinite omega-limit sets in `Fix(f ∘ g)`. -/
-theorem inverseCommonCycle_of_exchangedOmegaIntervals {f g : IntervalMap}
-    (hf : Continuous f) (hg : Continuous g) (hc : Function.Commute f g)
-    (hsplit : HasExchangedOmegaIntervals f g) : HasInverseCommonCycle f g := by
-  obtain ⟨x, hx, hbetween⟩ := exists_product_fixed_between hf hg hc
-  have hK : IsClosed (fixedPoints (f ∘ g)) := isClosed_eq (hf.comp hg) continuous_id
-  obtain ⟨y, hy⟩ := nonempty_omegaLimit atTop (fun n : ℕ => g^[n]) {x} (singleton_nonempty x)
-  have hyK := orbitOmega_subset_of_invariant hK (prodFixed_maps hc).2 hx hy
-  by_cases hfin : (orbitOmega f y).Finite
-  · obtain ⟨z, hz, hzp⟩ := finite_orbitOmega_has_periodicPt hf hfin
-    exact inverseCommonCycle_of_productFixed_periodic hc
-      (orbitOmega_subset_of_invariant hK (prodFixed_maps hc).1 hyK hz) hzp
-  obtain ⟨L, R, hd, hL, hR, hsub⟩ := hsplit y hyK hfin
-  obtain ⟨n, hn⟩ := enters_exchanged_interiors hfin hsub
+/-- A backward limit whose forward orbit enters an exchanged interval pair
+forces the two immediate neighbors of the original point to lie on one side. -/
+theorem productFixed_not_between_of_backward_enters_exchanged {f g : IntervalMap}
+    (hf : Continuous f) (hc : Function.Commute f g) {x y : I}
+    (hx : x ∈ fixedPoints (f ∘ g)) (hy : y ∈ orbitOmega g x)
+    {L R : ClosedSubinterval} (hd : Disjoint L.carrier R.carrier)
+    (hL : MapsTo f L.carrier R.carrier) (hR : MapsTo f R.carrier L.carrier)
+    {n : ℕ} (hn : f^[n] y ∈ Ioo L.left L.right ∪ Ioo R.left R.right) :
+    x ∉ uIcc (f x) (g x) := by
   let U := Ioo L.left L.right ∪ Ioo R.left R.right
   have hnear : (f^[n]) ⁻¹' U ∈ 𝓝 y :=
     ((isOpen_Ioo.union isOpen_Ioo).preimage (hf.iterate n)).mem_nhds hn
@@ -199,6 +193,23 @@ theorem inverseCommonCycle_of_exchangedOmegaIntervals {f g : IntervalMap}
   have hcontra := exchanged_midpoint_outside hd hL hR htrap
   change f (g x) = x at hx
   rw [hx] at hcontra
-  exact (hcontra (uIcc_comm (f x) (g x) ▸ hbetween)).elim
+  exact fun h => hcontra (uIcc_comm (f x) (g x) ▸ h)
+
+/-- The common-cycle theorem under the manuscript's exchanged-interval
+hypothesis for infinite omega-limit sets in `Fix(f ∘ g)`. -/
+theorem inverseCommonCycle_of_exchangedOmegaIntervals {f g : IntervalMap}
+    (hf : Continuous f) (hg : Continuous g) (hc : Function.Commute f g)
+    (hsplit : HasExchangedOmegaIntervals f g) : HasInverseCommonCycle f g := by
+  obtain ⟨x, hx, hbetween⟩ := exists_product_fixed_between hf hg hc
+  have hK : IsClosed (fixedPoints (f ∘ g)) := isClosed_eq (hf.comp hg) continuous_id
+  obtain ⟨y, hy⟩ := nonempty_omegaLimit atTop (fun n : ℕ => g^[n]) {x} (singleton_nonempty x)
+  have hyK := orbitOmega_subset_of_invariant hK (prodFixed_maps hc).2 hx hy
+  by_cases hfin : (orbitOmega f y).Finite
+  · obtain ⟨z, hz, hzp⟩ := finite_orbitOmega_has_periodicPt hf hfin
+    exact inverseCommonCycle_of_productFixed_periodic hc
+      (orbitOmega_subset_of_invariant hK (prodFixed_maps hc).1 hyK hz) hzp
+  obtain ⟨L, R, hd, hL, hR, hsub⟩ := hsplit y hyK hfin
+  obtain ⟨n, hn⟩ := enters_exchanged_interiors hfin hsub
+  exact (productFixed_not_between_of_backward_enters_exchanged hf hc hx hy hd hL hR hn hbetween).elim
 
 end CommutingIntervalSimplified

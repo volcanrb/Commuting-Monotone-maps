@@ -1,10 +1,10 @@
 import CommutingIntervalSimplified.FiniteReturnRealization
-import CommutingIntervalSimplified.OmegaCycle
-import CommutingIntervalSimplified.EntropyCycle
+import CommutingIntervalSimplified.EntropyCycleMain
 
 /-! # Common periodic points of commuting interval maps
 
 The nonempty finite return-spectrum realization and the exchanged-interval
 cycle criterion are in `FiniteReturnRealization` and `OmegaCycle`.
-`EntropyCycle` gives entropy bounds for horseshoes used in interval dynamics.
+`EntropyCycleMain` proves the common-cycle conclusion when either generator has
+zero topological entropy.
 -/
