@@ -1,10 +1,11 @@
-import CommutingIntervalSimplified.FiniteReturnRealization
+import CommutingIntervalSimplified.CommonReturnRealization
+import CommutingIntervalSimplified.GradedDiagonal
 import CommutingIntervalSimplified.EntropyCycleMain
 
 /-! # Common periodic points of commuting interval maps
 
-The nonempty finite return-spectrum realization and the exchanged-interval
-cycle criterion are in `FiniteReturnRealization` and `OmegaCycle`.
-`EntropyCycleMain` proves the common-cycle conclusion when either generator has
-zero topological entropy.
--/
+`CommonReturnRealization` realizes the exact return spectrum of every finite
+set of positive integers, including the empty set. `OmegaCycle` and
+`EntropyCycleMain` give inverse common cycles under the exchanged-interval
+and zero-entropy hypotheses, respectively. `GradedDiagonal` records the
+intertwining identities of the graded construction. -/
